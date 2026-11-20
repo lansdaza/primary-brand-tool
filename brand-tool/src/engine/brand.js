@@ -96,6 +96,12 @@ function coreShape(kind,seed=3){
     for(let k=-2;k<=2;k++)o+=`<line x1="188" y1="${100+k*11}" x2="212" y2="${100+k*11}" stroke="currentColor" stroke-width="1"/>`}
   return `<svg viewBox="${vb}" style="width:100%;height:100%;overflow:visible">${o}</svg>`;
 }
+// A standalone .svg file from an inline one: one style attribute (a second one makes the file
+// invalid, so it won't open as an image), the namespace, and a real size from the viewBox.
+function svgFile(svg,color){
+  const vb=(svg.match(/viewBox="([^"]+)"/)||[])[1]||'0 0 200 200',[, ,w,h]=vb.split(/\s+/).map(Number);
+  return svg.replace(/<svg\b[^>]*>/,`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" width="${w*2}" height="${h*2}" style="color:${color};overflow:visible">`);
+}
 const grain=on=>on?'<div class="a-grain"></div>':'';
 /* ---------- World Graph: the brand tool's own renderer (three.js), compiled from its source and mounted into templates. Any frame can be drawn on demand with renderAt(t). ---------- */
 const GLOBE_BACK=['world graph','guideline picture'];
@@ -409,7 +415,7 @@ function aureliusGuide(seed){const ty=BRAND.type,ph=BRAND.imagery.photography,pa
     {id:'graphics',title:'Graphic system',num:'5.0',items:[
       {id:'coreshape',title:'Core shape',num:'5.0',ref:'p.26–28',desc:[AD['5.0'],AD['5.1'],AD['5.2']],details:AD['5.0d'],path:'graphics.coreShape',
        blocks:[{k:'tiles',cols:4,shuffle:'Draw new ones',html:kinds.map((k,i)=>AA('pb-shape',`--g:${tones[i][0]};--i:${tones[i][1]}`,coreShape(k,seed+i)))}],
-       files:kinds.map((k,i)=>({name:`aurelius-core-shape-${k}.svg`,text:coreShape(k,seed+i).replace('<svg','<svg xmlns="http://www.w3.org/2000/svg" style="color:'+N.Ink+'"')})),
+       files:kinds.map((k,i)=>({name:`aurelius-core-shape-${k}.svg`,text:svgFile(coreShape(k,seed+i),N.Ink)})),
        rules:g.coreShape.rules,data:{elements:g.coreShape.elements,strokePx:g.coreShape.strokePx,drawnBy:'code, from these rules; every draw is new'}},
       {id:'texture',title:'Texture',num:'5.3',ref:'p.29',desc:[AD['5.3']],details:AD['5.3d'],path:'graphics.texture',
        blocks:[{k:'tiles',cols:2,html:[`<div class="pb-tile"><img src="${IMG.ridge}" alt="Mountain ridge in cloud, without texture"><span class="cap" style="color:${N.Bone}">Without texture</span></div>`,AA('pb-tile',`--g:${N.Char};--i:${N.Bone}`,`<img src="${IMG.ridge}" alt="Mountain ridge in cloud, with texture"><div class="a-grain" style="opacity:1"></div><span class="cap">With texture</span>`)]}],

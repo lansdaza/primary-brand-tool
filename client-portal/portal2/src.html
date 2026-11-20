@@ -1,5 +1,18 @@
 <title>Primary Client Portal</title>
-<style>/*__UICSS__*/</style>
+<style>/*__UICSS__*/.pb-page--book{max-width:78rem;padding-inline:clamp(var(--space-m),3vw,var(--space-xxl))}
+.pb-page--book .pb-pb-wrap{margin-top:0}
+.pb-page--book .pb-pb-paper{padding:0;gap:calc(var(--space-xxl) * 1.25);background:none;box-shadow:none}
+.pb-page--book .pb-pb-sec{padding:0;scroll-margin-top:4.5rem}
+.pb-page--book .pb-pb-cover{min-height:26rem}
+.pb-page--book .pb-pb-text,.pb-page--book .pb-pb-lead{max-width:44rem}
+.pp-booknav{position:sticky;top:0;z-index:4;margin:0 calc(-1 * clamp(var(--space-m),3vw,var(--space-xxl))) var(--space-l);padding:var(--space-xs) clamp(var(--space-m),3vw,var(--space-xxl));background:color-mix(in srgb,var(--pb-panel) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 calc(var(--border-s) * -1) 0 var(--pb-line)}
+@media(max-width:60rem){.pb-main:has(.pb-page--book){overflow:visible}}
+.pp-booknav-in{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.pp-booknav-in::-webkit-scrollbar{display:none}
+.pp-booknav button{flex:none;height:var(--pb-row);padding:0 var(--space-s);border:0;border-radius:var(--radius-full);background:none;color:var(--pb-sub);font:var(--weight-ui-medium) var(--size-xs)/1 var(--font-ui);white-space:nowrap;cursor:pointer}
+.pp-booknav button:hover{color:var(--neutral-10);background:var(--pb-hover)}
+.pp-booknav button[aria-current]{background:var(--neutral-10);color:var(--neutral-1)}
+</style>
 <style>/*__TPLCSS__*/</style>
 <style>/*__BRANDCSS__*/</style>
 <style id="pp-fonts"></style>
@@ -383,19 +396,27 @@ function render() {
       h("a", { className: "pb-skip", href: "#pb-main", onClick: (e) => { e.preventDefault(); document.getElementById("pb-main")?.focus(); } }, "Skip to content"),
       nav(),
       h("div", { className: "pb-shell" }, topBar(),
-        h("div", { className: "pb-body", "data-rail": "true", "data-inspector": "false" },
+        h("div", { className: "pb-body", "data-rail": railEl ? "true" : "false", "data-inspector": "false" },
           railEl,
-          h("main", { id: "pb-main", className: "pb-panel pb-main", "data-kind": "doc", "aria-label": label, tabIndex: -1 }, h("div", { className: "pb-page" + (wide ? " pb-page--wide" : "") }, mainEl))))));
+          h("main", { id: "pb-main", className: "pb-panel pb-main", "data-kind": "doc", "aria-label": label, tabIndex: -1 }, h("div", { className: "pb-page" + (wide === "book" ? " pb-page--book" : wide ? " pb-page--wide" : "") }, mainEl))))));
   document.getElementById("root").replaceChildren(g);
   if (keep) document.getElementById("pb-main").scrollTop = mainScroll;
   render.lastKey = S.view + S.reqId;
+  if (S.view === "book") bookSpy();
   rendering = false;
 }
 document.addEventListener("focusout", () => setTimeout(() => { if (pendingRender && !document.activeElement?.closest?.("#pb-main textarea, #pb-main input")) render(); }, 0));
 const TOOL_VIEW = { brief: "brief", reveal: "publish", plan: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
 const VIEWS_RENDER = { brief: viewBrief, reveal: viewReveal, plan: viewPlan, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
 const pagehead = (eyebrow, title, text, cls) => h("header", { className: "pb-pagehead" + (cls ? " " + cls : "") }, eyebrow ? h("p", { className: "pb-eyebrow" }, eyebrow) : null, h("h1", null, title), text ? h("p", null, text) : null);
-const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+// The main panel scrolls on desktop; on a phone the page itself does.
+const mainScroller = () => { const m = document.getElementById("pb-main"); return m && m.scrollHeight > m.clientHeight + 1 ? m : null; };
+const jumpTo = (id) => {
+  const el = document.getElementById(id), m = document.getElementById("pb-main"); if (!el || !m) return;
+  const bar = m.querySelector(".pp-booknav"), off = (bar ? bar.offsetHeight : 0) + 24, sc = mainScroller();
+  if (sc) sc.scrollTo({ top: el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - off, behavior: "smooth" });
+  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - off, behavior: "smooth" });
+};
 
 /* ---------- Questionnaire (the tool's Brief form) ---------- */
 const filled = () => Q.fields.filter((f) => (S.answers[f.id] || "").trim()).length;
@@ -507,21 +528,33 @@ function versionLine() {
 }
 function viewBook() {
   const secs = bookSections();
-  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Brand book" },
-    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Brand book"),
-      h("ul", { className: "pb-raillist" }, railItem(S.clientFrom === "sample" ? "Sample" : S.client?.version ? `Version ${S.client.version}` : "Latest", S.client?.published ? fmtDay(S.client.published) : undefined, true, () => document.getElementById("pb-main").scrollTo({ top: 0, behavior: "smooth" })))),
-    secs.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Sections")),
-      h("ul", { className: "pb-raillist" }, secs.map((s) => railItem(s.title, undefined, false, () => jumpTo(s.id))))) : null,
-    h("p", { className: "pb-railnote pb-railfoot", role: "status" }, S.clientFrom === "sample" ? "The studio’s published versions show here." : S.client ? "Published by Primary." : "Loading…"));
+  const bar = S.client && secs.length ? h("nav", { className: "pp-booknav", "aria-label": "Sections" },
+    h("div", { className: "pp-booknav-in" }, secs.map((s) => h("button", { type: "button", "data-sec": s.id, onClick: () => jumpTo(s.id) }, s.title)))) : null;
   const notes = S.bookNote.map((n) => h("li", { "data-tone": n.tone }, n.text));
   const main = h(FRAG, null,
-    pagehead(null, "Brand book", S.client ? `${BRAND().name}’s brand as Primary published it: the rules, colours, type and files. ${versionLine()}.` : "Your brand book shows here once Primary publishes it."),
+    pagehead(null, "Brand book", S.client ? `${BRAND().name}’s brand as Primary published it: the rules, colours, type and files. ${S.clientFrom === "sample" ? "A sample version." : versionLine() + "."}` : "Your brand book shows here once Primary publishes it."),
     studio() ? h("div", { className: "pb-kit-actions" },
       btn({ label: S.bookBusy ? "Saving the version…" : "Load a published version", icon: "top:lucide-upload", busy: S.bookBusy, onClick: () => pickBook() }),
       h("span", { className: "pp-note" }, "Or drop the .json from the Brand Tool’s Publish tab anywhere on this page.")) : null,
     notes.length ? h("ul", { className: "pp-status", role: "status" }, notes) : null,
+    bar,
     S.client ? bookNode() : h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading the brand book…" : "No brand book yet"), h("p", null, S.bookLoading ? "This takes a moment the first time." : "Primary publishes it from the Brand Tool when it’s ready.")));
-  return [rail, main, "Brand book", false];
+  return [null, main, "Brand book", "book"];
+}
+// Highlight the section in view in the sticky bar, and keep its chip visible.
+function bookSpy() {
+  const main = document.getElementById("pb-main"), bar = main?.querySelector(".pp-booknav");
+  if (!bar) return;
+  const btns = [...bar.querySelectorAll("button")];
+  const update = () => {
+    const top = bar.getBoundingClientRect().bottom + 48; let cur = btns[0];
+    for (const b of btns) { const el = document.getElementById(b.dataset.sec); if (el && el.getBoundingClientRect().top <= top) cur = b; }
+    btns.forEach((b) => b === cur ? b.setAttribute("aria-current", "true") : b.removeAttribute("aria-current"));
+    const sc = bar.firstChild; if (cur && sc && (cur.offsetLeft < sc.scrollLeft || cur.offsetLeft + cur.offsetWidth > sc.scrollLeft + sc.clientWidth)) sc.scrollTo({ left: cur.offsetLeft - 16, behavior: "smooth" });
+  };
+  let raf = 0; const on = () => { if (!bar.isConnected) return removeEventListener("scroll", on); cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
+  main.addEventListener("scroll", on, { passive: true }); addEventListener("scroll", on, { passive: true });
+  update();
 }
 function pickBook() { const i = document.getElementById("pp-bookfile"); i.value = ""; i.click(); }
 document.getElementById("pp-bookfile").addEventListener("change", (e) => loadBookFile(e.target.files?.[0]));
