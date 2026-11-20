@@ -1,0 +1,775 @@
+<title>Primary Client Portal</title>
+<style>/*__UICSS__*/</style>
+<style>/*__TPLCSS__*/</style>
+<style>/*__BRANDCSS__*/</style>
+<style id="pp-fonts"></style>
+<style>
+/*__PUBCSS__*/
+/* Portal additions, written only with the Brand Tool's own tokens */
+.pp-flagbtn{display:flex;flex-direction:column;gap:var(--space-xs);width:100%;min-width:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.pp-flagbtn:hover h2{text-decoration:underline;text-underline-offset:.2em}
+.pp-flagbtn:focus-visible{outline:2px solid var(--neutral-10);outline-offset:4px;border-radius:var(--radius-s)}
+.pb-flag .pp-dot{pointer-events:none}
+.pp-picks{display:flex;flex-wrap:wrap;gap:var(--space-xxs)}
+.pp-picks .pb-pill{cursor:pointer}
+.pp-picks .pb-pill[aria-pressed=true]{background:var(--neutral-10);color:var(--neutral-1)}
+.pp-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-xs)}
+.pp-field-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:var(--space-s)}
+.pp-input{width:100%;min-height:calc(var(--line-s) + var(--space-s) * 2);padding:var(--space-s);border:0;border-radius:var(--radius-s);background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line);color:var(--neutral-10);font:var(--weight-ui-regular) var(--size-s)/var(--line-s) var(--font-ui)}
+.pp-input:focus-visible{outline:none;background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10)}
+.pp-thumb{display:block;width:100%;max-width:14rem;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-s);background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:var(--space-s)}
+.pp-opt{display:flex;flex-direction:column;gap:var(--space-s);min-width:0;padding:var(--space-s);border-radius:var(--radius-m);background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-opt[data-rec]{box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10)}
+.pp-opt-hero{grid-column:1/-1}
+.pp-opt-media{display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-s);background:var(--pb-ground)}
+.pp-opt-hero .pp-opt-media{aspect-ratio:16/9}
+.pp-opt-media img,.pp-opt-media video{width:100%;height:100%;object-fit:contain}
+.pp-opt-media span{color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-opt-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xs);min-width:0}
+.pp-opt-head strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:var(--weight-ui-medium);font-size:var(--size-xs)}
+.pp-caption{margin:0;color:var(--pb-body);font-size:var(--size-s);line-height:var(--line-s);white-space:pre-wrap;overflow-wrap:anywhere}
+.pp-msg{margin:0;padding:var(--space-s) var(--space-m);border-radius:var(--radius-m);background:var(--pb-hover);color:var(--neutral-10);white-space:pre-wrap;overflow-wrap:anywhere}
+.pp-msg small{display:block;margin-bottom:var(--space-xxs);color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-block{display:flex;flex-direction:column;gap:var(--space-s);margin-bottom:var(--space-xl)}
+.pp-block>h2{margin:0;padding-bottom:var(--space-xs);box-shadow:inset 0 calc(-1 * var(--border-s)) 0 var(--pb-line);font:var(--weight-ui-medium) var(--size-s)/var(--line-s) var(--font-ui)}
+.pp-studio{padding:var(--space-m);border-radius:var(--radius-m);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-note{margin:0;color:var(--pb-sub);font-size:var(--size-xs);line-height:var(--line-s)}
+.pp-note[data-tone=bad]{color:var(--error)}
+.pp-status{margin:0 0 var(--space-m);padding:0 0 0 var(--space-m);color:var(--pb-body);font-size:var(--size-xs);line-height:var(--line-s)}
+.pp-status li+li{margin-top:var(--space-xxs)}
+.pp-status li[data-tone=bad]{color:var(--error)}
+.pp-status li[data-tone=good]{color:var(--neutral-10);font-weight:var(--weight-ui-medium)}
+.pp-history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-xs)}
+.pp-history li{display:flex;flex-direction:column;gap:2px;font-size:var(--size-xs);color:var(--pb-body)}
+.pp-history li span{color:var(--pb-sub)}
+.pp-dropmask{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;background:color-mix(in srgb,var(--neutral-10) 30%,transparent);pointer-events:none}
+.pp-dropmask div{padding:var(--space-l) var(--space-xl);border-radius:var(--radius-m);background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10);font:var(--weight-ui-medium) var(--size-s)/var(--line-s) var(--font-ui);color:var(--neutral-10)}
+.pp-brandpick{cursor:pointer}
+.pp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.pb-pb-dlrow .themed-button{justify-self:end}
+.pp-files{display:flex;flex-direction:column;gap:var(--space-xl)}
+.pp-files section{display:flex;flex-direction:column;gap:var(--space-s);scroll-margin-top:var(--space-l)}
+.pp-files h2{margin:0;padding-bottom:var(--space-xs);box-shadow:inset 0 calc(-1 * var(--border-s)) 0 var(--pb-line);font:var(--weight-ui-medium) var(--size-s)/var(--line-s) var(--font-ui)}
+.pp-galmini{display:grid;grid-template-columns:repeat(auto-fill,minmax(7rem,1fr));gap:var(--space-xs)}
+.pp-galmini figure{margin:0;display:flex;align-items:center;justify-content:center;aspect-ratio:1;overflow:hidden;border-radius:var(--radius-s);background:var(--pb-ground)}
+.pp-galmini figure[data-dark]{background:#1b1b1b}
+.pp-galmini img{max-width:80%;max-height:80%;object-fit:contain}
+.pp-galmini figure.is-photo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover}
+</style>
+<div id="root"><div class="graphical-theme" data-graphical-theme="Base" data-color-mode="light"></div></div>
+<input type="file" id="pp-bookfile" accept=".json,application/json" hidden>
+<input type="file" id="pp-photofile" accept="image/*" hidden>
+<input type="file" id="pp-optfile" accept="image/*,video/mp4,video/webm,application/pdf" multiple hidden>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script id="qdata" type="application/json">__QDATA__</script>
+<script>
+/* ---------- the Brand Tool's own theme, buttons and icons ---------- */
+const THEME = __THEME__;
+const ICONS = __ICONS__;
+const L = (p) => `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide" aria-hidden="true">${p}</svg>`;
+Object.assign(ICONS, {
+  download: L('<path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path>'),
+  send: L('<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path>'),
+  plus: L('<path d="M5 12h14"></path><path d="M12 5v14"></path>'),
+  circlePlus: L('<circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path>'),
+  check: L('<path d="M20 6 9 17l-5-5"></path>'),
+  copy: L('<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>'),
+  sun: L('<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>'),
+  inbox: L('<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>'),
+  message: L('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>'),
+  back: L('<path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path>'),
+  imagePlus: L('<path d="M16 5h6"></path><path d="M19 2v6"></path><path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"></path><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path><circle cx="9" cy="9" r="2"></circle>'),
+  x: L('<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>'),
+  eye: L('<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle>')
+});
+const icon = (k) => { const t = document.createElement("template"); t.innerHTML = ICONS[k] || ""; return t.content.firstChild; };
+
+/* ---------- tiny DOM helper, also stands in for the tool's JSX runtime ---------- */
+const UNITLESS = new Set(["flexGrow", "flexShrink", "flex", "fontWeight", "lineHeight", "opacity", "zIndex", "order"]);
+function setStyle(el, st) {
+  if (!st) return;
+  if (typeof st === "string") { el.setAttribute("style", st); return; }
+  for (const [k, v] of Object.entries(st)) {
+    if (v === undefined || v === null || v === false) continue;
+    const prop = k.startsWith("--") ? k : k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase());
+    el.style.setProperty(prop, typeof v === "number" && !UNITLESS.has(k) ? v + "px" : String(v));
+  }
+}
+function add(el, kids) {
+  for (const k of [].concat(kids)) {
+    if (k === null || k === undefined || k === false || k === true || k === "") continue;
+    if (Array.isArray(k)) add(el, k);
+    else el.append(k instanceof Node ? k : String(k));
+  }
+}
+function h(tag, props, ...kids) {
+  if (typeof tag === "function") return tag(kids.length ? { ...(props || {}), children: kids.length > 1 ? kids : kids[0] } : { ...(props || {}) });
+  const el = tag === FRAG ? document.createDocumentFragment() : document.createElement(tag);
+  if (tag !== FRAG && props) for (const [k, v] of Object.entries(props)) {
+    if (v === undefined || v === null || v === false || k === "key" || k === "children") continue;
+    if (k === "className" || k === "class") el.setAttribute("class", v);
+    else if (k === "style") setStyle(el, v);
+    else if (k === "htmlFor") el.setAttribute("for", v);
+    else if (k === "tabIndex") el.setAttribute("tabindex", v);
+    else if (k.startsWith("on") && typeof v === "function") el.addEventListener(k.slice(2).toLowerCase(), v);
+    else if (k === "value") el.value = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  add(el, kids.length ? kids : props?.children);
+  return el;
+}
+const FRAG = Symbol("fragment");
+const Ge = { Fragment: FRAG, jsx: (t, p) => h(t, p), jsxs: (t, p) => h(t, p) };
+
+/* ---------- the Brand Tool's brand book, as it renders on its Publish tab ---------- */
+/*__PUBJS__*/
+
+/* The portal's Downloads section: the same rows, with a download on each */
+function pbPubDownloads({ c: t }) {
+  const e = t.downloads || [], n = e.filter((o) => o.included);
+  return h(FRAG, null,
+    e.length ? h("div", { className: "pb-pb-dl" }, e.map((o) => dlRow(o))) : h("p", { className: "pb-pb-text" }, "No files yet."),
+    h("p", { className: "pb-pb-soft pb-pb-note" }, `${n.length} of ${e.length} ready to download.`));
+}
+function dlRow(o) {
+  const r = [...new Set((o.files || []).map((a) => String(a.name || "").split(".").pop().toUpperCase()).filter((a) => a && a.length <= 5))];
+  const i = o.kind === "font" ? "Font" : r.join(" · ") || "Files";
+  const have = usable(o).length;
+  return h("div", { className: "pb-pb-dlrow" + (o.included ? "" : " is-out") },
+    h("span", { className: "pb-pb-badge" }, o.kind === "font" ? "Aa" : r[0] || "—"),
+    h("div", null, h("strong", null, o.name),
+      h("span", null, o.included ? `${i} · ${o.files.length} file${o.files.length === 1 ? "" : "s"}${o.licence ? ` · ${o.licence} licence` : ""}` : o.reason)),
+    o.included && have
+      ? btn({ label: "Download", icon: "download", variant: "secondary", onClick: (ev) => downloadSet(o, ev.currentTarget) })
+      : h("span", { className: "pb-pb-state" }, o.included ? "Not ready yet" : "Left out"));
+}
+
+/* ---------- state ---------- */
+const Q = JSON.parse(document.getElementById("qdata").textContent);
+const S = {
+  view: "brief", reqId: null, filter: "all", mode: "light", sheet: false,
+  studio: false, asClient: false, me: null, names: {},
+  client: null, clientFrom: null, clientMeta: null, bookNode: null, bookNote: [], bookBusy: false,
+  answers: { ...Q.answers }, briefFrom: "file", briefSave: "", briefAt: null,
+  requests: [], reqState: "loading", draft: { what: "", channels: [], due: "", photo: null, format: null }, sendBusy: false, sendErr: "",
+  detailNote: {}, changeOpen: false, changeText: "",
+};
+let db = null, assets = null, downloads = null, userCap = null;
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+S.asClient = store.get("pp-as-client") === "1";
+try { const d = JSON.parse(store.get("pp-draft") || "null"); if (d && typeof d === "object") S.draft = { ...S.draft, ...d, photo: d.photo || null }; } catch {}
+try { const a = JSON.parse(store.get("pp-answers") || "null"); if (a && typeof a === "object") { S.answers = { ...S.answers, ...a.answers }; S.briefFrom = "local"; S.briefAt = a.at || null; } } catch {}
+
+const studio = () => S.studio && !S.asClient;
+const BRAND = () => S.client?.brand || Q.brand;
+const fmtDay = (v) => { const d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
+const fmtDate = (v) => { const d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }); };
+const fmtTime = (v) => { const d = new Date(v); return isNaN(d) ? "" : d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }); };
+const fmtWhen = (v) => { const d = new Date(v); if (isNaN(d)) return ""; const today = new Date().toDateString() === d.toDateString(); return today ? `today at ${fmtTime(d)}` : `${fmtDay(d)} at ${fmtTime(d)}`; };
+const who = (id) => !id ? "Someone" : id === S.me ? "You" : S.names[id] || "Someone";
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+
+/* ---------- theme, matching the tool: the root's data-theme or the system setting ---------- */
+const readMode = () => { const t = document.documentElement.dataset.theme; return t === "dark" || t === "light" ? t : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; };
+S.mode = readMode();
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { S.mode = readMode(); render(); });
+new MutationObserver(() => { const m = readMode(); if (m !== S.mode) { S.mode = m; render(); } }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+function btn({ label, icon: ic, variant = "secondary", onClick, aria, iconOnly, disabled, busy, title, cls }) {
+  let style = THEME.btn[`${S.mode}-${variant}`] || THEME.btn[`${S.mode}-secondary`];
+  if (variant === "ghost" && !iconOnly) style += " padding: var(--space-xxs) var(--space-s);";
+  if (disabled || busy) style += " opacity: .5; cursor: default;";
+  const b = h("button", { type: "button", tabIndex: 0, className: "themed-button" + (cls ? " " + cls : ""), style, "aria-label": aria || label, title: title || (iconOnly ? label : undefined), disabled: disabled || busy ? true : undefined, onClick });
+  if (busy) b.append(h("span", { className: "pb-spin", "aria-hidden": "true" }));
+  else if (ic) b.append(icon(ic));
+  if (!iconOnly) b.append(h("span", { className: "pb-btn-label" }, label));
+  return b;
+}
+const flash = (b, text) => { const l = b.querySelector(".pb-btn-label"); if (!l) return; const was = l.textContent; l.textContent = text; setTimeout(() => (l.textContent = was), 1600); };
+
+/* ---------- capabilities ---------- */
+claude.use("downloads").then((d) => { downloads = d; }).catch(() => {});
+async function saveFile(filename, data, b) {
+  if (!downloads) { if (b) flash(b, "Not available here"); return false; }
+  try { await downloads.save({ filename, data }); if (b) flash(b, "Saved"); return true; }
+  catch (e) {
+    const c = e?.code, t = c === "declined" ? "Cancelled" : c === "rate_limited" ? "One is waiting" : c === "rejected_extension" ? "Use Download all" : c === "too_large" ? "Too large" : "Not available here";
+    if (b) flash(b, t); return false;
+  }
+}
+const base = (n) => String(n || "file").split("/").pop();
+const dataBlob = (uri) => { const [head, body] = uri.split(","); const b64 = /;base64/.test(head); const type = head.slice(5).split(";")[0] || "application/octet-stream"; if (!b64) return new Blob([decodeURIComponent(body)], { type }); const bin = atob(body); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new Blob([u], { type }); };
+const usable = (d) => (d.files || []).filter((f) => typeof f.data === "string" && f.data.startsWith("data:"));
+const slug = (s) => String(s || "files").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "files";
+const DIRECT = /\.(png|jpe?g|webp|gif|svg|pdf|ttf|json|txt|md|csv|mp4|webm|zip)$/i;
+async function downloadSet(d, b) {
+  const fs = usable(d);
+  if (fs.length === 1 && DIRECT.test(base(fs[0].name))) return saveFile(base(fs[0].name), dataBlob(fs[0].data), b);
+  if (!window.JSZip) { flash(b, "Not available here"); return; }
+  const zip = new JSZip(); for (const f of fs) zip.file(base(f.name), dataBlob(f.data));
+  saveFile(`${BRAND().id}-${slug(d.name)}.zip`, await zip.generateAsync({ type: "blob" }), b);
+}
+async function downloadAll(b) {
+  const c = S.client; if (!c) return;
+  if (!window.JSZip) { flash(b, "Not available here"); return; }
+  const zip = new JSZip(); let n = 0;
+  for (const d of (c.downloads || []).filter((x) => x.included)) for (const f of usable(d)) { zip.folder(slug(d.group)).folder(slug(d.name)).file(base(f.name), dataBlob(f.data)); n++; }
+  if (!n) { flash(b, "Nothing to download yet"); return; }
+  saveFile(`${c.brand.id}-brand-files${c.version ? "-v" + c.version : ""}.zip`, await zip.generateAsync({ type: "blob" }), b);
+}
+
+/* ---------- routing ---------- */
+const VIEWS = ["brief", "book", "files", "new", "requests"];
+function readRoute() {
+  const hsh = location.hash.slice(1);
+  if (hsh.startsWith("req-")) { S.view = "request"; S.reqId = hsh.slice(4); }
+  else { S.view = VIEWS.includes(hsh) ? hsh : "brief"; S.reqId = null; }
+}
+function go(view, id) {
+  S.sheet = false; S.changeOpen = false; S.changeText = "";
+  const target = view === "request" ? "req-" + id : view;
+  if (location.hash.slice(1) !== target) location.hash = target; else { readRoute(); render(); }
+  document.getElementById("pb-main")?.scrollTo?.({ top: 0 });
+  window.scrollTo?.({ top: 0 });
+}
+addEventListener("hashchange", () => { readRoute(); render(); });
+readRoute();
+
+/* ---------- shell: the tool's nav, top bar and panels ---------- */
+const STATUS = { received: "Received", progress: "In progress", ready: "Ready for you", approved: "Approved" };
+const STATUS_KIND = { received: undefined, progress: "check", ready: "fix", approved: "page" };
+function badgeCount() {
+  return studio() ? S.requests.filter((r) => r.status === "received").length : S.requests.filter((r) => r.status === "ready").length;
+}
+function nav() {
+  const item = (view, label, ic, badge) => h("li", null, h("button", {
+    type: "button", className: "pb-navitem", "aria-current": S.view === view || (view === "requests" && S.view === "request") ? "page" : undefined,
+    onClick: () => go(view)
+  }, icon(ic), h("span", { className: "pb-navlabel" }, label), badge ? h("span", { className: "pb-badge", "aria-label": `${badge} ${studio() ? "new" : "ready for you"}` }, String(badge)) : null));
+  const n = badgeCount();
+  const inner = h("div", { className: "pb-nav-inner" },
+    h("div", { className: "pb-navhead" }, h("button", { type: "button", className: "pb-navhome", onClick: () => go("book") }, h("span", { className: "pb-mark", "aria-hidden": "true" }, "P"), h("span", { className: "pb-navlabel" }, "Primary"))),
+    h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Project")),
+    h("ul", { className: "pb-navlist" }, item("brief", "Questionnaire", "Brief")),
+    h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Brand")),
+    h("ul", { className: "pb-navlist" }, item("book", "Brand book", "Guideline"), item("files", "Files", "Assets")),
+    h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Requests")),
+    h("ul", { className: "pb-navlist" }, item("new", "Request assets", "circlePlus"), item("requests", "Requests", "inbox", n)),
+    S.studio ? h("div", { className: "pb-navfoot" }, h("button", {
+      type: "button", className: "pb-navitem pb-navpin", "aria-pressed": S.asClient ? "true" : "false", title: "See the portal the way your client does",
+      onClick: () => { S.asClient = !S.asClient; store.set("pp-as-client", S.asClient ? "1" : "0"); render(); }
+    }, icon("eye"), h("span", { className: "pb-navlabel" }, S.asClient ? "Back to studio view" : "Preview as client"))) : null);
+  return h("nav", { className: "pb-nav", "aria-label": "Main", "data-sheet": S.sheet ? "" : undefined }, inner,
+    S.sheet ? h("button", { type: "button", className: "pb-navscrim", "aria-label": "Close menu", onClick: () => { S.sheet = false; render(); } }) : null);
+}
+function dots() {
+  const c = S.client?.colour || {}, groups = Object.entries(c).filter(([k, v]) => Array.isArray(v) && v.length && typeof v[0] === "object" && !["balance", "rules", "never"].includes(k)).map(([, v]) => v);
+  const hex = (x) => x?.hex || x?.deep || x?.steps?.[0];
+  let out = [];
+  if (groups[0]) out.push(hex(groups[0][0]), hex(groups[0][Math.floor(groups[0].length / 2)]));
+  if (groups[1]) out.push(hex(groups[1][0]), hex(groups[1][Math.min(2, groups[1].length - 1)]));
+  out = out.filter((x) => pbPubHex.test(x || ""));
+  if (out.length < 4) out = ["#F6F5F2", "#B7B2A9", "#BCD3D7", "#C6CEAE"];
+  return h("span", { className: "pb-dots", "aria-hidden": "true" }, out.slice(0, 4).map((x) => h("i", { style: { background: x } })));
+}
+function topActions() {
+  const a = [];
+  if (S.view === "brief" && studio()) a.push(btn({ label: "Export for Brand Tool", icon: "download", onClick: (e) => exportCsv(e.currentTarget) }));
+  if ((S.view === "book" || S.view === "files") && S.client) a.push(btn({ label: "Download all", icon: "download", onClick: (e) => downloadAll(e.currentTarget) }));
+  if (S.view === "book" && studio()) a.push(btn({ label: "Load a version", icon: "top:lucide-upload", onClick: () => pickBook() }));
+  if (S.view !== "new") a.push(btn({ label: "Request assets", icon: "plus", variant: "primary", onClick: () => go("new") }));
+  return a;
+}
+function topBar() {
+  const dark = S.mode === "dark";
+  return h("header", { className: "pb-top" },
+    h("div", { className: "pb-top-start" },
+      btn({ label: "Menu", icon: "top:lucide-panel-left", variant: "ghost", iconOnly: true, cls: "pb-navopen", onClick: () => { S.sheet = true; render(); } }),
+      h("button", { type: "button", className: "ui-part ui-button pb-menutrigger pb-brandpick pp-brandpick", style: dark ? THEME.pickDark : THEME.pickLight, "aria-label": `${BRAND().name} brand book`, onClick: () => go("book") }, dots(), h("span", null, BRAND().name))),
+    h("div", { className: "pb-top-end" },
+      h("div", { className: "pb-top-actions", role: "group", "aria-label": "Actions" }, topActions()),
+      btn({ label: dark ? "Switch to light mode" : "Switch to dark mode", icon: dark ? "sun" : "top:lucide-moon", variant: "ghost", iconOnly: true, onClick: () => { document.documentElement.dataset.theme = dark ? "light" : "dark"; } })));
+}
+const railItem = (label, meta, current, onClick, lead) => h("li", null, h("button", { type: "button", className: "pb-railitem", "aria-current": current ? "true" : undefined, onClick },
+  lead || null, h("span", { className: "pb-railitem-main", title: label }, label), meta !== undefined && meta !== null ? h("span", { className: "pb-railitem-meta" }, String(meta)) : null));
+const railBlock = (title, items, fill) => h("div", { className: "pb-railblock" + (fill ? " pb-railblock--fill" : "") }, title ? h("div", { className: "pb-railhead" }, h("h2", null, title)) : null, h("ul", { className: "pb-raillist" }, items));
+
+let rendering = false, pendingRender = false;
+function render() {
+  const ae = document.activeElement;
+  if (ae && ae.closest?.("#pb-main") && /^(TEXTAREA|INPUT)$/.test(ae.tagName) && !rendering) { pendingRender = true; return; }
+  rendering = true; pendingRender = false;
+  const mainScroll = document.getElementById("pb-main")?.scrollTop || 0, keep = render.lastKey === S.view + S.reqId;
+  const [railEl, mainEl, label, wide] = VIEWS_RENDER[S.view]();
+  const g = h("div", { className: "graphical-theme", "data-graphical-theme": "Base", "data-color-mode": S.mode, style: S.mode === "dark" ? THEME.dark : THEME.light },
+    h("div", { className: "pb-app", "data-view": TOOL_VIEW[S.view], "data-nav": "open" },
+      h("a", { className: "pb-skip", href: "#pb-main", onClick: (e) => { e.preventDefault(); document.getElementById("pb-main")?.focus(); } }, "Skip to content"),
+      nav(),
+      h("div", { className: "pb-shell" }, topBar(),
+        h("div", { className: "pb-body", "data-rail": "true", "data-inspector": "false" },
+          railEl,
+          h("main", { id: "pb-main", className: "pb-panel pb-main", "data-kind": "doc", "aria-label": label, tabIndex: -1 }, h("div", { className: "pb-page" + (wide ? " pb-page--wide" : "") }, mainEl))))));
+  document.getElementById("root").replaceChildren(g);
+  if (keep) document.getElementById("pb-main").scrollTop = mainScroll;
+  render.lastKey = S.view + S.reqId;
+  rendering = false;
+}
+document.addEventListener("focusout", () => setTimeout(() => { if (pendingRender && !document.activeElement?.closest?.("#pb-main textarea, #pb-main input")) render(); }, 0));
+const TOOL_VIEW = { brief: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
+const VIEWS_RENDER = { brief: viewBrief, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
+const pagehead = (eyebrow, title, text, cls) => h("header", { className: "pb-pagehead" + (cls ? " " + cls : "") }, eyebrow ? h("p", { className: "pb-eyebrow" }, eyebrow) : null, h("h1", null, title), text ? h("p", null, text) : null);
+const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+/* ---------- Questionnaire (the tool's Brief form) ---------- */
+const filled = () => Q.fields.filter((f) => (S.answers[f.id] || "").trim()).length;
+const secFilled = (s) => Q.fields.filter((f) => f.section === s && (S.answers[f.id] || "").trim()).length;
+const secTotal = (s) => Q.fields.filter((f) => f.section === s).length;
+function briefNote() {
+  if (S.briefSave === "saving") return "Saving…";
+  if (S.briefSave === "error") return "Couldn’t reach the studio. Your answers are kept in this browser.";
+  if (S.briefFrom === "db") return `Shared with the studio${S.briefAt ? ` · saved ${fmtWhen(S.briefAt)}` : ""}.`;
+  if (S.briefFrom === "local") return db ? "Kept in this browser. They reach the studio with your next edit." : "Kept in this browser.";
+  return `Answers from ${Q.meta.submittedBy}, ${fmtDate(Q.meta.submittedAt)}.`;
+}
+function viewBrief() {
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Questionnaire" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Questionnaire"),
+      h("ul", { className: "pb-raillist" }, railItem("All questions", `${filled()}/${Q.fields.length}`, true, () => document.getElementById("pb-main").scrollTo({ top: 0, behavior: "smooth" })))),
+    h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Sections")),
+      h("ul", { className: "pb-raillist", id: "pp-secs" }, Q.sections.map((s, i) => railItem(s, `${secFilled(s)}/${secTotal(s)}`, false, () => jumpTo("sec-" + i))))),
+    h("p", { className: "pb-railnote pb-railfoot", role: "status", id: "pp-briefnote" }, briefNote()));
+  let n = 0;
+  const form = h("div", { className: "pb-form" }, Q.sections.map((s, i) => h("section", { className: "pb-form-section", id: "sec-" + i, "aria-labelledby": "sech-" + i },
+    h("h2", { id: "sech-" + i }, s),
+    Q.fields.filter((f) => f.section === s).map((f) => {
+      n++;
+      const ta = h("textarea", { id: "qa-" + f.id, className: "pb-q-input", "data-short": f.short ? "true" : undefined, rows: f.short ? 1 : 3, maxlength: 6000, placeholder: "Type an answer" });
+      ta.value = S.answers[f.id] || "";
+      ta.addEventListener("input", () => onAnswer(f.id, ta.value));
+      return h("div", { className: "pb-q", id: "q-" + f.id }, h("label", { htmlFor: "qa-" + f.id }, h("span", { className: "pb-q-n" }, String(n)), f.q), ta);
+    }))));
+  const done = filled(), all = Q.fields.length;
+  const main = h(FRAG, null,
+    pagehead(`${BRAND().name} · Questionnaire`, "Questionnaire", done === all
+      ? `All ${all} questions answered. Edits save as you type and reach the studio.`
+      : `${done} of ${all} answered. Answers save as you type and reach the studio.`, "pb-briefhead"),
+    form);
+  return [rail, main, "Questionnaire", true];
+}
+let briefTimer = null, briefWriting = false, briefAgain = false;
+function onAnswer(id, v) {
+  S.answers[id] = v;
+  store.set("pp-answers", JSON.stringify({ answers: S.answers, at: Date.now() }));
+  if (S.briefFrom === "file") S.briefFrom = "local";
+  const list = document.getElementById("pp-secs");
+  if (list) [...list.querySelectorAll(".pb-railitem-meta")].forEach((m, i) => (m.textContent = `${secFilled(Q.sections[i])}/${secTotal(Q.sections[i])}`));
+  const all = document.querySelector(".pb-rail .pb-railitem-meta"); if (all) all.textContent = `${filled()}/${Q.fields.length}`;
+  if (!db) { setBriefNote(); return; }
+  S.briefSave = "saving"; setBriefNote();
+  clearTimeout(briefTimer); briefTimer = setTimeout(writeBrief, 900);
+}
+async function writeBrief() {
+  if (briefWriting) { briefAgain = true; return; }
+  briefWriting = true;
+  try { const at = Date.now(); await db.doc("brief/answers").set({ answers: { ...S.answers }, at, by: S.me || null }); S.briefFrom = "db"; S.briefAt = at; S.briefSave = ""; }
+  catch { S.briefSave = "error"; }
+  briefWriting = false; setBriefNote();
+  if (briefAgain) { briefAgain = false; writeBrief(); }
+}
+const setBriefNote = () => { const e = document.getElementById("pp-briefnote"); if (e) e.textContent = briefNote(); };
+const stamp = () => { const d = new Date(), p = (x) => String(x).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}:00`; };
+const csvCell = (s) => `"${String(s).replace(/"/g, '""')}"`;
+function exportCsv(b) {
+  const cols = Q.fields.filter((f) => (S.answers[f.id] || "").trim());
+  const head = cols.map((f) => f.label).concat("Submitted on"), row = cols.map((f) => S.answers[f.id].trim()).concat(stamp());
+  const d = new Date(), p = (x) => String(x).padStart(2, "0");
+  saveFile(`${Q.brand.id}-questionnaire-${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.csv`, head.map(csvCell).join(",") + "\r\n" + row.map(csvCell).join(",") + "\r\n", b);
+}
+
+/* ---------- Brand book ---------- */
+function check(j) {
+  if (!j || typeof j !== "object") return "That file isn’t readable.";
+  if (j.client && j.client.format === "primary.client-brand") return null;
+  if (j.format !== "primary.client-brand") return "That file isn’t a client version. Use the .json from the Brand Tool’s Publish tab (Download).";
+  if (j.formatVersion !== 1) return "That file comes from a newer Brand Tool than this portal reads.";
+  if (!j.brand || typeof j.brand.name !== "string") return "That file has no brand in it.";
+  return null;
+}
+const unwrap = (j) => j.client && j.client.format === "primary.client-brand" ? { ...j.client, version: j.version, published: j.at ? new Date(j.at).toISOString() : undefined } : j;
+function setFonts(c) {
+  const rules = [];
+  for (const d of (c.downloads || []).filter((x) => x.kind === "font")) {
+    const fs = usable(d), by = {};
+    for (const f of fs) { const k = `${f.weight || 400}/${f.style || "normal"}`; const pri = /woff2$/i.test(f.name) ? 3 : /woff$/i.test(f.name) ? 2 : /(ttf|otf)$/i.test(f.name) ? 1 : 0; if (pri && (!by[k] || by[k].pri < pri)) by[k] = { f, pri }; }
+    for (const { f } of Object.values(by)) rules.push(`@font-face{font-family:${JSON.stringify(d.name)};src:url(${JSON.stringify(f.data)});font-weight:${+f.weight || 400};font-style:${f.style === "italic" ? "italic" : "normal"};font-display:swap}`);
+  }
+  document.getElementById("pp-fonts").textContent = rules.join("\n");
+}
+let bookToken = 0;
+function setBook(c, from, meta) {
+  S.client = c; S.clientFrom = from; S.clientMeta = meta || null; S.bookNode = null;
+  setFonts(c);
+  render();
+}
+function bookNode() {
+  if (!S.client) return null;
+  if (!S.bookNode) {
+    try { S.bookNode = pbPubBook({ c: S.client, brand: { id: S.client.brand.id } }); }
+    catch (e) { S.bookNode = h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "This version couldn’t be shown"), h("p", null, "Something in the file didn’t read as expected. Publish it again from the Brand Tool and load the new file.")); }
+  }
+  return S.bookNode;
+}
+function bookSections() {
+  const node = bookNode(); if (!node) return [];
+  return [...node.querySelectorAll(".pb-pb-sec")].map((s, i) => { s.id = "bk-" + i; return { id: s.id, title: s.querySelector(".pb-pb-sechead h2")?.textContent || "" }; });
+}
+function versionLine() {
+  const c = S.client; if (!c) return "";
+  if (S.clientFrom === "sample") return "A sample of the brand book";
+  return [c.version ? `Version ${c.version}` : "Published version", c.published ? `published ${fmtDate(c.published)}` : ""].filter(Boolean).join(", ");
+}
+function viewBook() {
+  const secs = bookSections();
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Brand book" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Brand book"),
+      h("ul", { className: "pb-raillist" }, railItem(S.clientFrom === "sample" ? "Sample" : S.client?.version ? `Version ${S.client.version}` : "Latest", S.client?.published ? fmtDay(S.client.published) : undefined, true, () => document.getElementById("pb-main").scrollTo({ top: 0, behavior: "smooth" })))),
+    secs.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Sections")),
+      h("ul", { className: "pb-raillist" }, secs.map((s) => railItem(s.title, undefined, false, () => jumpTo(s.id))))) : null,
+    h("p", { className: "pb-railnote pb-railfoot", role: "status" }, S.clientFrom === "sample" ? "The studio’s published versions show here." : S.client ? "Published by Primary." : "Loading…"));
+  const notes = S.bookNote.map((n) => h("li", { "data-tone": n.tone }, n.text));
+  const main = h(FRAG, null,
+    pagehead(null, "Brand book", S.client ? `${BRAND().name}’s brand as Primary published it: the rules, colours, type and files. ${versionLine()}.` : "Your brand book shows here once Primary publishes it."),
+    studio() ? h("div", { className: "pb-kit-actions" },
+      btn({ label: S.bookBusy ? "Saving the version…" : "Load a published version", icon: "top:lucide-upload", busy: S.bookBusy, onClick: () => pickBook() }),
+      h("span", { className: "pp-note" }, "Or drop the .json from the Brand Tool’s Publish tab anywhere on this page.")) : null,
+    notes.length ? h("ul", { className: "pp-status", role: "status" }, notes) : null,
+    S.client ? bookNode() : h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading the brand book…" : "No brand book yet"), h("p", null, S.bookLoading ? "This takes a moment the first time." : "Primary publishes it from the Brand Tool when it’s ready.")));
+  return [rail, main, "Brand book", false];
+}
+function pickBook() { const i = document.getElementById("pp-bookfile"); i.value = ""; i.click(); }
+document.getElementById("pp-bookfile").addEventListener("change", (e) => loadBookFile(e.target.files?.[0]));
+let dragDepth = 0;
+const dropMask = () => document.querySelector(".pp-dropmask");
+addEventListener("dragenter", (e) => { if (!studio() || !(S.view === "book" || S.view === "files") || ![...(e.dataTransfer?.types || [])].includes("Files")) return; e.preventDefault(); dragDepth++; if (!dropMask()) document.body.append(h("div", { className: "pp-dropmask graphical-theme", "data-color-mode": S.mode, style: S.mode === "dark" ? THEME.dark : THEME.light }, h("div", null, "Drop the client version (.json) to load it"))); });
+addEventListener("dragover", (e) => { if (dropMask()) e.preventDefault(); });
+addEventListener("dragleave", () => { if (--dragDepth <= 0) { dragDepth = 0; dropMask()?.remove(); } });
+addEventListener("drop", (e) => { if (!dropMask()) return; e.preventDefault(); dragDepth = 0; dropMask().remove(); loadBookFile(e.dataTransfer.files?.[0]); });
+async function loadBookFile(file) {
+  if (!file) return;
+  const note = (text, tone) => { S.bookNote = [{ text, tone }]; if (S.view !== "book") go("book"); else render(); };
+  if (!/\.json$/i.test(file.name)) return note(`${file.name} isn’t a .json file. Use the file from the Brand Tool’s Publish tab.`, "bad");
+  let j; try { j = JSON.parse(await file.text()); } catch { return note(`${file.name} couldn’t be read as JSON.`, "bad"); }
+  const err = check(j); if (err) return note(err, "bad");
+  const c = unwrap(j), tok = ++bookToken;
+  const label = `${c.brand.name}${c.version ? `, version ${c.version}` : ""}${c.published ? `, published ${fmtDate(c.published)}` : ""}`;
+  S.bookNote = [{ text: `Showing ${label}, from ${file.name}.`, tone: "good" }];
+  if (c.brand.id && c.brand.id !== Q.brand.id) S.bookNote.push({ text: `This file is for ${c.brand.name}; this portal’s questionnaire is ${Q.brand.name}’s.`, tone: "bad" });
+  if (!(assets && db)) {
+    S.bookNote.push({ text: "Shown in this browser only: saving it for everyone needs editor access to this page.", tone: "" });
+    setBook(c, "file"); if (S.view !== "book") go("book"); return;
+  }
+  S.bookBusy = true; S.bookNote.push({ text: "Saving it so your client sees this version too…", tone: "" });
+  setBook(c, "file"); if (S.view !== "book") go("book");
+  try {
+    const blob = new Blob([JSON.stringify(c)], { type: "application/json" });
+    const up = await assets.upload(blob, { type: "application/json" });
+    if (tok !== bookToken) return;
+    const meta = { assetId: up.id, version: c.version ?? null, published: c.published ?? null, brandId: c.brand.id, brandName: c.brand.name, file: file.name, by: S.me || null, at: Date.now() };
+    await db.doc("portal/book").set(meta);
+    S.clientMeta = meta; S.clientFrom = "saved";
+    S.bookNote = [{ text: `Showing ${label}.`, tone: "good" }, { text: "Saved: everyone who opens this page now sees this version.", tone: "" }];
+  } catch (e) {
+    S.bookNote = [{ text: `Showing ${label}, from ${file.name}.`, tone: "good" }, { text: e?.code === "too_large" || e?.code === "file_too_large" ? "It’s too large to save here (20 MB at most), so it shows in this browser only." : "It couldn’t be saved for everyone just now, so it shows in this browser only. Try loading it again.", tone: "bad" }];
+  }
+  S.bookBusy = false; render();
+}
+async function loadSaved(meta) {
+  if (!meta?.assetId || S.clientMeta?.assetId === meta.assetId) return;
+  const tok = ++bookToken; S.bookLoading = true; if (S.view === "book") render();
+  try {
+    const r = await fetch("/_blob/" + meta.assetId); if (!r.ok) throw 0;
+    const j = await r.json(); if (tok !== bookToken || check(j)) throw 0;
+    S.bookLoading = false; setBook(unwrap(j), "saved", meta);
+  } catch { if (tok === bookToken) { S.bookLoading = false; if (!S.client) loadSample(); } }
+}
+async function loadSample() {
+  const tok = bookToken; S.bookLoading = true;
+  try { const r = await fetch("aurelius-client-sample.json"); if (!r.ok) throw 0; const j = await r.json(); if (tok !== bookToken || S.client || check(j)) { S.bookLoading = false; return; } S.bookLoading = false; setBook(unwrap(j), "sample"); }
+  catch { S.bookLoading = false; if (S.view === "book") render(); }
+}
+
+/* ---------- Files ---------- */
+const isImgData = (f) => typeof f.data === "string" && /^data:image\//.test(f.data);
+function viewFiles() {
+  const c = S.client, ds = (c?.downloads || []);
+  const groups = [...new Set(ds.map((d) => d.group || "Files"))];
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Files" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Files"),
+      h("ul", { className: "pb-raillist" }, railItem("Everything", ds.filter((d) => d.included).length, true, () => document.getElementById("pb-main").scrollTo({ top: 0, behavior: "smooth" })))),
+    groups.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Groups")),
+      h("ul", { className: "pb-raillist" }, groups.map((g, i) => railItem(g, ds.filter((d) => (d.group || "Files") === g && d.included).length, false, () => jumpTo("fg-" + i))))) : null,
+    h("p", { className: "pb-railnote pb-railfoot" }, c ? versionLine() + "." : "Loading…"));
+  const main = h(FRAG, null,
+    pagehead(null, "Files", `Logos, type and imagery approved for ${BRAND().name}. Download one set, or everything at once.`),
+    !c ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "No files yet"), h("p", null, "They show here once Primary publishes the brand book.")) :
+      h("div", { className: "pp-files" }, groups.map((g, i) => {
+        const rows = ds.filter((d) => (d.group || "Files") === g);
+        const pics = rows.filter((d) => d.included).flatMap((d) => usable(d)).filter(isImgData).slice(0, 12);
+        return h("section", { id: "fg-" + i }, h("h2", null, g),
+          pics.length ? h("div", { className: "pp-galmini" }, pics.map((f) => h("figure", { className: /\.(jpe?g|png|webp)$/i.test(f.name) && !/logo|icon/i.test(f.name) ? "is-photo" : "", "data-dark": /white|bone|light|reverse/i.test(base(f.name)) && /logo|icon/i.test(f.name) ? "" : undefined }, h("img", { src: f.data, alt: base(f.name).replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " "), loading: "lazy" })))) : null,
+          h("div", { className: "pb-pb-dl" }, rows.map(dlRow)));
+      })));
+  return [rail, main, "Files", false];
+}
+
+/* ---------- Requests ---------- */
+const CHANNELS = ["LinkedIn", "Instagram", "X", "Website", "Email", "Deck", "Print", "Other"];
+const saveDraft = () => store.set("pp-draft", JSON.stringify(S.draft));
+function viewNew() {
+  const d = S.draft, formats = S.client?.formats || [];
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Start from a format" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Request assets"),
+      h("ul", { className: "pb-raillist" }, railItem("Describe it yourself", undefined, !d.format, () => { d.format = null; saveDraft(); render(); }))),
+    formats.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Or start from a format")),
+      h("ul", { className: "pb-raillist" }, formats.map((f) => railItem(f.name, f.kind, d.format?.id === f.id, () => { d.format = { id: f.id, name: f.name, kind: f.kind, use: f.use }; saveDraft(); render(); })))) : null,
+    h("p", { className: "pb-railnote pb-railfoot" }, "The studio sees a request as soon as you send it."));
+  const what = h("textarea", { id: "pp-what", className: "pb-q-input", rows: 4, maxlength: 4000, placeholder: d.format ? `What should the ${d.format.name.toLowerCase()} say or show?` : "For example: a LinkedIn post announcing our new office, using the globe" });
+  what.value = d.what; what.addEventListener("input", () => { d.what = what.value; saveDraft(); upd(); });
+  const due = h("input", { id: "pp-due", type: "date", className: "pp-input", min: new Date().toISOString().slice(0, 10) });
+  due.value = d.due || ""; due.addEventListener("change", () => { d.due = due.value; saveDraft(); });
+  const sendB = btn({ label: S.sendBusy ? "Sending…" : "Send request", icon: "send", variant: "primary", busy: S.sendBusy, onClick: sendRequest });
+  const hint = h("p", { className: "pp-note", "data-tone": S.sendErr ? "bad" : undefined, role: "status" });
+  const upd = () => { const ok = d.what.trim().length > 0 && d.channels.length > 0; sendB.disabled = !ok || S.sendBusy; sendB.style.opacity = ok && !S.sendBusy ? "" : ".5"; hint.textContent = S.sendErr || (ok ? "" : !d.what.trim() ? "Say what you need, then pick where it goes." : "Pick at least one place it will go."); };
+  const chip = (c) => h("button", { type: "button", className: "pb-pill", "aria-pressed": d.channels.includes(c) ? "true" : "false", onClick: (e) => {
+    d.channels = d.channels.includes(c) ? d.channels.filter((x) => x !== c) : [...d.channels, c]; saveDraft();
+    e.currentTarget.setAttribute("aria-pressed", d.channels.includes(c) ? "true" : "false"); upd();
+  } }, c);
+  const photo = d.photo
+    ? h("div", { className: "pp-row" }, h("img", { className: "pp-thumb", src: "/_blob/" + d.photo.assetId, alt: d.photo.name || "Attached photo" }),
+      btn({ label: "Remove photo", icon: "x", variant: "ghost", onClick: () => { d.photo = null; saveDraft(); render(); } }))
+    : h("div", { className: "pp-row" }, assets
+      ? btn({ label: S.photoBusy ? "Adding…" : "Add a photo", icon: "imagePlus", busy: S.photoBusy, onClick: () => { const i = document.getElementById("pp-photofile"); i.value = ""; i.click(); } })
+      : h("span", { className: "pp-note" }, "Adding a photo needs access to this page from the studio."),
+      S.photoErr ? h("span", { className: "pp-note", "data-tone": "bad" }, S.photoErr) : null);
+  const main = h(FRAG, null,
+    pagehead(`${BRAND().name} · Requests`, "Request assets", "Tell the studio what you need. Options come back here for you to approve."),
+    !db ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Sign in to send requests"), h("p", null, "Requests are shared with the studio, so they need you signed in to Claude.")) :
+      h("div", { className: "pb-form" },
+        h("section", { className: "pb-form-section" }, h("h2", null, "What do you need?"),
+          d.format ? h("div", { className: "pp-row" }, h("span", { className: "pb-chip", "data-kind": "check" }, `${d.format.name} · ${d.format.kind}`),
+            h("span", { className: "pp-note" }, d.format.use || ""), btn({ label: "Clear format", icon: "x", variant: "ghost", iconOnly: true, onClick: () => { d.format = null; saveDraft(); render(); } })) : null,
+          h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-what" }, h("span", { className: "pb-q-n" }, "1"), "Describe the asset"), what)),
+        h("section", { className: "pb-form-section" }, h("h2", null, "Where will it go?"),
+          h("div", { className: "pb-q" }, h("p", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "2"), " Pick one or more."), h("div", { className: "pp-picks", role: "group", "aria-label": "Channels" }, CHANNELS.map(chip)))),
+        h("section", { className: "pb-form-section" }, h("h2", null, "Anything else?"),
+          h("div", { className: "pp-field-row" },
+            h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-due" }, h("span", { className: "pb-q-n" }, "3"), "Needed by (optional)"), due),
+            h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "4"), " A photo to work from (optional)"), photo))),
+        h("div", { className: "pb-kit-actions" }, sendB, hint)));
+  upd();
+  return [rail, main, "Request assets", true];
+}
+document.getElementById("pp-photofile").addEventListener("change", async (e) => {
+  const f = e.target.files?.[0]; if (!f || !assets) return;
+  S.photoBusy = true; S.photoErr = ""; render();
+  try { const up = await assets.upload(f); S.draft.photo = { assetId: up.id, name: f.name }; saveDraft(); }
+  catch (er) { S.photoErr = er?.code === "unsupported_type" ? "That file type can’t be attached. Try a JPG or PNG." : er?.code === "too_large" || er?.code === "file_too_large" ? "That photo is over 20 MB." : "The photo couldn’t be added. Try again."; }
+  S.photoBusy = false; render();
+});
+async function sendRequest() {
+  const d = S.draft; if (!db || !d.what.trim() || !d.channels.length || S.sendBusy) return;
+  S.sendBusy = true; S.sendErr = ""; render();
+  try {
+    const ref = db.collection("requests").doc(); const at = Date.now();
+    await ref.set({ what: d.what.trim(), channels: d.channels, due: d.due || null, photo: d.photo || null, format: d.format || null, status: "received", at, updatedAt: at, by: S.me || null, delivery: null, notes: [] });
+    S.draft = { what: "", channels: [], due: "", photo: null, format: null }; saveDraft();
+    S.detailNote[ref.id] = "Sent. The studio has your request.";
+    S.sendBusy = false; go("request", ref.id);
+  } catch (e) { S.sendBusy = false; S.sendErr = e?.code === "not_granted" || e?.code === "permission_denied" ? "Your access to this page doesn’t allow sending requests. Ask Primary to give you Contributor access." : "The request didn’t send. Try again."; render(); }
+}
+const statusChip = (s) => h("span", { className: "pb-chip", "data-kind": STATUS_KIND[s] }, STATUS[s] || s);
+function viewRequests() {
+  const all = S.requests, f = S.filter;
+  const count = (s) => all.filter((r) => r.status === s).length;
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request filters" },
+    h("div", { className: "pb-railblock" }, h("div", { className: "pb-railhead" }, h("h2", null, "Requests")),
+      h("ul", { className: "pb-raillist" }, [["all", "All", all.length], ["ready", "Ready for you", count("ready")], ["received", "Received", count("received")], ["progress", "In progress", count("progress")], ["approved", "Approved", count("approved")]]
+        .map(([k, l, n]) => railItem(l, n, f === k, () => { S.filter = k; render(); })))),
+    h("p", { className: "pb-railnote pb-railfoot", role: "status" }, S.reqState === "loading" ? "Loading…" : S.reqState === "slow" ? "Requests can’t be reached yet." : S.reqState === "off" ? "Sign in to see requests." : studio() ? "New requests show here as clients send them." : "Options show up here when the studio sends them."));
+  const list = all.filter((r) => f === "all" || r.status === f);
+  const main = h(FRAG, null,
+    pagehead(`${BRAND().name} · Requests`, "Requests", studio() ? "What the client has asked for. Open one to send options back." : "Everything you’ve asked the studio for, newest first."),
+    S.reqState === "off" ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Sign in to see requests"), h("p", null, "Requests are shared with the studio, so they need you signed in to Claude.")) :
+    S.reqState === "error" ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Requests couldn’t load"), h("p", null, "Reload the page to try again.")) :
+    !list.length ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading requests…" : all.length ? "Nothing here" : "No requests yet"),
+      all.length || S.reqState === "loading" ? null : h("p", null, "Ask for a post, a slide, a banner or anything else, and the studio sends options back here."),
+      all.length || S.reqState === "loading" ? null : btn({ label: "Request assets", icon: "plus", variant: "primary", onClick: () => go("new") })) :
+    h("ul", { className: "pb-flags" }, list.map((r) => h("li", { className: "pb-flag", "data-done": r.status === "approved" ? "true" : "false" },
+      h("span", { className: "pb-flag-toggle pp-dot", "aria-pressed": r.status === "approved" ? "true" : "false", "aria-hidden": "true" }, r.status === "approved" ? icon("check") : null),
+      h("button", { type: "button", className: "pp-flagbtn pb-flag-body", onClick: () => go("request", r.id) },
+        h("div", { className: "pb-flag-head" }, h("h2", null, title(r)), h("span", { className: "pb-chips" }, statusChip(r.status), r.due ? h("span", { className: "pb-chip", "data-kind": "page" }, `Due ${fmtDay(r.due + "T12:00")}`) : null)),
+        h("dl", null, h("dt", null, "For"), h("dd", null, (r.channels || []).join(", ") || "—"),
+          h("dt", null, "Asked"), h("dd", null, `${who(r.by)}, ${fmtWhen(r.at)}`),
+          r.delivery?.options?.length ? [h("dt", null, "Options"), h("dd", null, plural(r.delivery.options.length, "option"))] : null))))));
+  return [rail, main, "Requests", false];
+}
+const title = (r) => { const t = (r.what || "").split("\n")[0].trim(); return (r.format ? `${r.format.name}: ` : "") + (t.length > 90 ? t.slice(0, 88) + "…" : t || "Request"); };
+async function updateReq(id, data) {
+  try { await db.doc("requests/" + id).update({ ...data, updatedAt: Date.now() }); return true; }
+  catch { S.detailNote[id] = "That didn’t save. Try again."; render(); return false; }
+}
+function optMedia(o) {
+  const src = "/_blob/" + o.assetId;
+  if (/^video\//.test(o.type || "")) return h("video", { src, controls: true, muted: true, playsinline: true });
+  if (/pdf/.test(o.type || "") || /\.pdf$/i.test(o.name || "")) return h("span", null, `PDF · ${o.name || "file"}`);
+  return h("img", { src, alt: o.caption ? o.caption.slice(0, 80) : o.name || "Option", loading: "lazy" });
+}
+async function downloadOpt(o, b) {
+  try { const r = await fetch("/_blob/" + o.assetId); if (!r.ok) throw 0; saveFile(o.name || "option", await r.blob(), b); }
+  catch { flash(b, "Couldn’t fetch it"); }
+}
+async function copyText(text, b) {
+  try { await navigator.clipboard.writeText(text); flash(b, "Copied"); }
+  catch { const p = b.closest(".pp-opt")?.querySelector(".pp-caption"); if (p) { const r = document.createRange(); r.selectNodeContents(p); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } flash(b, "Selected, copy it"); }
+}
+function viewRequest() {
+  const r = S.requests.find((x) => x.id === S.reqId);
+  const back = h("div", { className: "pb-railblock" }, h("ul", { className: "pb-raillist" }, railItem("All requests", S.requests.length, false, () => go("requests"), h("span", { className: "pb-railitem-lead" }, icon("back")))));
+  if (!r) {
+    const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request" }, back);
+    return [rail, h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading…" : "This request isn’t here"), S.reqState === "loading" ? null : h("p", null, "It may have been removed."), btn({ label: "All requests", icon: "back", onClick: () => go("requests") })), "Request", false];
+  }
+  const opts = r.delivery?.options || [], sorted = [...opts.filter((o) => o.recommended), ...opts.filter((o) => !o.recommended)];
+  const hist = [{ at: r.at, by: r.by, text: "Sent the request" }, ...(r.notes || [])].sort((a, b) => a.at - b.at);
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request" }, back,
+    h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Progress")),
+      h("ul", { className: "pb-raillist" }, ["received", "progress", "ready", "approved"].map((s) => railItem(STATUS[s], s === r.status ? "Now" : ["received", "progress", "ready", "approved"].indexOf(s) < ["received", "progress", "ready", "approved"].indexOf(r.status) ? "Done" : "", s === r.status, () => {})))),
+    h("p", { className: "pb-railnote pb-railfoot" }, `Updated ${fmtWhen(r.updatedAt || r.at)}.`));
+  const note = S.detailNote[r.id];
+  const clientActions = r.status === "ready" && opts.length && !studio() ? h("div", { className: "pp-block" },
+    h("div", { className: "pb-kit-actions" },
+      btn({ label: opts.length > 1 ? "Approve the recommendation" : "Approve", icon: "check", variant: "primary", onClick: async () => { if (await updateReq(r.id, { status: "approved", approvedAt: Date.now(), approvedBy: S.me || null, notes: [...(r.notes || []), { at: Date.now(), by: S.me || null, kind: "approve", text: "Approved" }] })) { S.detailNote[r.id] = "Approved. The studio can see it."; } } }),
+      btn({ label: "Ask for a change", icon: "message", onClick: () => { S.changeOpen = !S.changeOpen; render(); setTimeout(() => document.getElementById("pp-change")?.focus(), 0); } })),
+    S.changeOpen ? (() => {
+      const ta = h("textarea", { id: "pp-change", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "What should change?" }); ta.value = S.changeText;
+      const sb = btn({ label: "Send to the studio", icon: "send", variant: "primary", disabled: !S.changeText.trim(), onClick: async () => {
+        const t = S.changeText.trim(); if (!t) return;
+        if (await updateReq(r.id, { status: "progress", notes: [...(r.notes || []), { at: Date.now(), by: S.me || null, kind: "change", text: t }] })) { S.changeOpen = false; S.changeText = ""; S.detailNote[r.id] = "Sent. The studio is on it."; }
+      } });
+      ta.addEventListener("input", () => { S.changeText = ta.value; sb.disabled = !ta.value.trim(); sb.style.opacity = ta.value.trim() ? "" : ".5"; });
+      return h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-change" }, "What would you like changed?"), ta, h("div", { className: "pb-kit-actions" }, sb));
+    })() : null) : null;
+  const optionCard = (o, i, hero) => h("article", { className: "pp-opt" + (hero ? " pp-opt-hero" : ""), "data-rec": o.recommended ? "" : undefined },
+    h("div", { className: "pp-opt-head" }, h("strong", null, o.recommended ? "Recommended" : `Option ${i + 1}`), o.recommended ? h("span", { className: "pb-chip", "data-kind": "fix" }, "Studio’s pick") : null),
+    h("div", { className: "pp-opt-media" }, optMedia(o)),
+    o.caption ? h("p", { className: "pp-caption" }, o.caption) : null,
+    h("div", { className: "pp-row" },
+      btn({ label: "Download", icon: "download", onClick: (e) => downloadOpt(o, e.currentTarget) }),
+      o.caption ? btn({ label: "Copy caption", icon: "copy", variant: "ghost", onClick: (e) => copyText(o.caption, e.currentTarget) }) : null));
+  const delivered = r.delivery?.sentAt && opts.length;
+  const main = h(FRAG, null,
+    pagehead(`Request · ${STATUS[r.status]}`, title(r), [(r.channels || []).join(", "), r.due ? `needed by ${fmtDate(r.due + "T12:00")}` : ""].filter(Boolean).join(" · ")),
+    note ? h("ul", { className: "pp-status", role: "status" }, h("li", { "data-tone": /didn’t/.test(note) ? "bad" : "good" }, note)) : null,
+    studio() ? studioPanel(r) : null,
+    delivered || studio() ? null : h("div", { className: "pp-block" }, h("p", { className: "pp-msg" }, r.status === "approved" ? "Approved." : r.status === "progress" ? "The studio is working on this. Options show up here when they’re ready." : "The studio has your request. Options show up here when they’re ready.")),
+    delivered ? h("div", { className: "pp-block" }, h("h2", null, opts.length > 1 ? "Options from the studio" : "From the studio"),
+      r.delivery.message ? h("p", { className: "pp-msg" }, h("small", null, `${who(r.delivery.by)}, ${fmtWhen(r.delivery.sentAt)}`), r.delivery.message) : null,
+      h("div", { className: "pp-opts" }, sorted.map((o, i) => optionCard(o, sorted[0].recommended ? i : i, i === 0 && o.recommended)))) : null,
+    clientActions,
+    h("div", { className: "pp-block" }, h("h2", null, "What was asked"),
+      h("p", { className: "pp-caption" }, r.what),
+      r.photo ? h("img", { className: "pp-thumb", src: "/_blob/" + r.photo.assetId, alt: r.photo.name || "Photo sent with the request" }) : null),
+    h("div", { className: "pp-block" }, h("h2", null, "History"), h("ul", { className: "pp-history" }, hist.map((n) => h("li", null, h("strong", null, n.kind === "change" ? "Asked for a change" : n.kind === "sent" ? "Sent options" : n.kind === "approve" ? "Approved" : n.text), n.kind === "change" ? n.text : null, h("span", null, `${who(n.by)}, ${fmtWhen(n.at)}`))))));
+  return [rail, main, "Request", false];
+}
+function studioPanel(r) {
+  const opts = r.delivery?.options || [];
+  const set = (options, extra) => updateReq(r.id, { delivery: { ...(r.delivery || {}), options, ...(extra || {}) }, ...(r.status === "received" ? { status: "progress" } : {}) });
+  const seg = h("div", { className: "pb-seg", role: "group", "aria-label": "Status" }, ["received", "progress", "ready", "approved"].map((s) =>
+    h("button", { type: "button", className: "pb-pill", "aria-pressed": r.status === s ? "true" : "false", style: "background:none", onClick: () => r.status !== s && updateReq(r.id, { status: s }) }, STATUS[s])));
+  const msg = h("textarea", { id: "pp-studio-msg", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "A short note to the client: what you made and why you recommend it" });
+  msg.value = r.delivery?.message || "";
+  msg.addEventListener("change", () => set(opts, { message: msg.value.trim() }));
+  return h("div", { className: "pp-block pp-studio" },
+    h("h2", null, "Studio"),
+    h("div", { className: "pp-row" }, seg),
+    h("div", { className: "pp-opts" }, opts.map((o, i) => {
+      const cap = h("textarea", { className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "Caption the client can copy (optional)", "aria-label": `Caption for option ${i + 1}` });
+      cap.value = o.caption || "";
+      cap.addEventListener("change", () => set(opts.map((x, j) => j === i ? { ...x, caption: cap.value.trim() } : x)));
+      return h("article", { className: "pp-opt", "data-rec": o.recommended ? "" : undefined },
+        h("div", { className: "pp-opt-head" }, h("strong", null, o.name || `Option ${i + 1}`), o.recommended ? h("span", { className: "pb-chip", "data-kind": "fix" }, "Recommended") : null),
+        h("div", { className: "pp-opt-media" }, optMedia(o)), cap,
+        h("div", { className: "pp-row" },
+          o.recommended ? null : btn({ label: "Recommend this", icon: "check", variant: "ghost", onClick: () => set(opts.map((x, j) => ({ ...x, recommended: j === i }))) }),
+          btn({ label: "Remove", icon: "x", variant: "ghost", onClick: () => set(opts.filter((_, j) => j !== i)) })));
+    })),
+    h("div", { className: "pp-row" },
+      assets ? btn({ label: S.optBusy ? "Uploading…" : "Add options", icon: "imagePlus", busy: S.optBusy, onClick: () => { S.optFor = r.id; const i = document.getElementById("pp-optfile"); i.value = ""; i.click(); } }) : h("span", { className: "pp-note" }, "Adding options needs editor access to this page."),
+      S.optErr ? h("span", { className: "pp-note", "data-tone": "bad" }, S.optErr) : null),
+    h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-studio-msg" }, "Message to the client"), msg),
+    h("div", { className: "pb-kit-actions" },
+      btn({ label: r.delivery?.sentAt ? "Send again" : "Send to client", icon: "send", variant: "primary", disabled: !opts.length, onClick: async () => {
+        const now = Date.now();
+        if (await updateReq(r.id, { status: "ready", delivery: { ...(r.delivery || {}), options: opts, message: msg.value.trim(), sentAt: now, by: S.me || null }, notes: [...(r.notes || []), { at: now, by: S.me || null, kind: "sent", text: "Sent options" }] })) S.detailNote[r.id] = "Sent. The client sees the options now.";
+      } }),
+      h("span", { className: "pp-note" }, opts.length ? "The client sees the recommended option first." : "Add at least one option first.")));
+}
+document.getElementById("pp-optfile").addEventListener("change", async (e) => {
+  const files = [...(e.target.files || [])], id = S.optFor; if (!files.length || !assets || !id) return;
+  S.optBusy = true; S.optErr = ""; render();
+  const added = [];
+  for (const f of files) {
+    try { const up = await assets.upload(f); added.push({ assetId: up.id, name: f.name, type: up.contentType || f.type, caption: "", recommended: false }); }
+    catch (er) { S.optErr = `${f.name} couldn’t be uploaded${er?.code === "unsupported_type" ? " (that file type isn’t supported)" : ""}.`; }
+  }
+  const r = S.requests.find((x) => x.id === id);
+  if (r && added.length) {
+    const opts = [...(r.delivery?.options || []), ...added];
+    if (!opts.some((o) => o.recommended)) opts[0].recommended = true;
+    await updateReq(id, { delivery: { ...(r.delivery || {}), options: opts }, ...(r.status === "received" ? { status: "progress" } : {}) });
+  }
+  S.optBusy = false; render();
+});
+
+/* ---------- start ---------- */
+render();
+(async () => {
+  const [u, d, a] = await Promise.all([claude.use("user").catch(() => null), claude.use("db").catch(() => null), claude.use("assets").catch(() => null)]);
+  userCap = u; db = d; assets = a;
+  if (u) { try { S.studio = !!(await u.canEdit()); S.me = await u.id(); } catch {} }
+  if (!db) { S.reqState = "off"; loadSample(); render(); return; }
+  /* published brand book: the version the studio saved for everyone, else the sample */
+  let bookSeen = false;
+  const bookTimer = setTimeout(() => { if (!bookSeen && !S.client) loadSample(); }, 10000);
+  db.doc("portal/book").onSnapshot((snap) => {
+    if (snap.fromCache && !snap.exists) return;
+    bookSeen = true; clearTimeout(bookTimer);
+    if (snap.exists) loadSaved(snap.data()); else if (!S.client) loadSample();
+  }, () => { clearTimeout(bookTimer); if (!S.client) loadSample(); });
+  /* questionnaire answers shared with the studio */
+  db.doc("brief/answers").onSnapshot((snap) => {
+    if (!snap.exists || snap.hasPendingWrites) return;
+    const v = snap.data(); if (!v?.answers || typeof v.answers !== "object") return;
+    const local = JSON.parse(store.get("pp-answers") || "null");
+    if (local?.at && v.at && local.at > v.at) return;
+    S.answers = { ...Q.answers, ...v.answers }; S.briefFrom = "db"; S.briefAt = v.at || null;
+    if (S.view === "brief" && !document.activeElement?.closest?.(".pb-q")) render(); else setBriefNote();
+  }, () => {});
+  /* requests */
+  const reqTimer = setTimeout(() => { if (S.reqState === "loading") { S.reqState = "slow"; render(); } }, 10000);
+  db.collection("requests").orderBy("at", "desc").onSnapshot((snap) => {
+    S.requests = snap.docs.map((x) => ({ id: x.id, ...x.data() }));
+    if (!snap.fromCache) { clearTimeout(reqTimer); S.reqState = "ok"; } else if (S.reqState === "loading") S.reqState = "ok";
+    resolveNames(); render();
+  }, () => { clearTimeout(reqTimer); S.reqState = "error"; render(); });
+  render();
+})();
+async function resolveNames() {
+  if (!userCap?.profiles) return;
+  const ids = [...new Set(S.requests.flatMap((r) => [r.by, r.delivery?.by, ...(r.notes || []).map((n) => n.by)]).filter((x) => x && x !== S.me && !(x in S.names)))];
+  if (!ids.length) return;
+  try { const ps = await userCap.profiles(ids); for (const id of ids) S.names[id] = ps?.[id]?.name || ""; render(); } catch {}
+}
+</script>

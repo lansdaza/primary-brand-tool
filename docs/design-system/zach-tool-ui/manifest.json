@@ -1,0 +1,26 @@
+{
+  "name": "Zach Tool UI",
+  "version": "1.0.0",
+  "source": "untitled-theme.zip",
+  "source_sha256": "b300f287e4f59d117532cdd1f994039959157c3c700b2b999a865b7e442f434a",
+  "ui_directory": "src/components/zach-ui",
+  "documentation_directory": "design-system/zach-tool-ui",
+  "font": "Sidebar Inter",
+  "icon_selection": "Central outlined",
+  "icon_artwork_included": false,
+  "note": "Integrate providers, styles, and components; copying alone does not apply the theme.",
+  "verification_baseline": {
+    "date": "2026-11-06",
+    "packages": {
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "@base-ui/react": "1.7.0",
+      "motion": "14.10.1",
+      "lucide-react": "1.70.0",
+      "dialkit": "2.1.0",
+      "typescript": "7.0.2",
+      "esbuild": "0.28.2"
+    },
+    "note": "Source type-check and production-bundle baseline, not a requirement to upgrade an existing application. Browser rendering and click-through verification were not completed; see verification.md."
+  }
+}

@@ -1,0 +1,20 @@
+
+/* Brand surfaces: everything inside .a is drawn only from a brand package. Type, tag and texture
+   behaviour come from variables each brand sets on .a[data-brand]. The same CSS is reused for export. */
+.a{position:relative;overflow:hidden;background:var(--g);color:var(--i);font-family:var(--bf,system-ui,sans-serif);font-weight:400;-webkit-font-smoothing:antialiased;box-sizing:border-box;text-align:left}
+.a *{box-sizing:border-box;margin:0;padding:0}
+.a-h{font-family:var(--hf,inherit);letter-spacing:var(--ht,-.05em);line-height:var(--hl,.95);font-weight:400;white-space:pre-line;text-wrap:balance}
+.a-sub{font-family:var(--sf,inherit);letter-spacing:var(--st,-.03em);line-height:var(--sl,1.1);white-space:pre-line}
+.a-body{line-height:var(--bl,1.3);letter-spacing:0}
+.a-mono{font-family:var(--tf,inherit);font-weight:var(--tw,400);text-transform:uppercase;line-height:var(--tl,.9);letter-spacing:var(--tt,0)}
+.a-tag{font-family:var(--tf,inherit);font-weight:var(--tw,400);text-transform:uppercase;line-height:var(--tl,.9);letter-spacing:var(--tt,0);display:inline-block;border-radius:var(--tag-r,99em);padding:var(--tag-p,.42em 1.25em .5em);border:var(--tag-b,1px) solid currentColor;white-space:nowrap}
+.a-tag.fill{background:var(--tagf-g,var(--i));color:var(--tagf-i,var(--g));border-color:var(--tagf-g,var(--i));padding:var(--tagf-p,var(--tag-p,.42em 1.25em .5em));border-radius:var(--tagf-r,var(--tag-r,99em))}
+.a-grain{position:absolute;inset:0;background-image:var(--grain);background-size:var(--grain-size,160px 160px);opacity:var(--grain-op,.5);mix-blend-mode:var(--grain-blend,multiply);pointer-events:none}
+.a-mask,.a-msk{background:currentColor;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+.a-mask{position:absolute}
+.a-msk{display:block;flex:none}
+.a-sym{display:block;fill:currentColor;flex:none}
+.a-abs{position:absolute;inset:0}
+.a-wg{position:absolute;display:block}
+.a-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.a svg{display:block}

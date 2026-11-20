@@ -1,0 +1,6 @@
+node_modules
+brand-tool/out/
+brand-tool/dist/
+client-portal/portal/index.html
+
+.DS_Store

@@ -1,0 +1,3 @@
+import {build} from 'esbuild';import path from 'path';const WG='/tmp/claude-0/-home-claude/b7211c49-152b-58c5-8d7d-ef269956e9c7/scratchpad/gitp/src';
+await build({entryPoints:['src/stress.ts'],bundle:true,format:'iife',minify:true,outfile:'out/stress.js',target:'es2020',nodePaths:[path.resolve('node_modules')],define:{'process.env.NODE_ENV':'"production"','import.meta.env.DEV':'false'},
+ plugins:[{name:'wg',setup(b){b.onResolve({filter:/^@\//},a=>{if(a.path==='@/assets/earth-lum.jpg.asset.json')return{path:path.resolve('lum.mjs')};const base=path.join(WG,a.path.slice(2));return b.resolve('./'+path.basename(base),{resolveDir:path.dirname(base),kind:a.kind})})}}]});

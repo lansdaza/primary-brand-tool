@@ -1,0 +1,293 @@
+{
+ "6.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "PAGE NUMBER",
+   "Iconography",
+   "Iconography"
+  ]
+ },
+ "5.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "PAGE NUMBER",
+   "Web Design Sample",
+   "Web Design Sample"
+  ]
+ },
+ "4.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "Graphic System",
+   "PAGE NUMBER",
+   "Graphic System"
+  ]
+ },
+ "3.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "PAGE NUMBER",
+   "Typography",
+   "Typography"
+  ]
+ },
+ "2.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "PAGE NUMBER",
+   "Color",
+   "Color"
+  ]
+ },
+ "1.0": {
+  "text": "",
+  "more": [],
+  "heads": [
+   "PAGE NUMBER",
+   "Logo",
+   "Logo"
+  ]
+ },
+ "5.1": {
+  "text": "Membership benefits include a free annual exam, 24/7 telehealth, and same or next day appointments. Pay As You Go also available.",
+  "more": [
+   "This is a conceptual example of how the website might open—not a literal design, but a starting point for exploration."
+  ],
+  "heads": [
+   "Web Design",
+   "Web Design",
+   "PAGE NUMBER",
+   "Membership",
+   "Services",
+   "Locations"
+  ]
+ },
+ "4.1": {
+  "text": "The editorial mask introduces a distinctive graphic layer that blends illustration with photography, creating a visual language that feels crafted, expressive, and unmistakably ownable. Simple vector shapes with a painterly brush texture are used to extend, frame, or partially obscure imagery, adding moments of personality without distracting from the subject. Rather than functioning as decorative overlays, these illustrated forms become part of the composition, reinforcing the brand's editorial aesthetic while creating more dynamic image crops. The handcrafted quality adds warmth and humanity, reflecting the personal relationships at the heart of the Small Door Vet experience. Applied consistently, the system gives photography greater flexibility while establishing a recognizable visual signature that is both elevated and approachable.",
+  "more": [
+   "Within these assets, you’ll find a layer named “SD Texture” — this texture can be applied at different opacities over brand images and backgrounds to create a tactile, paper texture."
+  ],
+  "heads": [
+   "Editorial Mask",
+   "NOTE",
+   "Graphic System",
+   "PAGE NUMBER"
+  ]
+ },
+ "4.2": {
+  "text": "Painterly illustrations introduce an expressive layer to the identity through simplified, hand-rendered depictions of everyday pet-related objects. Featuring visible brush strokes and textured edges, these illustrations bring warmth and personality while maintaining a refined aesthetic. When enlarged, cropped, and abstracted, they become graphic background elements that add movement, depth, and visual interest without competing with key content. This flexible approach allows the illustrations to function as both recognizable objects and abstract compositions, reinforcing the brand's handcrafted character and editorial sensibility across a wide range of applications. These assets can be generated as needed to expand the illustration library while maintaining a consistent visual style, with a sample generation prompt provided below for reference.",
+  "more": [
+   "Create a rough illustration of an isolated [...] in the same rough texture, painterly style as the attached image. It should have a fill not outlined."
+  ],
+  "heads": [
+   "Painterly Illustration",
+   "PROMPT EXAMPLE",
+   "Graphic System",
+   "PAGE NUMBER"
+  ]
+ },
+ "4.3": {
+  "text": "The frame system transforms photography into a recognizable brand asset by presenting images within custom shapes inspired by framed artwork and cherished photographs. Echoing the feeling of displaying beloved memories at home, these frames reinforce the personal relationships between pets, their owners, and the care they receive. Their distinctive silhouettes introduce consistency across a wide range of imagery while adding subtle visual character without overpowering the content itself. Used throughout the identity, the frames create an editorial sense of structure that complements the brand's refined aesthetic. Together, they elevate everyday photography into thoughtfully composed moments that feel warm, intentional, and deeply personal.",
+  "more": [],
+  "heads": [
+   "Frames",
+   "DETAILS",
+   "Graphic System",
+   "PAGE NUMBER"
+  ]
+ },
+ "4.4": {
+  "text": "The logo mask extends the identity by transforming the primary mark into a flexible framing device for photography and illustration. While the overall proportions can adapt to suit different compositions, the signature \"small door\" element remains a consistent anchor, preserving recognition across every application. This approach allows the logo to become an active part of the visual system rather than functioning solely as a standalone mark. By integrating imagery directly into the brand's most recognizable asset, the system creates distinctive layouts that feel cohesive, memorable, and unmistakably tied to the Small Door Vet identity.",
+  "more": [],
+  "heads": [
+   "Logo Frame",
+   "Graphic System",
+   "PAGE NUMBER"
+  ]
+ },
+ "4.5": {
+  "text": "The editorial layout system brings every element of the brand together through a structured, grid-based approach that feels refined, balanced, and intentional. Generous whitespace, thoughtful alignment, and clear typographic hierarchy create compositions that are both visually engaging and easy to navigate. Photography, illustration, typography, and graphic elements work in harmony, with each component given space to breathe while contributing to a cohesive overall composition. This editorial approach reinforces the premium nature of the brand without sacrificing warmth or accessibility. By maintaining consistent spacing, proportion, and rhythm across applications, the system creates a recognizable visual language that feels polished, flexible, and confidently understated.",
+  "more": [
+   "Being a Small Door member means expert, personalized care from a trusted team that feels like family. Enjoy easy access to vet services that fit your schedule and your pet's unique needs.",
+   "Offer valid on new memberships only, cannot be combined with other discounts, and is subject to change. Not valid for Pay as You Go clients or existing clients."
+  ],
+  "heads": [
+   "Editorial Layout",
+   "Graphic System",
+   "PAGE NUMBER",
+   "New yorkers’ Favorite Vet",
+   "Membership perks include:",
+   "$75 off membership"
+  ]
+ },
+ "3.2": {
+  "text": "A thoughtful typesetting system brings clarity, rhythm, and consistency to every brand communication. Defined hierarchies for headlines, subheads, body copy, and supporting elements create a cohesive reading experience while allowing the editorial character of the brand to shine through. The balance of expressive typography and clean supporting text reinforces an identity that feels polished, approachable, and easy to navigate across both digital and print applications.",
+  "more": [
+   "Membership benefits include a free annual exam, 24/7 telehealth, and same or next day appointments. Pay As You Go also available."
+  ],
+  "heads": [
+   "JOIN TODAY",
+   "Typesetting",
+   "Typography",
+   "PAGE NUMBER",
+   "Book Now",
+   "Join Now"
+  ]
+ },
+ "3.4": {
+  "text": "The Google Font typesetting system mirrors the structure and hierarchy of the primary typography, providing an accessible alternative that maintains the integrity of the brand across digital platforms and collaborative workflows. Defined hierarchies for headlines, subheads, body copy, and supporting elements create a cohesive reading experience while preserving the editorial character of the identity. By closely matching the rhythm and tone of the primary type system, these Google Fonts ensure consistent, polished communications wherever licensed fonts are unavailable.",
+  "more": [
+   "Membership benefits include a free annual exam, 24/7 telehealth, and same or next day appointments. Pay As You Go also available."
+  ],
+  "heads": [
+   "JOIN TODAY",
+   "Google Fonts Typesetting",
+   "Typography",
+   "PAGE NUMBER",
+   "Book Now",
+   "Join Now"
+  ]
+ },
+ "3.1": {
+  "text": "The typography system pairs a distinctive serif with a clean, modern sans serif to create a balanced and versatile visual voice. This combination brings together a sense of sophistication and warmth, reflecting the brand's elevated yet approachable personality. Clear typographic contrast establishes hierarchy while supporting a wide range of communications, from editorial storytelling to everyday informational content.",
+  "more": [],
+  "heads": [
+   "Brand Fonts",
+   "Zenith",
+   "Dm Sans",
+   "DOWNLOAD FONTS HERE",
+   "Zenith",
+   "DM Sans"
+  ]
+ },
+ "3.3": {
+  "text": "Google Font alternatives provide accessible substitutes that preserve the overall character and functionality of the brand's typography. They ensure a consistent visual experience across platforms where licensed typefaces may not be available, supporting collaboration, scalability, and ease of implementation. By maintaining similar proportions and tone, these alternatives help the brand remain cohesive across everyday communications and digital applications.",
+  "more": [],
+  "heads": [
+   "Google Fonts",
+   "Spectral",
+   "DM Sans",
+   "DOWNLOAD FONTS HERE",
+   "Spectral",
+   "DM Sans"
+  ]
+ },
+ "2.1": {
+  "text": "The primary color palette combines soft neutrals with a warm orange accent to create a visual identity that feels elevated, welcoming, and timeless. The neutral tones provide a calm, refined foundation, while the orange introduces moments of warmth and optimism that reflect the personal nature of the brand. Together, the palette strikes a balance between sophistication and approachability, allowing the identity to feel distinctive without relying on overly playful or conventional veterinary color cues.",
+  "more": [],
+  "heads": [
+   "Primary Colors",
+   "Color",
+   "PAGE NUMBER"
+  ]
+ },
+ "2.2": {
+  "text": "The accent palette expands the visual system with a range of expressive hues that bring variety, energy, and flexibility to the brand. Used alongside the primary palette, these colors help create depth while maintaining a cohesive and sophisticated aesthetic. Their soft, muted character reinforces the approachable tone of the identity, allowing the brand to feel vibrant and engaging without overwhelming the overall experience.",
+  "more": [],
+  "heads": [
+   "Accent Colors",
+   "Color",
+   "PAGE NUMBER"
+  ]
+ },
+ "2.3": {
+  "text": "A balanced use of color creates a cohesive visual system that feels calm, refined, and intentional. The identity is anchored by a generous use of neutral tones, with accent colors introduced selectively to add warmth, personality, and visual emphasis. This approach maintains a clean, editorial aesthetic while allowing moments of expression that reinforce the brand's approachable character.",
+  "more": [],
+  "heads": [
+   "Color Balance",
+   "Color",
+   "PAGE NUMBER"
+  ]
+ },
+ "1.1": {
+  "text": "The Small Door Vet logo system is built to provide a flexible foundation that remains consistent across every brand touchpoint. Multiple logo configurations ensure the identity can adapt to a variety of formats while preserving the integrity and recognizability of the core mark. At the heart of the system is the distinctive \"small door\" motif, a simple architectural form that serves as both a memorable symbol and a recurring graphic element throughout the identity. This recognizable shape extends beyond the logo itself, inspiring masks, frames, and layouts that create a cohesive visual language across the brand. Together, the system balances refinement with warmth, resulting in an identity that feels elevated, approachable, and designed to grow with the brand.",
+  "more": [],
+  "heads": [
+   "Logo",
+   "PAGE NUMBER",
+   "HORIZONTAL LOGO",
+   "STACKED LOGO",
+   "LOGOMARK",
+   "CONTAINED LOGO"
+  ]
+ },
+ "1.2": {
+  "text": "It’s important to maintain clearspace around the logo so that objects, text, and images do not make the logo feel crowded or unreadable. Always use clearspace on all sides that is equivalent to at least double the size of the space between the logomark and wordmark. Clearspace should be maintained as often as possible.",
+  "more": [],
+  "heads": [
+   "Clearspace",
+   "Logo",
+   "PAGE NUMBER"
+  ]
+ },
+ "1.4": {
+  "text": "It’s crucial to maintain consistency with the SDV logo colors. The logos are crafted to function in brand black and brand white. Always consider contrast when choosing a logo.",
+  "more": [
+   "Pure black or pure white logos can be used if a black and white layout is required for print."
+  ],
+  "heads": [
+   "Logo Colors",
+   "DETAILS",
+   "Logo",
+   "PAGE NUMBER"
+  ]
+ },
+ "1.5": {
+  "text": "Our logo is often the first impression of our brand. Maintaining the integrity of the logo is vital to the longevity and professional appearance of our brand. To maintain consistency, please avoid these misuses of our logos.",
+  "more": [],
+  "heads": [
+   "Do not reduce the opacity of the logo.",
+   "Do not outline the logo.",
+   "Do not use unapproved colors.",
+   "Do not disassemble the logo.",
+   "Logo Misuse",
+   "Logo"
+  ]
+ },
+ "1.3": {
+  "text": "The SDV logomark serves as the primary identifier for avatars and icons. It is designed to remain clear, recognizable, and distinctive at small sizes and in constrained digital environments. Consistent use is critical to ensure legibility and brand recognition across platforms and devices.",
+  "more": [
+   "Contained avatars should always use a background color of #F4F5EF with a brand black logomark."
+  ],
+  "heads": [
+   "Favicon and Avatars",
+   "DETAILS",
+   "Logo",
+   "PAGE NUMBER"
+  ]
+ },
+ "Intro": {
+  "text": "These brand guidelines contain complete instructions on the proper use of the logo, color, typography and graphic system. Adhering to these rules will ensure that the brand is always presented as it should be. Before you start developing any collateral related to our brand, please read this manual carefully. If you have any questions please contact the founding team for proper brand guidance.",
+  "more": [],
+  "heads": [
+   "Introduction",
+   "0.0"
+  ]
+ },
+ "6.1": {
+  "text": "The baseline icon set for the SDV brand is Google Material Icons. These icons should be used in their solid state with adequate negative space to add a textured stroke.",
+  "more": [],
+  "heads": [
+   "Google Materials",
+   "Iconography",
+   "PAGE NUMBER"
+  ]
+ },
+ "6.2": {
+  "text": "The stroke weight will vary based on scale of the icons, but should generally look and feel like the icons on this page. The designer may use their own discretion when choosing a brush effect. Example from this page is below:",
+  "more": [
+   "The baseline icon set for the SDV brand is Google Material Icons. These icons should be used in their solid state with adequate negative space to add a textured stroke."
+  ],
+  "heads": [
+   "Icon Texture",
+   "DETAILS",
+   "Iconography",
+   "PAGE NUMBER"
+  ]
+ }
+}

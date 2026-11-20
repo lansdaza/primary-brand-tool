@@ -1,0 +1,36 @@
+const {chromium}=require('playwright');const fs=require('fs');
+const S='/tmp/claude-0/-home-claude/b7211c49-152b-58c5-8d7d-ef269956e9c7/scratchpad';
+const html='<!doctype html><html><head><meta charset=utf8></head><body>'+fs.readFileSync(S+'/build/aurelius-live-brand.html','utf8')+'</body></html>';fs.writeFileSync(S+'/build/test.html',html);
+const ok=(c,m)=>console.log((c?'PASS ':'FAIL ')+m);
+(async()=>{const b=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ const scheme=process.argv[2]||'light';const ctx=await b.newContext({viewport:{width:1440,height:900},colorScheme:scheme});
+ await ctx.addInitScript(()=>{window.claude={use:async x=>x==='user'?{can:async()=>true}:null}});
+ const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+ await pg.goto('file://'+S+'/build/test.html#aurelius-make');await pg.mouse.move(700,450);await pg.waitForTimeout(1500);
+ await pg.locator('.pb-rail').getByText('Statement',{exact:true}).click();await pg.waitForTimeout(800);
+ ok(await pg.locator('.pb-size').count()===1,'size picker shown');
+ ok(!(await pg.locator('.pb-insp .dialkit-root').innerText()).includes('Format'),'no Format dial');
+ await pg.locator('.pb-size .pb-deckpick').click();await pg.waitForTimeout(400);
+ const menu=await pg.locator('.pb-menu').innerText();
+ ok(/Social/.test(menu)&&/Digital/.test(menu)&&/Print/.test(menu),'menu grouped by Social, Digital, Print');
+ await pg.screenshot({path:`${S}/ux/size-menu-${scheme}.png`});
+ await pg.locator('.pb-menu').getByText('LinkedIn Cover').click();await pg.waitForTimeout(800);
+ ok(/1584 × 396/.test(await pg.locator('.pb-artlabel').innerText()),'artboard resized to LinkedIn Cover');
+ await pg.screenshot({path:`${S}/ux/size-banner-${scheme}.png`});
+ ok(/left out/.test(await pg.locator('.pb-size').innerText()),'explains left-out sizes');
+ await pg.locator('.pb-rail').getByText('Big number').click();await pg.waitForTimeout(800);
+ await pg.locator('.pb-size .pb-deckpick').click();await pg.waitForTimeout(300);await pg.locator('.pb-menu').getByText('A4 Portrait').click();await pg.waitForTimeout(800);
+ ok(/2480 × 3508/.test(await pg.locator('.pb-artlabel').innerText()),'Big number at A4');
+ ok(/prints at 210×297 mm/.test(await pg.locator('.pb-size').innerText()),'print size noted');
+ await pg.screenshot({path:`${S}/ux/size-figure-${scheme}.png`});
+ // decks: slides have no size picker
+ await pg.goto('file://'+S+'/build/test.html#aurelius-decks');await pg.mouse.move(700,450);await pg.waitForTimeout(1200);
+ await pg.getByRole('button',{name:'Start from sample'}).click();await pg.waitForTimeout(1500);
+ ok(await pg.locator('.pb-size').count()===0 && !(await pg.locator('.pb-insp').innerText()).includes('Format'),'slides keep one size');
+ // small door shared
+ await pg.goto('file://'+S+'/build/test.html#smalldoor-make');await pg.mouse.move(700,450);await pg.waitForTimeout(1200);
+ const rail=await pg.locator('.pb-rail').innerText();
+ ok(/Big number/.test(rail)&&/Headline and photo/.test(rail),'Small Door gets the shared layouts');
+ await pg.locator('.pb-rail').getByText('Headline and photo').click();await pg.waitForTimeout(900);
+ await pg.screenshot({path:`${S}/ux/size-sdcover-${scheme}.png`});
+ console.log('errors',errs);await b.close()})();

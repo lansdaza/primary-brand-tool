@@ -1,0 +1,696 @@
+<title>Primary Client Portal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Figtree:wght@400;500&family=DM+Mono:wght@400&display=swap">
+<style>
+/* Layout: a quiet studio shell (header + two-stage switch) around client work. The questionnaire
+   is a long form with a sticky section index; the brand book is a paper drawn only in the brand's own tones. */
+:root{
+  --ground:#F1F2F2; --surface:#FFFFFF; --ink:#141617; --sub:#686D71; --line:#DADDDE; --soft:#E8EAEA;
+  --accent:#2F50C8; --accent-ink:#FFFFFF; --ok:#2E7A4E; --warn:#9A5B12;
+  --f-ui:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --r-s:6px; --r-m:10px;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0F1011; --surface:#17191A; --ink:#ECEEEE; --sub:#999EA2; --line:#2A2D2F; --soft:#202325;
+  --accent:#8EA4FF; --accent-ink:#0F1011; --ok:#7CC69A; --warn:#E3A55A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ground:#0F1011; --surface:#17191A; --ink:#ECEEEE; --sub:#999EA2; --line:#2A2D2F; --soft:#202325;
+  --accent:#8EA4FF; --accent-ink:#0F1011; --ok:#7CC69A; --warn:#E3A55A; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font:400 15px/1.5 var(--f-ui);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:12px;flex-wrap:wrap}
+.studio{display:flex;align-items:baseline;gap:10px;min-width:0}
+.studio b{font-weight:600;letter-spacing:-.01em}
+.studio span{color:var(--sub);font-size:13px}
+.stages{display:flex;gap:4px;margin-left:auto;background:var(--soft);padding:3px;border-radius:999px}
+.stage{display:flex;align-items:center;gap:8px;border:0;background:none;padding:6px 14px 6px 8px;border-radius:999px;cursor:pointer;color:var(--sub);font-size:14px;white-space:nowrap}
+.stage i{font-style:normal;font:500 11px/1 var(--f-mono);width:20px;height:20px;display:grid;place-items:center;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+.stage[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.stage[aria-current="page"] i{background:var(--ink);color:var(--surface);box-shadow:none}
+.stage small{font:400 12px/1 var(--f-mono);color:var(--sub)}
+@media (max-width:620px){.stages{margin-left:0;width:100%}.stage{flex:1;justify-content:center}.stage small{display:none}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:var(--r-s);padding:9px 14px;font-weight:500;font-size:14px;cursor:pointer;background:var(--soft);color:var(--ink);text-decoration:none}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--surface)}
+.btn.primary:hover{opacity:.88}
+.btn.quiet{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+.btn.quiet:hover{background:var(--soft)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn svg{width:16px;height:16px;flex:none}
+.note{font-size:13px;color:var(--sub)}
+.note[data-tone="ok"]{color:var(--ok)}.note[data-tone="warn"]{color:var(--warn)}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+
+/* stage intro */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-block:40px 28px}
+.intro h1{margin:6px 0 8px;font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.03em;font-weight:500;text-wrap:balance}
+.intro p{margin:0;color:var(--sub);max-width:60ch}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+@media (max-width:760px){.intro{grid-template-columns:1fr}.actions{justify-content:flex-start}}
+
+/* questionnaire */
+.qgrid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-bottom:120px}
+.index{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);align-self:start;display:flex;flex-direction:column;gap:2px}
+.index .meter{height:4px;border-radius:2px;background:var(--soft);overflow:hidden;margin:0 0 14px}
+.index .meter b{display:block;height:100%;background:var(--ink);transition:width .3s}
+.index a{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:var(--r-s);color:var(--sub);text-decoration:none;font-size:14px}
+.index a:hover{background:var(--soft);color:var(--ink)}
+.index a[data-full]{color:var(--ink)}
+.index a span:last-child{font:400 12px/1.6 var(--f-mono)}
+.index .meta{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--sub);display:flex;flex-direction:column;gap:4px}
+@media (max-width:860px){.qgrid{grid-template-columns:1fr;gap:16px}.index{position:static;flex-direction:row;flex-wrap:wrap}.index a{flex:0 0 auto;background:var(--surface)}.index .meter{flex:1 0 100%}.index .meta{flex:1 0 100%;margin-top:6px}}
+.sections{display:flex;flex-direction:column;gap:20px;min-width:0}
+.sec{background:var(--surface);border-radius:var(--r-m);padding:28px clamp(18px,3vw,36px);box-shadow:inset 0 0 0 1px var(--line);scroll-margin-top:96px}
+.sec h2{margin:0 0 20px;font-size:20px;font-weight:500;letter-spacing:-.015em;display:flex;align-items:baseline;gap:12px}
+.sec h2 span{font:400 12px var(--f-mono);color:var(--sub)}
+.q{display:grid;grid-template-columns:34px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-top:1px solid var(--soft)}
+.q:first-of-type{border-top:0;padding-top:0}
+.q .n{font:400 12px/22px var(--f-mono);color:var(--sub);grid-row:span 2}
+.q label{font-weight:500;line-height:1.4;text-wrap:pretty}
+.q textarea{width:100%;min-width:0;border:0;border-radius:var(--r-s);background:var(--ground);padding:10px 12px;line-height:1.5;resize:vertical;min-height:44px;field-sizing:content;max-height:60vh}
+.q textarea:focus{outline:2px solid var(--accent);outline-offset:0;background:var(--surface)}
+.q[data-changed] .n::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:4px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:4;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dock .wrap{display:flex;gap:12px;align-items:center;padding-block:12px;flex-wrap:wrap}
+.dock .note{flex:1 1 260px;min-width:0}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* brand book chrome */
+.bookbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-radius:var(--r-m);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);margin-bottom:20px}
+.bookbar .src{flex:1 1 280px;min-width:0;display:flex;gap:10px;align-items:center}
+.pill{font:500 11px/1 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--sub);white-space:nowrap}
+.pill[data-tone="ok"]{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.pill[data-tone="warn"]{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.drop[data-over]{outline:2px dashed var(--accent);outline-offset:6px;border-radius:var(--r-m)}
+.empty{background:var(--surface);border-radius:var(--r-m);box-shadow:inset 0 0 0 1px var(--line);padding:56px 24px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.empty h2{margin:0;font-weight:500}
+.empty p{margin:0;color:var(--sub);max-width:52ch}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:9px 14px;border-radius:999px;font-size:13px;z-index:20;pointer-events:none}
+
+/* the paper: everything inside is drawn from the loaded brand file */
+.paper{--bg:#F6F5F2;--fg:#100F0D;--dk:#201E1A;--dkfg:#F6F5F2;--mid:#B7B2A9;--bf:var(--f-ui);--mf:var(--f-mono);
+  background:var(--bg);color:var(--fg);border-radius:var(--r-m);overflow:hidden;font-family:var(--bf);margin-bottom:80px}
+.paper *{box-sizing:border-box}
+.paper .tagl{font-family:var(--mf);text-transform:uppercase;font-size:11px;letter-spacing:.02em;line-height:1;display:inline-block;padding:.5em 1.2em .55em;border-radius:99em;border:1px solid currentColor;white-space:nowrap}
+.cover{background:var(--dk);color:var(--dkfg);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;min-height:340px;position:relative;isolation:isolate}
+.cover .grain{position:absolute;inset:0;z-index:-1;opacity:.35;mix-blend-mode:screen;background-size:cover;background-position:center}
+.cover .logo{max-width:min(320px,70%);height:auto;display:block}
+.cover h1{font-family:var(--bf);font-weight:400;font-size:clamp(40px,8vw,104px);letter-spacing:-.05em;line-height:.9;margin:auto 0 0;align-self:end}
+.cover .side{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:16px;text-align:right}
+.cover .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:320px}
+.cover .ed{font-family:var(--mf);font-size:12px;text-transform:uppercase;letter-spacing:.04em;opacity:.7}
+.cover .left{display:flex;flex-direction:column;gap:48px;min-width:0}
+@media (max-width:680px){.cover{grid-template-columns:1fr}.cover .side{align-items:flex-start;text-align:left}.cover .tags{justify-content:flex-start}}
+.toc{display:flex;flex-wrap:wrap;gap:6px;padding:16px clamp(20px,5vw,64px);border-bottom:1px solid color-mix(in srgb,var(--fg) 14%,transparent)}
+.toc a{color:inherit;text-decoration:none;font-family:var(--mf);font-size:11px;text-transform:uppercase;letter-spacing:.02em;padding:.5em 1.1em .55em;border-radius:99em;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 25%,transparent)}
+.toc a:hover{background:var(--fg);color:var(--bg)}
+.bsec{padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(16px,4vw,48px);border-bottom:1px solid color-mix(in srgb,var(--fg) 14%,transparent);scroll-margin-top:90px}
+.bsec:last-child{border-bottom:0}
+.bsec>header{display:flex;flex-direction:column;gap:10px}
+.bsec>header .num{font-family:var(--mf);font-size:12px;opacity:.6}
+.bsec>header h2{margin:0;font-weight:400;font-size:clamp(26px,3vw,36px);letter-spacing:-.04em;line-height:.95}
+.bsec .body{display:flex;flex-direction:column;gap:24px;min-width:0}
+.bsec p{margin:0;max-width:62ch;line-height:1.35}
+.bsec .lede{font-size:clamp(18px,2vw,22px);letter-spacing:-.02em;line-height:1.2;max-width:34ch}
+.bsec h3{margin:0;font-family:var(--mf);font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:.04em;opacity:.65}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:760px){.bsec{grid-template-columns:1fr}}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.rulecard{padding:18px;border-radius:8px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 18%,transparent);display:flex;flex-direction:column;gap:10px}
+.rulecard ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;line-height:1.35}
+.rulecard[data-kind="never"] h3::before{content:"\2715  "}
+.rulecard[data-kind="do"] h3::before{content:"\2713  "}
+.marks{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:12px}
+.mark{border-radius:8px;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;padding:14px;max-width:100%;min-width:0}
+.mark img{max-width:72%;max-height:55%;margin:auto;display:block}
+.mark figcaption{font-family:var(--mf);font-size:11px;opacity:.7;display:flex;justify-content:space-between;gap:8px;align-items:center;min-width:0}
+.mark figcaption span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini{border:0;background:none;color:inherit;font-family:var(--mf);font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:4px 8px;border-radius:99em;box-shadow:inset 0 0 0 1px currentColor;cursor:pointer;white-space:nowrap;flex:none}
+.mini:hover{background:currentColor}
+.mini:hover span{color:var(--bg)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px}
+.sw{border:0;padding:0;text-align:left;cursor:pointer;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 12%,transparent);background:none;color:inherit;display:flex;flex-direction:column}
+.sw .chip{height:96px;display:flex;align-items:flex-end;padding:10px;font-family:var(--mf);font-size:11px}
+.sw .lab{padding:10px;display:flex;flex-direction:column;gap:2px;font-size:13px}
+.sw .lab small{font-family:var(--mf);font-size:11px;opacity:.65}
+.sw:hover .chip{filter:brightness(1.03)}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:10px}
+.pair{border-radius:8px;overflow:hidden;display:grid;grid-template-rows:auto auto}
+.pair button{border:0;cursor:pointer;text-align:left;padding:12px;height:76px;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mf);font-size:11px}
+.balance{display:flex;height:40px;border-radius:8px;overflow:hidden;font-family:var(--mf);font-size:11px}
+.balance div{display:flex;align-items:center;padding:0 12px;white-space:nowrap;overflow:hidden}
+.families{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.fam{padding:20px;border-radius:8px;background:color-mix(in srgb,var(--fg) 5%,transparent);display:flex;flex-direction:column;gap:12px;min-width:0}
+.fam .aa{font-size:88px;line-height:.9;letter-spacing:-.04em}
+.fam .glyphs{font-size:15px;line-height:1.3;opacity:.8;word-break:break-all}
+.fam small{font-family:var(--mf);font-size:11px;opacity:.7}
+.styles{display:flex;flex-direction:column}
+.style{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid color-mix(in srgb,var(--fg) 14%,transparent)}
+.style:first-child{border-top:0;padding-top:0}
+.style .spec{font-family:var(--mf);font-size:11px;display:flex;flex-direction:column;gap:4px;opacity:.75;text-transform:uppercase}
+.style .spec b{font-family:var(--bf);font-weight:500;text-transform:none;font-size:14px;opacity:1}
+.style .sample{white-space:pre-line;min-width:0;overflow-wrap:anywhere}
+@media (max-width:620px){.style{grid-template-columns:1fr}}
+.standin{font-size:12px;opacity:.7}
+.photos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.photos figure{margin:0;position:relative;border-radius:6px;overflow:hidden;grid-column:span 2;aspect-ratio:4/3;max-width:100%}
+.photos figure:nth-child(5n+1){grid-column:span 4;aspect-ratio:auto}
+.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos figcaption{position:absolute;left:8px;bottom:8px;font-family:var(--mf);font-size:10px;text-transform:uppercase;background:color-mix(in srgb,var(--dk) 70%,transparent);color:var(--dkfg);padding:3px 7px;border-radius:99em}
+@media (max-width:620px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}.photos figure,.photos figure:nth-child(5n+1){grid-column:span 1;aspect-ratio:1}}
+.shapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,140px),1fr));gap:10px}
+.shapes div{aspect-ratio:1;border-radius:8px;background:var(--dk);display:grid;place-items:center;padding:18px;max-width:100%}
+.shapes img{max-width:100%;max-height:100%}
+.glassdemo{position:relative;border-radius:8px;overflow:hidden;min-height:240px;display:grid;place-items:center;padding:28px;background:var(--dk) center/cover}
+.glass{width:min(100%,360px);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.glass .k{font-family:var(--mf);font-size:11px;text-transform:uppercase;opacity:.8}
+.glass .v{font-size:28px;letter-spacing:-.04em;line-height:1}
+.specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:8px 16px;margin:0}
+.specs div{display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:1px solid color-mix(in srgb,var(--fg) 14%,transparent);min-width:0}
+.specs dt{font-family:var(--mf);font-size:11px;text-transform:uppercase;opacity:.6}
+.specs dd{margin:0;overflow-wrap:anywhere}
+.tones{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:8px}
+.tone{border-radius:8px;padding:14px;aspect-ratio:5/4;display:flex;flex-direction:column;justify-content:space-between;max-width:100%}
+.tone b{font-weight:400;font-size:34px;letter-spacing:-.05em;line-height:1}
+.tone span{font-family:var(--mf);font-size:10px;text-transform:uppercase;letter-spacing:.02em}
+.dl{display:flex;flex-direction:column}
+.dlrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;padding:16px 0;border-top:1px solid color-mix(in srgb,var(--fg) 14%,transparent);align-items:center}
+.dlrow:first-child{border-top:0}
+.dlrow .t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dlrow .t b{font-weight:500}
+.dlrow .t small{font-family:var(--mf);font-size:11px;opacity:.65;text-transform:uppercase}
+.dlrow .t p{font-size:14px;opacity:.85}
+.dlrow details{grid-column:1/-1}
+.dlrow summary{cursor:pointer;font-family:var(--mf);font-size:11px;text-transform:uppercase;opacity:.7;width:max-content}
+.files{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column}
+.files li{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-top:1px dashed color-mix(in srgb,var(--fg) 14%,transparent);font-size:13px;min-width:0}
+.files li span{overflow-wrap:anywhere;min-width:0}
+.files li em{font-style:normal;font-family:var(--mf);font-size:11px;opacity:.6;white-space:nowrap}
+.formats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}
+.formats div{padding:14px;border-radius:8px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 14%,transparent);display:flex;flex-direction:column;gap:4px;min-width:0}
+.formats small{font-family:var(--mf);font-size:10px;text-transform:uppercase;opacity:.6}
+.formats span{font-size:13px;opacity:.85}
+.dlbig{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.pbtn{border:0;cursor:pointer;background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:99em;font-family:var(--bf);font-size:14px;font-weight:500}
+.pbtn[disabled]{opacity:.5;cursor:default}
+.kv{display:flex;flex-direction:column;gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="studio"><b>Primary</b><span id="clientName">Aurelius</span></div>
+    <nav class="stages" aria-label="Portal stages">
+      <button class="stage" type="button" data-go="questionnaire" id="stage-q"><i>1</i>Questionnaire <small id="stageQMeta"></small></button>
+      <button class="stage" type="button" data-go="brand-book" id="stage-b"><i>2</i>Brand book <small id="stageBMeta"></small></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Stage 1 -->
+  <section id="view-questionnaire" hidden>
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <div class="eyebrow">Stage 1 · Brand Sprint questionnaire</div>
+          <h1>Tell us about <span class="cname">Aurelius</span></h1>
+          <p>Your answers shape the kick-off workshop: the questions we bring, the references we gather and the first moodboards. Write as much or as little as you like.</p>
+        </div>
+      </div>
+      <div class="qgrid">
+        <aside class="index" id="qIndex" aria-label="Sections"></aside>
+        <div class="sections" id="qSections"></div>
+      </div>
+    </div>
+    <div class="dock">
+      <div class="wrap">
+        <p class="note" id="qStatus" role="status">Edits stay in this browser until you download them.</p>
+        <span class="confirm" id="resetWrap"></span>
+        <button class="btn quiet" type="button" id="copyMd">Copy answers</button>
+        <button class="btn primary" type="button" id="dlCsv"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v8m0 0 3-3m-3 3L5 7M3 13h10"/></svg>Download answers</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stage 2 -->
+  <section id="view-brand-book" hidden>
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <div class="eyebrow">Stage 2 · Brand book</div>
+          <h1>The <span class="cname">Aurelius</span> brand, ready to use</h1>
+          <p>Logo, colour, type and imagery with the rules that keep them consistent. Copy any colour code, and download the files your team needs.</p>
+        </div>
+      </div>
+      <div class="bookbar">
+        <div class="src"><span class="pill" id="bookPill">Loading</span><span class="note" id="bookSrc">Loading the brand book…</span></div>
+        <input type="file" id="bookFile" accept=".json,application/json" hidden>
+        <button class="btn quiet" type="button" id="loadBook">Load a published version</button>
+      </div>
+      <div class="drop" id="bookDrop"><div id="book"></div></div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script id="qdata" type="application/json">__QDATA__</script>
+<script>
+(() => {
+"use strict";
+const Q = JSON.parse(document.getElementById("qdata").textContent);
+const BRAND = Q.brand;
+const KEY = `zeus-portal:${BRAND.id}:answers:v1`;
+const $ = (s, el = document) => el.querySelector(s);
+const h = (tag, attrs = {}, ...kids) => {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "text") el.textContent = v;
+    else if (k === "style") el.style.cssText = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  return el;
+};
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } },
+  del(k) { try { localStorage.removeItem(k); } catch {} }
+};
+let toastT;
+const toast = (msg) => { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => (t.hidden = true), 2200); };
+const copy = async (text, what) => {
+  try { await navigator.clipboard.writeText(text); toast(`Copied ${what}`); return true; }
+  catch { toast("Copy isn't available here. Select the text instead."); return false; }
+};
+const fmtDate = (s) => { const d = new Date(s); return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }); };
+document.querySelectorAll(".cname").forEach(e => (e.textContent = BRAND.name));
+$("#clientName").textContent = BRAND.name;
+
+let downloads = null;
+window.claude?.use?.("downloads").then(d => { downloads = d; }).catch(() => {});
+async function saveFile(filename, data) {
+  if (!downloads) { toast("Downloads aren't available in this view."); return false; }
+  try { await downloads.save({ filename, data }); toast("Saved"); return true; }
+  catch (e) {
+    const c = e?.code;
+    if (c === "declined") toast("Download cancelled");
+    else if (c === "rejected_extension") toast("That file type can't be downloaded here. Use Download all.");
+    else if (c === "rate_limited") toast("A download is already waiting for you to confirm.");
+    else toast("Downloads aren't available in this view.");
+    return false;
+  }
+}
+
+/* ---------- routing ---------- */
+const VIEWS = ["questionnaire", "brand-book"];
+function route() {
+  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "questionnaire";
+  for (const id of VIEWS) $("#view-" + id).hidden = id !== v;
+  $("#stage-q").toggleAttribute("aria-current", false); $("#stage-b").toggleAttribute("aria-current", false);
+  $(v === "questionnaire" ? "#stage-q" : "#stage-b").setAttribute("aria-current", "page");
+  if (v === "brand-book") ensureBook();
+}
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => {
+  if (location.hash.slice(1) === b.dataset.go) return;
+  location.hash = b.dataset.go; window.scrollTo({ top: 0 });
+}));
+window.addEventListener("hashchange", route);
+
+/* ---------- questionnaire ---------- */
+const onFile = { ...Q.answers };
+let answers = { ...onFile };
+let draft = null;
+try { draft = JSON.parse(store.get(KEY) || "null"); } catch { draft = null; }
+if (draft && typeof draft === "object" && draft.answers && typeof draft.answers === "object") {
+  for (const f of Q.fields) if (typeof draft.answers[f.id] === "string") answers[f.id] = draft.answers[f.id];
+}
+const filled = (a) => Q.fields.filter(f => (a[f.id] || "").trim()).length;
+const changed = () => Q.fields.filter(f => (answers[f.id] || "") !== (onFile[f.id] || "")).length;
+
+function buildForm() {
+  const secs = $("#qSections"), idx = $("#qIndex");
+  idx.append(h("div", { class: "meter", "aria-hidden": "true" }, h("b", { id: "meterBar" })));
+  let n = 0;
+  Q.sections.forEach((name, si) => {
+    const fields = Q.fields.filter(f => f.section === name);
+    const sec = h("section", { class: "sec", id: `sec-${si}`, "aria-labelledby": `sech-${si}` },
+      h("h2", { id: `sech-${si}` }, name, h("span", { id: `secc-${si}` })));
+    for (const f of fields) {
+      n++;
+      const ta = h("textarea", { id: `qa-${f.id}`, rows: f.short ? 1 : 3, maxlength: 6000, placeholder: "Type an answer" });
+      ta.value = answers[f.id] || "";
+      ta.addEventListener("input", () => { answers[f.id] = ta.value; onEdit(f.id); });
+      sec.append(h("div", { class: "q", id: `q-${f.id}` }, h("span", { class: "n" }, String(n).padStart(2, "0")), h("label", { for: `qa-${f.id}` }, f.q), ta));
+    }
+    secs.append(sec);
+    idx.append(h("a", { href: `#sec-${si}`, id: `idx-${si}`, onclick: (e) => { e.preventDefault(); $(`#sec-${si}`).scrollIntoView(); } }, h("span", {}, name), h("span", { id: `idxc-${si}` })));
+  });
+  const m = Q.meta || {};
+  idx.append(h("div", { class: "meta" },
+    m.submittedBy ? h("span", {}, `Filled in by ${m.submittedBy}`) : null,
+    m.submittedAt ? h("span", {}, `Sent ${fmtDate(m.submittedAt)}`) : null));
+  refresh();
+}
+let saveT;
+function onEdit(id) {
+  $(`#q-${id}`).toggleAttribute("data-changed", (answers[id] || "") !== (onFile[id] || ""));
+  clearTimeout(saveT);
+  saveT = setTimeout(() => {
+    if (changed()) store.set(KEY, JSON.stringify({ answers, at: Date.now() })); else store.del(KEY);
+    refresh();
+  }, 300);
+  refresh(true);
+}
+function refresh(light) {
+  const total = Q.fields.length, done = filled(answers);
+  $("#meterBar").style.width = `${(done / total) * 100}%`;
+  Q.sections.forEach((name, si) => {
+    const fs = Q.fields.filter(f => f.section === name), d = fs.filter(f => (answers[f.id] || "").trim()).length;
+    $(`#secc-${si}`).textContent = `${d} of ${fs.length}`;
+    $(`#idxc-${si}`).textContent = `${d}/${fs.length}`;
+    $(`#idx-${si}`).toggleAttribute("data-full", d === fs.length);
+  });
+  $("#stageQMeta").textContent = `${done}/${total}`;
+  if (light) return;
+  for (const f of Q.fields) $(`#q-${f.id}`).toggleAttribute("data-changed", (answers[f.id] || "") !== (onFile[f.id] || ""));
+  const c = changed();
+  $("#qStatus").textContent = c
+    ? `${done} of ${total} answered. ${c} ${c === 1 ? "answer" : "answers"} changed in this browser since the version on file.`
+    : `${done} of ${total} answered. These are the answers on file; edits stay in this browser until you download them.`;
+  renderReset(c);
+}
+function renderReset(c) {
+  const w = $("#resetWrap"); w.replaceChildren();
+  if (!c) return;
+  const ask = h("button", { class: "btn quiet", type: "button", onclick: () => {
+    w.replaceChildren(h("span", { class: "note" }, "Undo every change?"),
+      h("button", { class: "btn", type: "button", onclick: () => {
+        answers = { ...onFile }; store.del(KEY);
+        for (const f of Q.fields) $(`#qa-${f.id}`).value = answers[f.id] || "";
+        refresh(); toast("Back to the answers on file");
+      } }, "Undo changes"),
+      h("button", { class: "btn quiet", type: "button", onclick: () => renderReset(changed()) }, "Keep them"));
+  } }, "Undo changes");
+  w.append(ask);
+}
+const stamp = () => { const d = new Date(), p = (x) => String(x).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}:00`; };
+const csvCell = (s) => `"${String(s).replace(/"/g, '""')}"`;
+function toCsv() {
+  const cols = Q.fields.filter(f => (answers[f.id] || "").trim());
+  const head = cols.map(f => f.label).concat("Submitted on");
+  const row = cols.map(f => answers[f.id].trim()).concat(stamp());
+  return head.map(csvCell).join(",") + "\r\n" + row.map(csvCell).join(",") + "\r\n";
+}
+function toMd() {
+  const lines = Q.fields.filter(f => (answers[f.id] || "").trim()).map(f => `**${f.label}**: ${answers[f.id].trim()}`);
+  lines.push(`**Submitted on**: ${stamp()}`);
+  return lines.join("\n\n");
+}
+$("#dlCsv").addEventListener("click", () => {
+  const d = new Date(), p = (x) => String(x).padStart(2, "0");
+  saveFile(`${BRAND.id}-questionnaire-${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.csv`, toCsv());
+});
+$("#copyMd").addEventListener("click", () => copy(toMd(), "the answers"));
+
+/* ---------- brand book ---------- */
+let book = null, bookFrom = null, bookPromise = null;
+const HEX = /^#[0-9a-f]{3,8}$/i;
+const okHex = (x) => (typeof x === "string" && HEX.test(x) ? x : null);
+const isImg = (f) => typeof f?.data === "string" && /^data:image\/(png|jpe?g|gif|webp|svg\+xml)[;,]/i.test(f.data);
+const base = (n) => String(n || "file").split("/").pop();
+const lum = (hex) => { const m = okHex(hex); if (!m) return .5; let x = m.slice(1); if (x.length === 3) x = [...x].map(c => c + c).join(""); const [r, g, b] = [0, 2, 4].map(i => parseInt(x.slice(i, i + 2), 16) / 255).map(c => c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4); return .2126 * r + .7152 * g + .0722 * b; };
+const STANDIN = { aurelius: { sans: "Figtree", mono: "DM Mono" } };
+const dataBlob = (uri) => { const [head, body] = uri.split(","); const b64 = /;base64/.test(head); const type = head.slice(5).split(";")[0] || "application/octet-stream"; if (!b64) return new Blob([decodeURIComponent(body)], { type }); const bin = atob(body); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new Blob([u], { type }); };
+const dataText = (uri) => { try { const [head, body] = uri.split(","); return /;base64/.test(head) ? decodeURIComponent(escape(atob(body))) : decodeURIComponent(body); } catch { return ""; } };
+
+function ensureBook() {
+  if (book || bookPromise) return;
+  bookPromise = fetch(`${BRAND.id}-client-sample.json`).then(r => { if (!r.ok) throw 0; return r.json(); })
+    .then(j => { const err = check(j); if (err) throw 0; setBook(j, "sample"); })
+    .catch(() => { bookPromise = null; setBook(null); });
+}
+function check(j) {
+  if (!j || typeof j !== "object" || j.format !== "primary.client-brand") return "That file isn't a client version from the Brand Tool's Publish tab.";
+  if (j.formatVersion !== 1) return "That file was made by a newer Brand Tool. Ask Primary for an updated portal.";
+  if (!j.brand || typeof j.brand.name !== "string") return "That file has no brand name in it.";
+  return null;
+}
+function setBook(j, from) {
+  book = j; bookFrom = from;
+  const pill = $("#bookPill"), src = $("#bookSrc");
+  if (!j) { pill.textContent = "Empty"; pill.dataset.tone = ""; src.textContent = "No brand book loaded yet."; $("#stageBMeta").textContent = ""; renderEmpty(); return; }
+  if (from === "sample") { pill.textContent = "Sample"; pill.dataset.tone = "warn"; src.textContent = typeof j.sample === "string" ? j.sample : "A sample file, not a published version."; $("#stageBMeta").textContent = "sample"; }
+  else { pill.textContent = Number.isFinite(j.version) ? `Version ${j.version}` : "Loaded"; pill.dataset.tone = "ok"; src.textContent = `${from}${j.published ? ` · published ${fmtDate(j.published)}` : ""}. Kept until you close this page.`; $("#stageBMeta").textContent = Number.isFinite(j.version) ? `v${j.version}` : ""; }
+  if (j.brand.id && j.brand.id !== BRAND.id) { src.textContent += ` This file is for ${j.brand.name}, not ${BRAND.name}.`; pill.dataset.tone = "warn"; }
+  renderBook(j);
+}
+function renderEmpty(msg) {
+  $("#book").replaceChildren(h("div", { class: "empty" }, h("h2", {}, "No brand book here yet"),
+    h("p", {}, msg || "When Primary publishes a version from the Brand Tool, it appears here. To test, drop a client version file (.json) from the Publish tab here."),
+    h("button", { class: "btn primary", type: "button", onclick: () => $("#bookFile").click() }, "Load a published version")));
+}
+async function loadFile(file) {
+  if (!file) return;
+  if (!/\.json$/i.test(file.name)) { toast("Choose the .json file from the Publish tab."); return; }
+  let j; try { j = JSON.parse(await file.text()); } catch { toast(`${file.name} isn't readable JSON.`); return; }
+  const err = check(j); if (err) { toast(err); return; }
+  setBook(j, file.name); window.scrollTo({ top: 0 });
+}
+$("#loadBook").addEventListener("click", () => $("#bookFile").click());
+$("#bookFile").addEventListener("change", (e) => { const f = e.target.files?.[0]; e.target.value = ""; loadFile(f); });
+const drop = $("#bookDrop");
+drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.setAttribute("data-over", ""); });
+drop.addEventListener("dragleave", () => drop.removeAttribute("data-over"));
+drop.addEventListener("drop", (e) => { e.preventDefault(); drop.removeAttribute("data-over"); loadFile(e.dataTransfer.files?.[0]); });
+
+function allFiles(c) { return (c.downloads || []).flatMap(d => (d.files || []).map(f => ({ ...f, group: d.group, dl: d }))); }
+function filesWhere(c, re) { return allFiles(c).filter(f => isImg(f) && re.test(f.name)); }
+const fileBtn = (f, label = "Download") => {
+  const ok = typeof f.data === "string" && f.data.startsWith("data:");
+  const b = h("button", { class: "mini", type: "button", disabled: ok ? null : true, onclick: () => saveFile(base(f.name), dataBlob(f.data)) }, h("span", {}, label));
+  return b;
+};
+
+function renderBook(c) {
+  const root = $("#book");
+  const tones = Array.isArray(c.tones) ? c.tones.filter(t => okHex(t.ground) && okHex(t.ink)) : [];
+  const light = tones.slice().sort((a, b) => lum(b.ground) - lum(a.ground))[0] || { ground: "#F4F4F2", ink: "#111111" };
+  const dark = tones.slice().sort((a, b) => lum(a.ground) - lum(b.ground))[0] || { ground: "#161616", ink: "#F4F4F2" };
+  const si = STANDIN[c.brand.id] || {};
+  const fams = c.type?.families || {};
+  // Load the brand's own font files when the version carries them.
+  const famCss = {};
+  for (const d of (c.downloads || []).filter(d => d.kind === "font")) {
+    const usable = (d.files || []).filter(f => typeof f.data === "string" && /^data:(font|application)\//.test(f.data) && /\.(woff2?|ttf|otf)$/i.test(f.name));
+    if (!usable.length || !d.name) continue;
+    const fam = `brand-${d.id}`;
+    for (const f of usable) { try { const ff = new FontFace(fam, `url(${f.data})`, { weight: String(f.weight || 400), style: f.style || "normal" }); ff.load().then(x => document.fonts.add(x)).catch(() => {}); } catch {} }
+    famCss[d.name] = fam;
+  }
+  const stack = (role) => { const name = fams[role]?.name; if (name && famCss[name]) return `"${famCss[name]}",var(--f-ui)`; const s = si[role]; return s ? `"${s}",${role === "mono" ? "var(--f-mono)" : "var(--f-ui)"}` : (role === "mono" ? "var(--f-mono)" : "var(--f-ui)"); };
+  const usingStandIn = Object.values(fams).some(f => f?.name && !famCss[f.name]);
+
+  const paper = h("article", { class: "paper", "aria-label": `${c.brand.name} brand book` });
+  paper.style.cssText = `--bg:${light.ground};--fg:${light.ink};--dk:${dark.ground};--dkfg:${dark.ink};--bf:${stack("sans")};--mf:${stack("mono")}`;
+
+  // cover
+  const lightLogo = filesWhere(c, /logo.*(light|bone|white|reverse)|((light|bone|white).*logo)/i)[0] || filesWhere(c, /logo/i)[0];
+  const texture = allFiles(c).find(f => isImg(f) && /texture|grain/i.test(f.name) && !/svg/i.test(f.data.slice(0, 30)));
+  const cover = h("section", { class: "cover" },
+    texture ? h("div", { class: "grain", style: `background-image:url(${texture.data})`, "aria-hidden": "true" }) : null,
+    h("div", { class: "left" },
+      lightLogo ? h("img", { class: "logo", src: lightLogo.data, alt: `${c.brand.name} logo` }) : null,
+      h("h1", {}, "Brand book")),
+    h("div", { class: "side" },
+      h("div", { class: "ed" }, [c.brand.edition, Number.isFinite(c.version) ? `Version ${c.version}` : (c.sample ? "Sample" : null)].filter(Boolean).join(" · ")),
+      Array.isArray(c.character) ? h("div", { class: "tags" }, c.character.map(t => h("span", { class: "tagl" }, String(t)))) : null));
+  paper.append(cover);
+
+  const secs = [];
+  const add = (id, title, body) => { if (body) secs.push({ id, title, body }); };
+
+  // voice
+  if (typeof c.voice === "string" && c.voice) {
+    const lines = [...c.voice.matchAll(/"([^"]{6,140})"/g)].map(m => m[1]);
+    const rest = c.voice.replace(/Example lines:.*?(?=Colour:|$)/s, "").trim();
+    add("voice", "Voice", h("div", { class: "body" },
+      h("p", { class: "lede" }, rest.split(/(?<=\.)\s/)[0]),
+      h("p", {}, rest.split(/(?<=\.)\s/).slice(1).join(" ")),
+      lines.length ? h("div", { class: "kv" }, h("h3", {}, "How it sounds"), ...lines.map(l => h("p", { class: "lede", style: "font-size:clamp(20px,2.4vw,28px);letter-spacing:-.04em" }, l))) : null));
+  }
+  // logo
+  if (c.logo) {
+    const marks = filesWhere(c, /logo|icon|mark/i).filter(f => /svg|png/i.test(f.type || f.data.slice(5, 20)) && !/icons\.|icons\//i.test(f.name));
+    // Show the uploaded masters when the version has them; the guideline's own copies are the fallback.
+    const own = marks.filter(f => !/^guideline-/.test(f.dl?.id || "")), pick = own.length ? own : marks;
+    const seen = new Set(); const uniq = pick.filter(f => { const k = base(f.name); if (seen.has(k)) return false; seen.add(k); return true; });
+    const onDark = (n) => /(light|bone|white|reverse)/i.test(n);
+    add("logo", "Logo", h("div", { class: "body" },
+      c.logo.assets ? h("dl", { class: "specs" }, Object.entries(c.logo.assets).map(([k, v]) => h("div", {}, h("dt", {}, k), h("dd", {}, String(v))))) : null,
+      uniq.length ? h("div", { class: "marks" }, uniq.map(f => h("figure", { class: "mark", style: onDark(f.name) ? "background:var(--dk);color:var(--dkfg)" : "background:color-mix(in srgb,var(--fg) 6%,var(--bg));color:var(--fg)" },
+        h("img", { src: f.data, alt: base(f.name) }), h("figcaption", {}, h("span", {}, base(f.name)), fileBtn(f, "SVG".length && /\.svg$/i.test(f.name) ? "SVG" : "File"))))) : null,
+      rulesBlock(c.logo.rules, c.logo.never)));
+  }
+  // colour
+  if (c.colour) {
+    const meta = {};
+    for (const f of allFiles(c).filter(f => /colou?r.*\.json$/i.test(f.name) && f.data)) { try { for (const x of JSON.parse(dataText(f.data))) if (x?.name) meta[x.name] = x; } catch {} }
+    const swatch = (name, hex) => { const hx = okHex(hex); if (!hx) return null; const m = meta[name] || {}; const fg = lum(hx) > .35 ? "#111" : "#fff";
+      return h("button", { class: "sw", type: "button", title: `Copy ${hx}`, onclick: () => copy(hx.toUpperCase(), hx.toUpperCase()) },
+        h("span", { class: "chip", style: `background:${hx};color:${fg}` }, hx.toUpperCase()),
+        h("span", { class: "lab" }, h("b", { style: "font-weight:500" }, name), m.rgb ? h("small", {}, `RGB ${m.rgb}`) : null, m.cmyk ? h("small", {}, `CMYK ${m.cmyk}`) : null)); };
+    const col = c.colour;
+    const bal = col.balance && Number.isFinite(col.balance.neutral) ? col.balance : null;
+    const nHex = (col.neutrals || []).map(n => okHex(n.hex)).filter(Boolean);
+    const pHex = (col.pairs || []).map(p => okHex(p.deep)).filter(Boolean);
+    add("colour", "Colour", h("div", { class: "body" },
+      col.neutrals?.length ? h("div", { class: "kv" }, h("h3", {}, "Neutrals · click to copy"), h("div", { class: "swatches" }, col.neutrals.map(n => swatch(n.name, n.hex)))) : null,
+      col.pairs?.length ? h("div", { class: "kv" }, h("h3", {}, "Secondary pairs"), h("div", { class: "pairs" }, col.pairs.map(p => {
+        const l = okHex(p.light), d = okHex(p.deep); if (!l || !d) return null;
+        return h("div", { class: "pair" },
+          h("button", { type: "button", style: `background:${l};color:${d}`, onclick: () => copy(l.toUpperCase(), l.toUpperCase()) }, h("span", {}, `${p.name} light`), h("span", {}, l.toUpperCase())),
+          h("button", { type: "button", style: `background:${d};color:${l}`, onclick: () => copy(d.toUpperCase(), d.toUpperCase()) }, h("span", {}, `${p.name} deep`), h("span", {}, d.toUpperCase())));
+      }))) : null,
+      bal ? h("div", { class: "kv" }, h("h3", {}, "Balance across a system"), h("div", { class: "balance", role: "img", "aria-label": `${bal.neutral}% neutral, ${bal.secondary}% secondary` },
+        h("div", { style: `flex:${bal.neutral};background:linear-gradient(90deg,${nHex.join(",") || "var(--dk)"});color:${dark.ink}` }, `${bal.neutral}% neutral`),
+        h("div", { style: `flex:${bal.secondary || 0};background:linear-gradient(90deg,${pHex.join(",") || "var(--fg)"});color:#fff` }, `${bal.secondary}%`))) : null,
+      rulesBlock(col.rules)));
+  }
+  // type
+  if (c.type) {
+    const t = c.type;
+    const famCards = Object.entries(fams).map(([role, f]) => h("div", { class: "fam", style: `font-family:${stack(role)}` },
+      h("small", {}, role === "mono" ? "Mono" : role === "sans" ? "Sans" : role), h("div", { class: "aa" }, "Aa"),
+      h("b", { style: "font-weight:500;font-size:20px;letter-spacing:-.02em" }, f.name || role),
+      h("div", { class: "glyphs" }, "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789")));
+    const pct = (s) => { const m = String(s || "").match(/(-?\d+(?:\.\d+)?)%/); return m ? +m[1] / 100 : null; };
+    const wt = (w) => /bold/i.test(w) ? 700 : /semi/i.test(w) ? 600 : /medium/i.test(w) ? 500 : /light/i.test(w) ? 300 : 400;
+    const size = { headline: "clamp(34px,5vw,60px)", subhead: "clamp(20px,2.4vw,26px)", body: "16px", button: "15px", tag: "11px" };
+    const styles = (t.styles || []).map(s => {
+      const tr = pct(s.tracking), ld = pct(s.leading), upper = /uppercase/i.test(s.extra || "") || s.id === "tag";
+      const css = `font-family:${stack(s.family)};font-weight:${wt(s.weight)};font-size:${size[s.id] || "18px"};${tr != null ? `letter-spacing:${tr}em;` : ""}${ld != null ? `line-height:${Math.max(ld, .85)};` : ""}${upper ? "text-transform:uppercase;" : ""}`;
+      const sample = s.id === "tag" ? h("span", { class: "tagl", style: css }, s.sample || s.name) : s.id === "button" ? h("span", { class: "pbtn", style: css + "display:inline-block" }, s.sample || "Button") : h("div", { class: "sample", style: css }, s.sample || "");
+      return h("div", { class: "style" }, h("div", { class: "spec" }, h("b", {}, s.name), h("span", {}, `${fams[s.family]?.name || s.family} · ${s.weight || ""}`), s.tracking ? h("span", {}, `Tracking ${s.tracking}`) : null, s.leading ? h("span", {}, `Leading ${s.leading}`) : null, s.extra ? h("span", { style: "text-transform:none" }, s.extra) : null), h("div", {}, sample));
+    });
+    add("type", "Typography", h("div", { class: "body" },
+      famCards.length ? h("div", { class: "families" }, famCards) : null,
+      usingStandIn ? h("p", { class: "standin" }, `Shown in a stand-in face. The ${Object.values(fams).map(f => f.name).filter(Boolean).join(" and ")} files aren't in this ${bookFrom === "sample" ? "sample" : "version"}; Primary will supply them with the licence.`) : null,
+      styles.length ? h("div", { class: "styles" }, styles) : null));
+  }
+  // imagery
+  if (c.imagery || c.photography) {
+    const im = c.imagery || {};
+    const photos = filesWhere(c, /\.(jpe?g|png|webp)$/i).filter(f => /imagery|photo|particle/i.test(f.name) && !/texture|grain|icon/i.test(f.name));
+    add("imagery", "Imagery", h("div", { class: "body" },
+      ...Object.entries(im).map(([k, v]) => h("div", { class: "kv" }, h("h3", {}, k), Array.isArray(v?.look) ? h("div", { class: "chips" }, v.look.map(x => h("span", { class: "tagl" }, String(x)))) : auto(v))),
+      c.photography ? auto(c.photography) : null,
+      photos.length ? h("div", { class: "photos" }, photos.map(f => h("figure", {}, h("img", { src: f.data, alt: base(f.name).replace(/\.\w+$/, "").replace(/[-_]/g, " "), loading: "lazy" }), h("figcaption", {}, base(f.name).replace(/^[a-z]+-/, "").replace(/\.\w+$/, "").replace(/-/g, " "))))) : null));
+  }
+  // graphics
+  if (c.graphics) {
+    const g = c.graphics;
+    const shapes = filesWhere(c, /shape|graphic/i).filter(f => /svg/i.test(f.data.slice(5, 20)));
+    const photo = filesWhere(c, /\.(jpe?g|png)$/i).filter(f => /photo|imagery/i.test(f.name))[0];
+    const glassBlock = (name, s) => { if (!s || !okHex(s.fill)) return null; const blur = Array.isArray(s.blur) ? s.blur[1] || s.blur[0] : 16; const op = Math.max(+s.fillOpacity || 0, .08);
+      return h("div", { class: "glass", style: `background:color-mix(in srgb,${s.fill} ${Math.round(op * 100)}%,transparent);backdrop-filter:blur(${+blur || 16}px);-webkit-backdrop-filter:blur(${+blur || 16}px);box-shadow:inset 0 0 0 ${+s.strokePx || .5}px ${okHex(s.stroke) || "#fff"};color:${dark.ink}` },
+        h("span", { class: "k" }, `Soft glass · ${name}`), h("span", { class: "v" }, `Blur ${Array.isArray(s.blur) ? s.blur.join("–") : blur}px`), h("span", { class: "k" }, `Stroke ${s.strokePx}px ${String(s.stroke).toUpperCase()}`)); };
+    add("graphics", "Graphic system", h("div", { class: "body" },
+      g.coreShape ? h("div", { class: "kv" }, h("h3", {}, "Core shapes"), Array.isArray(g.coreShape.elements) ? h("div", { class: "chips" }, g.coreShape.elements.map(x => h("span", { class: "tagl" }, String(x)))) : null) : null,
+      shapes.length ? h("div", { class: "shapes" }, shapes.map(f => h("div", {}, h("img", { src: f.data, alt: base(f.name) })))) : null,
+      g.coreShape?.rules ? rulesBlock(g.coreShape.rules) : null,
+      g.softGlass ? h("div", { class: "kv" }, h("h3", {}, "Soft glass"), g.softGlass.use ? h("p", {}, g.softGlass.use) : null,
+        h("div", { class: "glassdemo", style: photo ? `background-image:url(${photo.data})` : "" }, glassBlock("neutral", g.softGlass.neutral))) : null,
+      g.texture?.rule ? h("div", { class: "kv" }, h("h3", {}, "Texture"), h("p", {}, g.texture.rule)) : null,
+      auto(Object.fromEntries(Object.entries(g).filter(([k]) => !["coreShape", "softGlass", "texture"].includes(k))))));
+  }
+  // icons
+  if (c.icons) {
+    const ic = filesWhere(c, /icons?[./]/i).filter(f => !/logo/i.test(f.name) && !/icon-(dark|light|ink|bone)/i.test(f.name));
+    add("icons", "Icons", h("div", { class: "body" }, auto(c.icons), ic.map(f => h("img", { src: f.data, alt: "Icon set", style: "border-radius:8px;max-width:100%" }))));
+  }
+  // anything else this version carries
+  for (const k of ["agents", "charlie"]) if (c[k]) add(k, k[0].toUpperCase() + k.slice(1), h("div", { class: "body" }, auto(c[k])));
+  // tones
+  if (tones.length) add("tones", "Tones", h("div", { class: "body" }, h("p", {}, "Approved ground and ink pairings. Every layout uses one of these."),
+    h("div", { class: "tones" }, tones.map(t => h("div", { class: "tone", style: `background:${t.ground};color:${t.ink};box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 10%,transparent)` }, h("b", {}, "Aa"), h("span", {}, t.name), h("span", {}, `${t.ground.toUpperCase()} / ${t.ink.toUpperCase()}`))))));
+  // downloads
+  if (Array.isArray(c.downloads) && c.downloads.length) {
+    const all = allFiles(c).filter(f => typeof f.data === "string");
+    const zipBtn = h("button", { class: "pbtn", type: "button", disabled: all.length && window.JSZip ? null : true }, `Download all (${all.length} files, .zip)`);
+    zipBtn.addEventListener("click", async () => {
+      zipBtn.disabled = true; const old = zipBtn.textContent; zipBtn.textContent = "Building the zip…";
+      try {
+        const zip = new window.JSZip();
+        const used = new Set();
+        for (const f of all) { let p = `${String(f.group || "Files").replace(/[\\/:*?"<>|]/g, "")}/${base(f.name)}`; while (used.has(p)) p = p.replace(/(\.\w+)?$/, "-2$1"); used.add(p); zip.file(p, dataBlob(f.data)); }
+        const lean = JSON.parse(JSON.stringify(c)); for (const d of lean.downloads || []) for (const f of d.files || []) delete f.data;
+        zip.file("brand.json", JSON.stringify(lean, null, 2));
+        const blob = await zip.generateAsync({ type: "blob" });
+        await saveFile(`${c.brand.id || "brand"}-brand-files.zip`, blob);
+      } catch { toast("The zip couldn't be built in this browser."); }
+      zipBtn.disabled = false; zipBtn.textContent = old;
+    });
+    add("downloads", "Downloads", h("div", { class: "body" },
+      h("div", { class: "dlbig" }, zipBtn, h("span", { class: "standin" }, "Includes brand.json, the brand rules in a form AI tools can read.")),
+      h("div", { class: "dl" }, c.downloads.map(d => {
+        const have = (d.files || []).filter(f => typeof f.data === "string").length, n = (d.files || []).length;
+        const status = d.included === false ? (d.reason || "Not included") : have === n ? `${n} ${n === 1 ? "file" : "files"}` : have ? `${have} of ${n} files in this ${bookFrom === "sample" ? "sample" : "version"}` : (d.files?.[0]?.missing || "Files not in this version");
+        return h("div", { class: "dlrow" },
+          h("div", { class: "t" }, h("small", {}, [d.group, d.licence ? `${d.licence} licence` : null].filter(Boolean).join(" · ")), h("b", {}, d.name), d.use ? h("p", {}, d.use) : null),
+          h("span", { class: "standin" }, status),
+          n ? h("details", {}, h("summary", {}, "Files"), h("ul", { class: "files" }, (d.files || []).map(f => h("li", {}, h("span", {}, base(f.name)), f.data ? fileBtn(f) : h("em", {}, f.missing || "Not included"))))) : null);
+      }))));
+  }
+  // formats
+  if (Array.isArray(c.formats) && c.formats.length) add("formats", "Ready formats", h("div", { class: "body" }, h("p", {}, "Layouts Primary has set up for this brand. Ask for any of them and we'll make it with your content."),
+    h("div", { class: "formats" }, c.formats.map(f => h("div", {}, h("small", {}, f.kind || ""), h("b", { style: "font-weight:500" }, f.name), f.use ? h("span", {}, f.use) : null)))));
+
+  paper.append(h("nav", { class: "toc", "aria-label": "Brand book sections" }, secs.map(s => h("a", { href: `#bk-${s.id}`, onclick: (e) => { e.preventDefault(); $(`#bk-${s.id}`).scrollIntoView(); } }, s.title))));
+  secs.forEach((s, i) => paper.append(h("section", { class: "bsec", id: `bk-${s.id}` }, h("header", {}, h("span", { class: "num" }, `${String(i + 1).padStart(2, "0")}`), h("h2", {}, s.title)), s.body)));
+  root.replaceChildren(paper);
+}
+function rulesBlock(rules, never) {
+  const r = Array.isArray(rules) ? rules : [], n = Array.isArray(never) ? never : [];
+  if (!r.length && !n.length) return null;
+  return h("div", { class: "rules" },
+    r.length ? h("div", { class: "rulecard", "data-kind": "do" }, h("h3", {}, "Do"), h("ul", {}, r.map(x => h("li", {}, String(x))))) : null,
+    n.length ? h("div", { class: "rulecard", "data-kind": "never" }, h("h3", {}, "Never"), h("ul", {}, n.map(x => h("li", {}, String(x))))) : null);
+}
+function auto(v, depth = 0) {
+  if (v == null || depth > 3) return null;
+  if (typeof v !== "object") return h("p", {}, String(v));
+  if (Array.isArray(v)) { if (!v.length) return null; if (v.every(x => typeof x !== "object")) return h("ul", { style: "margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px" }, v.map(x => h("li", {}, String(x)))); return h("div", { class: "kv" }, v.map(x => auto(x, depth + 1))); }
+  const ents = Object.entries(v).filter(([, x]) => x != null && x !== "");
+  if (!ents.length) return null;
+  const simple = ents.filter(([, x]) => typeof x !== "object" || (Array.isArray(x) && x.every(y => typeof y !== "object") && x.length < 4 && x.join("").length < 40));
+  const complex = ents.filter(e => !simple.includes(e));
+  const label = (k) => k.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, s => s.toUpperCase());
+  return h("div", { class: "kv" },
+    simple.length ? h("dl", { class: "specs" }, simple.map(([k, x]) => h("div", {}, h("dt", {}, label(k)), h("dd", {}, Array.isArray(x) ? x.join(" · ") : String(x))))) : null,
+    ...complex.map(([k, x]) => h("div", { class: "kv" }, h("h3", {}, label(k)), auto(x, depth + 1))));
+}
+
+buildForm();
+route();
+})();
+</script>

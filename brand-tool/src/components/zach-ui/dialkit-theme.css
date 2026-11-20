@@ -1,0 +1,150 @@
+/* Import after dialkit/styles.css. Root tokens come from ZachDialRoot.tsx.
+   These selectors cover both the normal root and DialKit's detached portal
+   roots. Color planes, swatches, image content, and clip hues stay untouched. */
+.dialkit-root[data-theme] {
+  --dial-surface: var(--neutral-3);
+  --dial-surface-hover: var(--neutral-4);
+  --dial-surface-active: var(--neutral-5);
+  --dial-surface-subtle: var(--neutral-3);
+  --dial-text-root: var(--neutral-10);
+  --dial-text-section: var(--neutral-8);
+  --dial-text-label: var(--neutral-8);
+  --dial-text-focus: var(--neutral-10);
+  --dial-text-primary: var(--neutral-10);
+  --dial-text-secondary: var(--neutral-8);
+  --dial-text-tertiary: var(--neutral-7);
+  --dial-border: var(--neutral-4);
+  --dial-border-hover: var(--neutral-6);
+  --dial-focus-ring: var(--neutral-10);
+  --dial-glass-bg: var(--neutral-1);
+  --dial-dropdown-bg: var(--neutral-1);
+  --dial-backdrop-blur: var(--space-zero);
+  --dial-radius: var(--radius-s);
+  --dial-row-height: calc(var(--space-xl) + var(--space-xxs));
+  --dial-row-gap: var(--space-xs);
+  --dial-shadow: var(--shadow-none);
+  --dial-shadow-collapsed: var(--shadow-none);
+  --dial-shadow-dropdown: var(--shadow-none);
+  color: var(--neutral-10);
+  font-family: var(--font-ui);
+  font-size: var(--size-s);
+  line-height: var(--line-s);
+  font-weight: var(--weight-ui-regular);
+  letter-spacing: var(--letter-spacing-s);
+  text-wrap: pretty;
+  color-scheme: light dark;
+}
+
+.dialkit-root[data-theme="light"] { color-scheme: light; }
+.dialkit-root[data-theme="dark"] { color-scheme: dark; }
+
+.dialkit-root[data-theme] * {
+  /* Native numeric spans, shortcut keys, and color popups set their own fonts. */
+  font-family: var(--font-ui);
+}
+
+.dialkit-root[data-theme] :where(
+  button, input, select, textarea, label,
+  .dialkit-slider-label, .dialkit-slider-value, .dialkit-slider-input,
+  .dialkit-toggle-label, .dialkit-select-label, .dialkit-select-value,
+  .dialkit-pad-label, .dialkit-pad-axis, .dialkit-pad-value,
+  .dialkit-color-label, .dialkit-color-value, .dialkit-color-track-row,
+  .dialkit-text-label, .dialkit-labeled-control-label, .dialkit-preset-name,
+  .dialkit-shortcuts-row-label
+) {
+  font-size: var(--size-s);
+  line-height: var(--line-s);
+  font-weight: var(--weight-ui-regular);
+  letter-spacing: var(--letter-spacing-s);
+}
+
+.dialkit-root[data-theme] :where(
+  .dialkit-folder-title, .dialkit-folder-title-root, .dialkit-timeline-title,
+  .dialkit-timeline-popover-title
+) {
+  font-size: var(--size-s);
+  line-height: var(--line-s);
+  font-weight: var(--weight-ui-medium);
+  letter-spacing: var(--letter-spacing-s);
+}
+
+.dialkit-root[data-theme] :where(
+  .dialkit-slider-value, .dialkit-slider-input, .dialkit-pad-value,
+  .dialkit-color-value, .dialkit-color-css-input, .dialkit-timeline-time
+) {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}
+
+.dialkit-root[data-theme] :where(
+  .dialkit-panel-inner, .dialkit-select-dropdown, .dialkit-color-popover,
+  .dialkit-image-popover, .dialkit-timeline-dock, .dialkit-timeline-popover
+),
+.dialkit-root[data-theme]:is(.dialkit-preset-dropdown, .dialkit-shortcuts-dropdown) {
+  border: 0;
+  border-radius: var(--radius-m);
+  box-shadow: inset 0 0 0 var(--border-s) var(--neutral-4);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dialkit-root[data-theme] .dialkit-panel-inline {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.dialkit-root[data-theme] :where(.dialkit-panel-inner[data-collapsed="true"]) {
+  border-radius: var(--radius-full);
+}
+
+.dialkit-root[data-theme] :where(.dialkit-slider, .dialkit-toggle, .dialkit-select-trigger, .dialkit-action-button, .dialkit-segmented-button, .dialkit-color-control, .dialkit-pad-point) {
+  transition-duration: var(--motion-duration);
+  transition-timing-function: var(--motion-easing);
+}
+
+.dialkit-root[data-theme] .dialkit-toggle-thumb,
+.dialkit-root[data-theme] .dialkit-pad-point { box-shadow: var(--shadow-none); }
+.dialkit-root[data-theme] .dialkit-pad-surface[data-dragging="true"] .dialkit-pad-point {
+  box-shadow: 0 0 0 var(--space-xxs) var(--dial-border-hover);
+}
+
+.dialkit-root[data-theme] .dialkit-color-popover input[aria-invalid="true"],
+.dialkit-root[data-theme] .dialkit-color-value[aria-invalid="true"],
+.dialkit-root[data-theme] .dialkit-preset-delete:hover { color: var(--error); }
+
+/* Optional thumbnail mode has a separate portal, without .dialkit-root. */
+.dialkit-version-overlay[data-theme] {
+  --dialkit-overlay-bg: var(--neutral-2);
+  --dialkit-overlay-card: var(--neutral-1);
+  --dialkit-overlay-text: var(--neutral-10);
+  --dialkit-overlay-muted: var(--neutral-7);
+  --dialkit-overlay-ring: var(--neutral-10);
+  --dialkit-overlay-shadow: var(--shadow-none);
+  font-family: var(--font-ui);
+  text-wrap: pretty;
+}
+.dialkit-version-overlay[data-theme] * { font-family: var(--font-ui); }
+
+@media (forced-colors: active) {
+  .dialkit-root[data-theme] { --dial-focus-ring: Highlight; }
+}
+
+.dialkit-root[data-theme] :where(button, input, [tabindex="0"]):focus-visible {
+  outline: var(--border-l) solid var(--dial-focus-ring);
+  outline-offset: var(--space-xxs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialkit-root[data-theme],
+  .dialkit-root[data-theme] *,
+  .dialkit-root[data-theme] *::before,
+  .dialkit-root[data-theme] *::after,
+  .dialkit-version-overlay[data-theme],
+  .dialkit-version-overlay[data-theme] * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
