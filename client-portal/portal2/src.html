@@ -55,6 +55,74 @@
 .pp-galmini figure{margin:0;display:flex;align-items:center;justify-content:center;aspect-ratio:1;overflow:hidden;border-radius:var(--radius-s);background:var(--pb-ground)}
 .pp-galmini figure[data-dark]{background:#1b1b1b}
 .pp-galmini img{max-width:80%;max-height:80%;object-fit:contain}
+/* Brand reveal: slides drawn at 1600×900 in the client's brand, scaled to the stage */
+.pp-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-m);background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-stage-fit{position:absolute;inset:0;overflow:hidden}
+.pp-stage-fit>.pp-rv{position:absolute;left:0;top:0;transform-origin:0 0}
+.pp-stage-bar{display:flex;align-items:center;gap:var(--space-xs);margin:var(--space-s) 0 var(--space-xl)}
+.pp-grow{flex:1}
+.a.pp-rv{width:1600px;height:900px;padding:88px 96px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.a .pp-rv-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.a .pp-rv-logo{display:block;height:44px;width:auto}
+.a .pp-rv-eyebrow{font-size:17px;letter-spacing:.06em;opacity:.7;white-space:pre}
+.a .pp-rv-foot{display:flex;flex-direction:column;gap:28px}
+.a .pp-rv-giant{font-size:230px;line-height:.86}
+.a .pp-rv-tags{display:flex;flex-wrap:wrap;gap:12px;font-size:17px}
+.a .pp-rv-split{display:grid;grid-template-columns:1.35fr 1fr;gap:110px;align-items:end;flex:1;padding-top:40px}
+.a .pp-rv-statement{font-size:82px;line-height:1}
+.a .pp-rv-words{list-style:none;display:flex;flex-direction:column}
+.a .pp-rv-words li{font-size:40px;line-height:1.1;padding:14px 0;box-shadow:inset 0 -1px 0 color-mix(in srgb,currentColor 25%,transparent)}
+.a.pp-rv-halves{padding:0;flex-direction:row}
+.a.pp-rv-halves>div{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:88px 96px;min-width:0}
+.a .pp-rv-biglogo{display:block;width:78%;height:220px;object-fit:contain;align-self:center;margin:auto 0}
+.a .pp-rv-note{font-size:22px;line-height:1.35;max-width:620px;opacity:.75}
+.a .pp-rv-palette{display:flex;flex-direction:column;gap:18px;flex:1;margin-top:44px}
+.a .pp-rv-bars{display:flex;flex:1;overflow:hidden;border-radius:10px}
+.a .pp-rv-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:20px;font-size:15px;min-width:0}
+.a .pp-rv-bar strong{font-size:20px;font-weight:400}
+.a .pp-rv-aa{font-size:430px;line-height:.78;letter-spacing:-.04em}
+.a .pp-rv-fams{display:flex;flex-direction:column;gap:26px}
+.a .pp-rv-fams>div{display:flex;flex-direction:column;gap:8px;padding-bottom:22px;box-shadow:inset 0 -1px 0 color-mix(in srgb,currentColor 25%,transparent)}
+.a .pp-rv-fams .a-sub{font-size:46px}
+.a .pp-rv-sample{font-size:58px;line-height:1}
+.a.pp-rv-imagery{padding:0;position:relative}
+.a .pp-rv-grid{position:absolute;inset:0;display:grid;gap:6px;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr}
+.a .pp-rv-grid[data-n="1"]{grid-template-columns:1fr;grid-template-rows:1fr}
+.a .pp-rv-grid[data-n="2"]{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+.a .pp-rv-grid[data-n="3"]{grid-template-columns:2fr 1fr}
+.a .pp-rv-grid[data-n="4"]{grid-template-columns:2fr 1fr 1fr}
+.a .pp-rv-grid img{display:block;width:100%;height:100%;object-fit:cover;min-height:0}
+.a .pp-rv-grid img:first-child{grid-row:span 2}
+.a .pp-rv-grid[data-n="1"] img:first-child,.a .pp-rv-grid[data-n="2"] img:first-child{grid-row:auto}
+.a .pp-rv-over{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:20px;padding:120px 96px 80px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.a .pp-rv-over .pp-rv-eyebrow{opacity:.9}
+.a .pp-rv-quotes{display:flex;flex-direction:column;justify-content:center;gap:26px;flex:1}
+.a .pp-rv-quote{font-size:96px;line-height:1}
+.a .pp-rv-line{font-size:40px;line-height:1.15;opacity:.75}
+.a.pp-rv-use{flex-direction:row;align-items:center;gap:56px;padding:88px 72px 88px 96px}
+.a .pp-rv-usecap{width:330px;flex:none;display:flex;flex-direction:column;gap:16px}
+.a .pp-rv-usecap strong{font-family:var(--hf);font-size:46px;line-height:1.02;font-weight:400;letter-spacing:-.03em}
+.a .pp-rv-usecap span:last-child{font-size:20px;line-height:1.4;opacity:.7}
+.a.pp-rv-use img{flex:1;min-width:0;width:100%;height:auto;border-radius:12px;box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
+.a .pp-rv-headline{font-size:124px;line-height:.94;white-space:pre-line}
+.a .pp-rv-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:20px}
+.a .pp-rv-cols strong{display:block;margin-bottom:12px;font-size:30px;font-weight:400}
+.a .pp-rv-cols p{font-size:20px;line-height:1.4;opacity:.72}
+.pp-present{position:fixed;inset:0;z-index:10003;background:#000;outline:none}
+.pp-present .pp-stage-fit{position:absolute;inset:0;cursor:pointer}
+.pp-present-bar{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:var(--space-xs);padding:var(--space-xxs) var(--space-s);border-radius:var(--radius-full);background:rgba(28,28,28,.82);opacity:0;transition:opacity var(--motion-duration,200ms) ease}
+.pp-present:hover .pp-present-bar,.pp-present:focus-within .pp-present-bar{opacity:1}
+@media (hover:none){.pp-present-bar{opacity:1}}
+/* The offer, after the brand in use; plan and account */
+.pp-offer{display:flex;flex-direction:column;gap:var(--space-m);padding:var(--space-l);margin-bottom:var(--space-xl);border-radius:var(--radius-m);background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-offer.is-compact{padding:var(--space-m)}
+.pp-offer-head h2{margin:0;font:var(--weight-ui-medium) var(--size-l)/1.2 var(--font-ui);color:var(--neutral-10)}
+.pp-offer-head p{margin:var(--space-xxs) 0 0;max-width:38rem;color:var(--pb-body)}
+.pp-offer-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-xs)}
+.pp-offer-list li{display:flex;align-items:flex-start;gap:var(--space-xs);color:var(--pb-body);font-size:var(--size-s);line-height:var(--line-s)}
+.pp-offer-list svg{flex:none;margin-top:2px;color:var(--neutral-10)}
+.pp-link{padding:0;border:0;background:none;color:var(--neutral-10);font:inherit;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
+@media (max-width:640px){.pp-stage-bar .pp-note{font-size:var(--size-xs)}.pp-offer{padding:var(--space-m)}}
 .pp-galmini figure.is-photo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover}
 </style>
 <div id="root"><div class="graphical-theme" data-graphical-theme="Base" data-color-mode="light"></div></div>
@@ -81,6 +149,11 @@ Object.assign(ICONS, {
   back: L('<path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path>'),
   imagePlus: L('<path d="M16 5h6"></path><path d="M19 2v6"></path><path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"></path><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path><circle cx="9" cy="9" r="2"></circle>'),
   x: L('<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>'),
+  play: L('<path d="M6 4l14 8-14 8z"></path>'),
+  chevronLeft: L('<path d="m15 18-6-6 6-6"></path>'),
+  chevronRight: L('<path d="m9 18 6-6-6-6"></path>'),
+  sparkles: L('<path d="M12 3l1.8 4.9L19 9.7l-5.2 1.8L12 16.4l-1.8-4.9L5 9.7l5.2-1.8z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path>'),
+  wallet: L('<path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>'),
   eye: L('<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle>')
 });
 const icon = (k) => { const t = document.createElement("template"); t.innerHTML = ICONS[k] || ""; return t.content.firstChild; };
@@ -154,6 +227,7 @@ const S = {
   answers: { ...Q.answers }, briefFrom: "file", briefSave: "", briefAt: null,
   requests: [], reqState: "loading", draft: { what: "", channels: [], due: "", photo: null, format: null }, sendBusy: false, sendErr: "",
   detailNote: {}, changeOpen: false, changeText: "",
+  rv: 0, plan: null, asks: [], planNote: "",
 };
 let db = null, assets = null, downloads = null, userCap = null;
 const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
@@ -220,7 +294,7 @@ async function downloadAll(b) {
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["brief", "book", "files", "new", "requests"];
+const VIEWS = ["brief", "reveal", "book", "files", "new", "requests", "plan"];
 function readRoute() {
   const hsh = location.hash.slice(1);
   if (hsh.startsWith("req-")) { S.view = "request"; S.reqId = hsh.slice(4); }
@@ -253,9 +327,11 @@ function nav() {
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Project")),
     h("ul", { className: "pb-navlist" }, item("brief", "Questionnaire", "Brief")),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Brand")),
-    h("ul", { className: "pb-navlist" }, item("book", "Brand book", "Guideline"), item("files", "Files", "Assets")),
+    h("ul", { className: "pb-navlist" }, item("reveal", "Brand reveal", "sparkles"), item("book", "Brand book", "Guideline"), item("files", "Files", "Assets")),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Requests")),
     h("ul", { className: "pb-navlist" }, item("new", "Request assets", "circlePlus"), item("requests", "Requests", "inbox", n)),
+    h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Account")),
+    h("ul", { className: "pb-navlist" }, item("plan", "Plan", "wallet", studio() ? S.asks.filter((a) => !a.done).length : 0)),
     S.studio ? h("div", { className: "pb-navfoot" }, h("button", {
       type: "button", className: "pb-navitem pb-navpin", "aria-pressed": S.asClient ? "true" : "false", title: "See the portal the way your client does",
       onClick: () => { S.asClient = !S.asClient; store.set("pp-as-client", S.asClient ? "1" : "0"); render(); }
@@ -316,8 +392,8 @@ function render() {
   rendering = false;
 }
 document.addEventListener("focusout", () => setTimeout(() => { if (pendingRender && !document.activeElement?.closest?.("#pb-main textarea, #pb-main input")) render(); }, 0));
-const TOOL_VIEW = { brief: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
-const VIEWS_RENDER = { brief: viewBrief, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
+const TOOL_VIEW = { brief: "brief", reveal: "publish", plan: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
+const VIEWS_RENDER = { brief: viewBrief, reveal: viewReveal, plan: viewPlan, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
 const pagehead = (eyebrow, title, text, cls) => h("header", { className: "pb-pagehead" + (cls ? " " + cls : "") }, eyebrow ? h("p", { className: "pb-eyebrow" }, eyebrow) : null, h("h1", null, title), text ? h("p", null, text) : null);
 const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -499,6 +575,249 @@ async function loadSample() {
   catch { S.bookLoading = false; if (S.view === "book") render(); }
 }
 
+/* ---------- Brand reveal ---------- */
+/* The delivery moment: a designed walkthrough of the brand, slide by slide, in the client's own brand. The brand lead
+   presents it in the final sprint meeting; the client comes back to it any time. It ends with the brand in use, then
+   what a plan includes (the brief: the offer comes after the client has seen their brand working, never before). */
+const RV_W = 1600, RV_H = 900;
+const rvBrand = () => ({ id: S.client?.brand?.id || Q.brand.id });
+const rvTones = (c) => {
+  const ts = (c.tones || []).filter((t) => pbPubHex.test(t.ground || "") && pbPubHex.test(t.ink || ""));
+  const dark = ts.filter((t) => pbPubDark(t.ground)), light = ts.filter((t) => !pbPubDark(t.ground));
+  const plain = (xs) => xs.find((t) => !/light|deep|ink/i.test(t.name)) || xs[0];
+  return { dark: plain(dark) || { ground: "#111", ink: "#fff" }, light: plain(light) || { ground: "#f5f5f2", ink: "#111" },
+    accent: dark.find((t) => /deep/i.test(t.name)) || dark[1] || plain(dark) || { ground: "#111", ink: "#fff" } };
+};
+// The lockup for a ground: a light version on dark grounds, a dark one on light grounds; the symbol on its own when asked.
+function rvLogo(c, onDark, symbol) {
+  const fs = pbPubFiles(rvBrand(), c, /logo/i).filter((f) => pbPubSrc(rvBrand(), f));
+  const want = (f) => (symbol ? /icon|mark|symbol/i : /logo|lockup|wordmark/i).test(base(f.name)) && !(symbol ? false : /icon|mark|symbol/i.test(base(f.name)));
+  const tone = (f) => onDark ? /bone|white|light|reverse/i.test(base(f.name)) : /ink|black|dark/i.test(base(f.name));
+  return fs.find((f) => want(f) && tone(f)) || fs.find(want) || fs[0] || null;
+}
+const rvImg = (f, cls, style) => { const s = f && pbPubSrc(rvBrand(), f); return s?.url ? h("img", { className: cls, src: s.url, alt: base(f.name).replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " "), style }) : null; };
+const rvSlide = (tone, kids, cls) => h("div", { className: "a pp-rv" + (cls ? " " + cls : ""), "data-brand": rvBrand().id, style: { background: tone.ground, color: tone.ink } }, kids);
+const rvEyebrow = (n, label) => h("span", { className: "a-mono pp-rv-eyebrow" }, n ? `${String(n).padStart(2, "0")}  ${label}` : label);
+const sentences = (s) => String(s || "").match(/[^.!?]+[.!?]+/g)?.map((x) => x.trim()) || [];
+const quotes = (s) => [...String(s || "").matchAll(/["“]([^"”]{8,120})["”]/g)].map((m) => m[1]);
+
+function revealSlides(c) {
+  const T = rvTones(c), name = c.brand?.name || BRAND().name, out = [];
+  let n = 0;
+  let num = 0;
+  const add = (id, title, draw, numbered) => { const k = numbered ? ++n : 0; out.push({ id, title, draw: () => { num = k; return draw(); } }); };
+  // Cover
+  add("cover", "Cover", () => rvSlide(T.dark, [
+    h("div", { className: "pp-rv-top" }, rvImg(rvLogo(c, true), "pp-rv-logo") || h("span", { className: "a-mono" }, name), h("span", { className: "a-mono pp-rv-eyebrow" }, c.brand?.edition || "")),
+    h("div", { className: "pp-rv-foot" }, h("span", { className: "a-mono pp-rv-eyebrow" }, "Brand reveal"), h("h1", { className: "a-h pp-rv-giant" }, name),
+      c.character?.length ? h("div", { className: "pp-rv-tags" }, c.character.map((w) => h("span", { className: "a-tag" }, w))) : null)]));
+  // The idea: what the company is, in its own words, and the character it carries
+  const is = sentences(c.voice).find((x) => new RegExp(`^${name}\\b`, "i").test(x)) || sentences(c.voice)[0];
+  if (is || c.character?.length) add("idea", "The idea", () => rvSlide(T.light, [
+    rvEyebrow(num, "The idea"),
+    h("div", { className: "pp-rv-split" },
+      is ? h("p", { className: "a-h pp-rv-statement" }, is) : h("span"),
+      c.character?.length ? h("ul", { className: "pp-rv-words" }, c.character.map((w) => h("li", { className: "a-sub" }, w))) : null)]), true);
+  // Logo: the lockup on a light and a dark ground
+  if (c.logo || rvLogo(c, false)) add("logo", "Logo", () => h("div", { className: "a pp-rv pp-rv-halves", "data-brand": rvBrand().id },
+    h("div", { style: { background: T.light.ground, color: T.light.ink } }, rvEyebrow(num, "Logo"), rvImg(rvLogo(c, false), "pp-rv-biglogo")),
+    h("div", { style: { background: T.dark.ground, color: T.dark.ink } }, rvImg(rvLogo(c, true), "pp-rv-biglogo"),
+      c.logo?.rules?.[0] ? h("p", { className: "a-body pp-rv-note" }, String(c.logo.rules[0]).replace(/\s*\((?:p\.\s*)?\d[\d.,–\-\s]*\)/g, "").trim()) : null)), true);
+  // Colour: the palette as bars, the balance underneath
+  const groups = Object.entries(c.colour || {}).filter(([k, v]) => Array.isArray(v) && v.length && typeof v[0] === "object" && !["balance", "rules", "never"].includes(k));
+  if (groups.length) add("colour", "Colour", () => {
+    const bar = (hex, label, sub) => h("div", { className: "pp-rv-bar", style: { background: hex, color: pbPubDark(hex) ? "#fff" : "#111" } }, h("strong", null, label), h("span", null, sub || hex));
+    const rows = groups.slice(0, 2).map(([k, xs]) => h("div", { className: "pp-rv-bars" }, xs.flatMap((x) => x.hex ? [bar(x.hex, x.name)] : [x.light && bar(x.light, x.name, x.light), x.deep && bar(x.deep, "", x.deep)].filter(Boolean))));
+    const bal = c.colour.balance && Object.entries(c.colour.balance).filter(([, v]) => typeof v === "number");
+    return rvSlide(T.light, [h("div", { className: "pp-rv-top" }, rvEyebrow(num, "Colour"), bal?.length ? h("span", { className: "a-mono pp-rv-eyebrow" }, bal.map(([k, v]) => `${v}% ${k}`).join("  ·  ")) : null), h("div", { className: "pp-rv-palette" }, rows)], "pp-rv-colour");
+  }, true);
+  // Type: the families, big, with the headline style's own sample
+  const fams = Object.entries(c.type?.families || {});
+  if (fams.length) add("type", "Typography", () => {
+    const head = (c.type.styles || []).find((s) => /head/i.test(s.id || ""));
+    return rvSlide(T.light, [rvEyebrow(num, "Typography"),
+      h("div", { className: "pp-rv-split" },
+        h("b", { className: "a-h pp-rv-aa" }, "Aa"),
+        h("div", { className: "pp-rv-fams" }, fams.map(([k, f]) => h("div", null, h("span", { className: "a-sub", style: { fontFamily: pbPubFamVar(k) } }, f?.name || k), h("span", { className: "a-mono pp-rv-eyebrow" }, pbPubLabel(k)))),
+          head?.sample ? h("p", { className: "a-h pp-rv-sample" }, head.sample) : null))]);
+  }, true);
+  // Imagery: the guideline's own pictures, full bleed
+  const pics = pbPubFiles(rvBrand(), c, /imagery/i).filter((f) => { const s = pbPubSrc(rvBrand(), f); return s?.url && !s.mask && !/core-shape|pattern|texture|icon/i.test(f.name); })
+    .sort((a, b) => (/photo/i.test(b.name) ? 1 : 0) - (/photo/i.test(a.name) ? 1 : 0)).slice(0, 5);
+  if (pics.length) add("imagery", "Imagery", () => {
+    const look = c.imagery?.photography?.look || c.imagery?.look || [];
+    return rvSlide(T.dark, [h("div", { className: "pp-rv-grid", "data-n": String(pics.length) }, pics.map((f) => rvImg(f))),
+      h("div", { className: "pp-rv-over" }, rvEyebrow(num, "Imagery"), look.length ? h("div", { className: "pp-rv-tags" }, look.slice(0, 4).map((w) => h("span", { className: "a-tag" }, w))) : null)], "pp-rv-imagery");
+  }, true);
+  // Voice: lines in the brand's own words
+  const lines = quotes(c.voice);
+  if (lines.length) add("voice", "Voice", () => rvSlide(T.accent, [rvEyebrow(num, "Voice"),
+    h("div", { className: "pp-rv-quotes" }, h("p", { className: "a-h pp-rv-quote" }, `“${lines[0]}”`), lines.slice(1, 3).map((l) => h("p", { className: "a-sub pp-rv-line" }, `“${l}”`))),
+    sentences(c.voice).find((x) => /^copy is/i.test(x)) ? h("p", { className: "a-body pp-rv-note" }, sentences(c.voice).find((x) => /^copy is/i.test(x))) : null]), true);
+  // Your brand in use: one slide per scene
+  const used = (c.inUse || []).filter((u) => u.image);
+  used.forEach((u, i) => add("use-" + u.id, u.name, () => h("div", { className: "a pp-rv pp-rv-use", "data-brand": rvBrand().id, style: { background: T.light.ground, color: T.light.ink } },
+    h("img", { src: u.image, alt: u.name }),
+    h("div", { className: "pp-rv-usecap" }, i === 0 ? rvEyebrow(num, "Your brand in use") : h("span", { className: "a-mono pp-rv-eyebrow" }, "Your brand in use"), h("strong", null, u.name), h("span", null, u.caption))), i === 0));
+  // What's next: keep Primary as the brand team
+  add("next", "What’s next", () => rvSlide(T.dark, [
+    h("div", { className: "pp-rv-top" }, rvImg(rvLogo(c, true), "pp-rv-logo") || h("span", { className: "a-mono" }, name), h("span", { className: "a-mono pp-rv-eyebrow" }, "What’s next")),
+    h("div", { className: "pp-rv-foot" },
+      h("h2", { className: "a-h pp-rv-headline" }, "Keep us as your\nbrand team."),
+      h("div", { className: "pp-rv-cols" }, OFFER.map(([t, d]) => h("div", null, h("strong", { className: "a-sub" }, t), h("p", { className: "a-body" }, d)))))], "pp-rv-next"));
+  return out;
+}
+const OFFER = [
+  ["Ask in plain words", "A post, a slide, a banner. Say what you need and where it goes, the way you’d brief a designer."],
+  ["Designed and checked", "Every piece is made in your brand and reviewed by the designers who built it. You get a recommendation and an alternative."],
+  ["Approve and download", "Approve in a click, ask for a change in words, and keep everything in one place."],
+];
+
+// One slide drawn at 1600×900 and scaled to whatever holds it.
+function rvFit(holder) {
+  const s = holder?.firstElementChild; if (!s) return;
+  const k = Math.min(holder.clientWidth / RV_W, holder.clientHeight / RV_H) || 0;
+  s.style.transform = `translate(${(holder.clientWidth - RV_W * k) / 2}px, ${(holder.clientHeight - RV_H * k) / 2}px) scale(${k})`;
+}
+const rvFitAll = () => document.querySelectorAll(".pp-stage-fit").forEach(rvFit);
+addEventListener("resize", rvFitAll);
+const rvCache = new Map();
+function rvNode(slides, i) {
+  const key = (S.clientMeta?.assetId || S.clientFrom || "") + ":" + (S.client?.version || "") + ":" + i;
+  if (!rvCache.has(key)) { try { rvCache.set(key, slides[i].draw()); } catch (e) { rvCache.set(key, h("div", { className: "pp-rv", style: { background: "#eee" } })); } }
+  return rvCache.get(key).cloneNode(true);
+}
+function rvGo(i, slides) {
+  S.rv = Math.max(0, Math.min(slides.length - 1, i));
+  if (S.rv === slides.length - 1) store.set("pp-reveal-seen", "1");
+  if (document.querySelector(".pp-present")) presentDraw(); else render();
+}
+function viewReveal() {
+  const c = S.client, slides = c ? revealSlides(c) : [];
+  S.rv = Math.min(S.rv || 0, Math.max(0, slides.length - 1));
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Brand reveal" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Brand reveal"),
+      h("ul", { className: "pb-raillist" }, railItem("Present", undefined, false, () => present(), h("span", { className: "pb-railitem-lead" }, icon("play"))))),
+    slides.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Slides")),
+      h("ul", { className: "pb-raillist" }, slides.map((s, i) => railItem(s.title, i + 1, i === S.rv, () => rvGo(i, slides))))) : null,
+    h("p", { className: "pb-railnote pb-railfoot" }, c ? versionLine() + "." : "Loading…"));
+  const stage = h("div", { className: "pp-stage" }, h("div", { className: "pp-stage-fit" }, slides.length ? rvNode(slides, S.rv) : null));
+  const main = h(FRAG, null,
+    pagehead(null, "Brand reveal", `${BRAND().name}, start to finish. Present it in the final sprint meeting, or come back to it any time.`),
+    !c ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading…" : "Not ready yet"), h("p", null, "The reveal shows here once Primary publishes the brand book.")) : h(FRAG, null,
+      stage,
+      h("div", { className: "pp-stage-bar" },
+        btn({ label: "Previous slide", icon: "chevronLeft", variant: "ghost", iconOnly: true, disabled: S.rv === 0, onClick: () => rvGo(S.rv - 1, slides) }),
+        h("span", { className: "pp-note", "aria-live": "polite" }, `${S.rv + 1} / ${slides.length} · ${slides[S.rv].title}`),
+        btn({ label: "Next slide", icon: "chevronRight", variant: "ghost", iconOnly: true, disabled: S.rv === slides.length - 1, onClick: () => rvGo(S.rv + 1, slides) }),
+        h("span", { className: "pp-grow" }),
+        btn({ label: "Present", icon: "play", variant: "primary", onClick: () => present() })),
+      S.rv === slides.length - 1 ? offerBlock() : null));
+  setTimeout(rvFitAll, 0);
+  return [rail, main, "Brand reveal", true];
+}
+// Presenting: the slides full screen, arrows and space to move, Esc to leave.
+function present() {
+  if (!S.client || document.querySelector(".pp-present")) return;
+  const o = h("div", { className: "pp-present", role: "dialog", "aria-label": "Brand reveal", tabIndex: -1 });
+  document.body.append(o);
+  o.requestFullscreen?.().catch(() => {});
+  presentDraw(); o.focus();
+}
+function presentDraw() {
+  const o = document.querySelector(".pp-present"); if (!o) return;
+  const slides = revealSlides(S.client), i = S.rv;
+  const fit = h("div", { className: "pp-stage-fit" }, rvNode(slides, i));
+  const bar = h("div", { className: "pp-present-bar graphical-theme", "data-color-mode": "dark", style: THEME.dark },
+    btn({ label: "Previous slide", icon: "chevronLeft", variant: "ghost", iconOnly: true, disabled: i === 0, onClick: () => rvGo(i - 1, slides) }),
+    h("span", { className: "pp-note" }, `${i + 1} / ${slides.length}`),
+    btn({ label: "Next slide", icon: "chevronRight", variant: "ghost", iconOnly: true, disabled: i === slides.length - 1, onClick: () => rvGo(i + 1, slides) }),
+    btn({ label: "Close", icon: "x", variant: "ghost", iconOnly: true, onClick: () => closePresent() }));
+  o.replaceChildren(fit, bar);
+  fit.addEventListener("click", (e) => { const r = fit.getBoundingClientRect(); rvGo(e.clientX > r.left + r.width / 3 ? i + 1 : i - 1, slides); });
+  requestAnimationFrame(() => rvFit(fit));
+}
+function closePresent() {
+  document.querySelector(".pp-present")?.remove();
+  if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
+  render();
+}
+addEventListener("keydown", (e) => {
+  if (!document.querySelector(".pp-present") && !(S.view === "reveal" && !e.target.closest?.("input, textarea, button"))) return;
+  if (!S.client) return;
+  const slides = revealSlides(S.client);
+  if (e.key === "ArrowRight" || e.key === "PageDown" || (e.key === " " && document.querySelector(".pp-present"))) { e.preventDefault(); rvGo((S.rv || 0) + 1, slides); }
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); rvGo((S.rv || 0) - 1, slides); }
+  else if (e.key === "Escape" && document.querySelector(".pp-present")) closePresent();
+});
+document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && document.querySelector(".pp-present")) closePresent(); else requestAnimationFrame(rvFitAll); });
+
+/* ---------- Plan ---------- */
+/* Manual activation by the studio (the brief's v1): the studio sets the plan here; the client sees what it includes and
+   asks about one. Every sprint client starts with a few requests to try the service before paying. */
+const PLAN_DEFAULT = { status: "starter", starter: 3, allowance: 10, name: "Brand team" };
+const INCLUDES = [
+  "A monthly allowance of assets: social posts, slides, banners and more",
+  "Every option made in your brand and reviewed by Primary’s designers",
+  "A recommendation and an alternative for routine work; distinct directions for new moments",
+  "Your brand kept consistent as it grows, with the rules updated as we learn",
+  "Ideas from us for the moments ahead: a launch, a raise, an event",
+];
+const planOf = () => ({ ...PLAN_DEFAULT, ...(S.plan || {}) });
+function planUse() {
+  const p = planOf(), mine = S.requests.filter((r) => !r.oneOff);
+  if (p.status === "active") { const m = new Date(); const used = mine.filter((r) => { const d = new Date(r.at); return d.getMonth() === m.getMonth() && d.getFullYear() === m.getFullYear(); }).length; return { p, used, total: +p.allowance || 0, left: Math.max(0, (+p.allowance || 0) - used) }; }
+  if (p.status === "starter") { const used = mine.length; return { p, used, total: +p.starter || 0, left: Math.max(0, (+p.starter || 0) - used) }; }
+  return { p, used: 0, total: 0, left: 0 };
+}
+const planLine = () => {
+  const { p, left, total } = planUse();
+  return p.status === "active" ? `${p.name || "Plan"}: ${left} of ${plural(total, "request")} left this month` : p.status === "starter" ? `Starter: ${left} of ${plural(total, "request")} left` : "No plan yet";
+};
+const myAsk = () => S.asks.find((a) => a.by && a.by === S.me && !a.done);
+async function askAboutPlan(b, note) {
+  if (!db) { flash(b, "Sign in first"); return; }
+  try { await db.collection("planasks").doc().set({ at: Date.now(), by: S.me || null, note: note || "", done: false }); S.planNote = "Thanks. Primary will be in touch about a plan."; render(); }
+  catch { flash(b, "Didn’t send. Try again"); }
+}
+function offerBlock(compact) {
+  const asked = myAsk();
+  return h("div", { className: "pp-offer" + (compact ? " is-compact" : "") },
+    h("div", { className: "pp-offer-head" }, h("h2", null, "Keep Primary as your brand team"), h("p", null, "Ask for what you need in plain words. Primary designs it in your brand, reviews it, and sends it back to approve.")),
+    h("ul", { className: "pp-offer-list" }, INCLUDES.map((t) => h("li", null, icon("check"), h("span", null, t)))),
+    h("div", { className: "pb-kit-actions" },
+      asked || S.planNote ? h("span", { className: "pp-note", role: "status" }, S.planNote || `You asked about a plan ${fmtWhen(asked.at)}. Primary will be in touch.`)
+        : btn({ label: "Talk to Primary about a plan", icon: "message", variant: "primary", onClick: (e) => askAboutPlan(e.currentTarget) }),
+      planUse().left > 0 && !studio() ? btn({ label: planUse().p.status === "starter" ? `Try a request (${planUse().left} included)` : "Request assets", icon: "plus", onClick: () => go("new") }) : null));
+}
+function viewPlan() {
+  const { p, left, total, used } = planUse();
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Plan" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Plan"), h("ul", { className: "pb-raillist" }, railItem(p.status === "active" ? p.name || "Plan" : p.status === "starter" ? "Starter" : "No plan", total ? `${left}/${total}` : undefined, true, () => {}))),
+    h("p", { className: "pb-railnote pb-railfoot" }, "Your brand book, files and past work stay yours, with or without a plan."));
+  const studioBox = studio() ? h("div", { className: "pp-block pp-studio" }, h("h2", null, "Studio"),
+    h("div", { className: "pb-seg", role: "group", "aria-label": "Plan status" }, [["starter", "Starter"], ["active", "Plan"], ["none", "No plan"]].map(([k, l]) =>
+      h("button", { type: "button", className: "pb-pill", "aria-pressed": p.status === k ? "true" : "false", style: "background:none", onClick: () => setPlan({ status: k }) }, l))),
+    h("div", { className: "pp-field-row" },
+      planField("Plan name", "name", p.name, "text"), planField("Requests a month", "allowance", p.allowance, "number"), planField("Starter requests", "starter", p.starter, "number")),
+    S.asks.length ? h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, "Asked about a plan"),
+      h("ul", { className: "pp-history" }, S.asks.map((a) => h("li", null, h("strong", null, `${who(a.by)}, ${fmtWhen(a.at)}`), a.note ? a.note : null,
+        a.done ? h("span", null, "Followed up") : btn({ label: "Mark followed up", icon: "check", variant: "ghost", onClick: () => db.doc("planasks/" + a.id).update({ done: true }).catch(() => {}) }))))) : h("p", { className: "pp-note" }, "No one has asked about a plan yet.")) : null;
+  const main = h(FRAG, null,
+    pagehead(null, "Plan", p.status === "active" ? `${p.name || "Your plan"}. ${plural(left, "request")} left this month, ${used} used.` : p.status === "starter" ? `Your sprint includes ${plural(total, "request")} to try the service. ${left} left.` : "Your brand book, files and past work are yours to keep. New requests need a plan."),
+    studioBox, studio() ? h("p", { className: "pp-note" }, "What the client sees") : null, offerBlock(true));
+  return [rail, main, "Plan", false];
+}
+const planField = (label, key, value, type) => {
+  const id = "pp-plan-" + key, i = h("input", { id, className: "pp-input", type, min: type === "number" ? 0 : undefined, max: type === "number" ? 999 : undefined, maxlength: 40 });
+  i.value = value ?? ""; i.addEventListener("change", () => setPlan({ [key]: type === "number" ? Math.max(0, Math.min(999, Math.round(+i.value || 0))) : i.value.trim().slice(0, 40) }));
+  return h("div", { className: "pb-q" }, h("label", { htmlFor: id }, label), i);
+};
+async function setPlan(patch) {
+  if (!db || !studio()) return;
+  try { await db.doc("portal/plan").set({ ...planOf(), ...patch, updatedAt: Date.now(), by: S.me || null }); } catch { S.planNote = "That didn’t save. Try again."; render(); }
+}
+
 /* ---------- Files ---------- */
 const isImgData = (f) => typeof f.data === "string" && /^data:image\//.test(f.data);
 function viewFiles() {
@@ -526,6 +845,14 @@ function viewFiles() {
 /* ---------- Requests ---------- */
 const CHANNELS = ["LinkedIn", "Instagram", "X", "Website", "Email", "Deck", "Print", "Other"];
 const saveDraft = () => store.set("pp-draft", JSON.stringify(S.draft));
+// Upgrade prompts only at natural moments: the starter requests running out, or a plan's allowance running low.
+function allowanceNote() {
+  if (studio()) return null;
+  const { p, left } = planUse();
+  if (left <= 0) return h(FRAG, null, offerBlock(true), h("ul", { className: "pp-status" }, h("li", null, p.status === "active" ? "This month’s requests are used. You can still send this one as a one-off; Primary confirms the price before starting." : "You can still send this as a one-off; Primary confirms the price before starting.")));
+  if (left === 1) return h("ul", { className: "pp-status" }, h("li", null, p.status === "starter" ? "This is your last included request. " : "One request left this month. ", h("button", { type: "button", className: "pp-link", onClick: () => go("plan") }, "See what a plan includes")));
+  return null;
+}
 function viewNew() {
   const d = S.draft, formats = S.client?.formats || [];
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Start from a format" },
@@ -555,6 +882,7 @@ function viewNew() {
   const main = h(FRAG, null,
     pagehead(`${BRAND().name} · Requests`, "Request assets", "Tell the studio what you need. Options come back here for you to approve."),
     !db ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Sign in to send requests"), h("p", null, "Requests are shared with the studio, so they need you signed in to Claude.")) :
+      h(FRAG, null, allowanceNote(),
       h("div", { className: "pb-form" },
         h("section", { className: "pb-form-section" }, h("h2", null, "What do you need?"),
           d.format ? h("div", { className: "pp-row" }, h("span", { className: "pb-chip", "data-kind": "check" }, `${d.format.name} · ${d.format.kind}`),
@@ -566,7 +894,7 @@ function viewNew() {
           h("div", { className: "pp-field-row" },
             h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-due" }, h("span", { className: "pb-q-n" }, "3"), "Needed by (optional)"), due),
             h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "4"), " A photo to work from (optional)"), photo))),
-        h("div", { className: "pb-kit-actions" }, sendB, hint)));
+        h("div", { className: "pb-kit-actions" }, sendB, hint))));
   upd();
   return [rail, main, "Request assets", true];
 }
@@ -582,7 +910,8 @@ async function sendRequest() {
   S.sendBusy = true; S.sendErr = ""; render();
   try {
     const ref = db.collection("requests").doc(); const at = Date.now();
-    await ref.set({ what: d.what.trim(), channels: d.channels, due: d.due || null, photo: d.photo || null, format: d.format || null, status: "received", at, updatedAt: at, by: S.me || null, delivery: null, notes: [] });
+    const oneOff = !studio() && planUse().left <= 0;
+    await ref.set({ what: d.what.trim(), channels: d.channels, due: d.due || null, photo: d.photo || null, format: d.format || null, status: "received", at, updatedAt: at, by: S.me || null, delivery: null, notes: [], ...(oneOff ? { oneOff: true } : {}) });
     S.draft = { what: "", channels: [], due: "", photo: null, format: null }; saveDraft();
     S.detailNote[ref.id] = "Sent. The studio has your request.";
     S.sendBusy = false; go("request", ref.id);
@@ -759,6 +1088,9 @@ render();
   }, () => {});
   /* requests */
   const reqTimer = setTimeout(() => { if (S.reqState === "loading") { S.reqState = "slow"; render(); } }, 10000);
+  /* the plan the studio set, and asks about one */
+  db.doc("portal/plan").onSnapshot((snap) => { S.plan = snap.exists ? snap.data() : null; render(); }, () => {});
+  db.collection("planasks").orderBy("at", "desc").onSnapshot((snap) => { S.asks = snap.docs.map((x) => ({ id: x.id, ...x.data() })); render(); }, () => {});
   db.collection("requests").orderBy("at", "desc").onSnapshot((snap) => {
     S.requests = snap.docs.map((x) => ({ id: x.id, ...x.data() }));
     if (!snap.fromCache) { clearTimeout(reqTimer); S.reqState = "ok"; } else if (S.reqState === "loading") S.reqState = "ok";
@@ -768,7 +1100,7 @@ render();
 })();
 async function resolveNames() {
   if (!userCap?.profiles) return;
-  const ids = [...new Set(S.requests.flatMap((r) => [r.by, r.delivery?.by, ...(r.notes || []).map((n) => n.by)]).filter((x) => x && x !== S.me && !(x in S.names)))];
+  const ids = [...new Set([...S.requests.flatMap((r) => [r.by, r.delivery?.by, ...(r.notes || []).map((n) => n.by)]), ...S.asks.map((a) => a.by)].filter((x) => x && x !== S.me && !(x in S.names)))];
   if (!ids.length) return;
   try { const ps = await userCap.profiles(ids); for (const id of ids) S.names[id] = ps?.[id]?.name || ""; render(); } catch {}
 }

@@ -7,7 +7,7 @@ import * as E from './engine/index.js';
 import { Btn, ICON, SlideView, TextField, type Brand, type Params, type Save, type Tpl } from './ui';
 
 export type Pres = { product: string; person: string; role: string; phone: string };
-const KEY = (id: string) => `primary-presence-${id}`;
+export const KEY = (id: string) => `primary-presence-${id}`;
 
 // Per brand, per browser: what kind of product it is, and whose signature to show. Brands start from their own record.
 export function usePresence(brand: Brand): [Pres, (patch: Partial<Pres>) => void] {
@@ -31,7 +31,7 @@ const paramsOf = (brand: Brand, id: string, pres: Pres): Params => {
 };
 
 // Render a layout off screen and hand back its PNG.
-async function renderPNG(t: Tpl, p: Params, scale = 1): Promise<Blob> {
+export async function renderPNG(t: Tpl, p: Params, scale = 1): Promise<Blob> {
   const holder = document.createElement('div');
   holder.style.cssText = 'position:fixed;left:-100000px;top:0;pointer-events:none';
   document.body.appendChild(holder);
