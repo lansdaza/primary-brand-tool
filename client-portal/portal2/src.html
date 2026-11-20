@@ -137,6 +137,180 @@
 .pp-link{padding:0;border:0;background:none;color:var(--neutral-10);font:inherit;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
 @media (max-width:640px){.pp-stage-bar .pp-note{font-size:var(--size-xs)}.pp-offer{padding:var(--space-m)}}
 .pp-galmini figure.is-photo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover}
+/* ---------- v1.1: home, review, library ---------- */
+.pb-page--book .pb-pb-sec{content-visibility:auto;contain-intrinsic-size:auto 900px}
+.pp-grow{flex:1}
+.pp-gap{height:var(--space-l)}
+.pp-av{flex:none;display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:var(--radius-full);background:var(--neutral-10);color:var(--neutral-1);font:var(--weight-ui-medium) var(--size-xxs)/1 var(--font-ui);letter-spacing:.02em}
+.pp-card{display:flex;flex-direction:column;gap:var(--space-s);padding:var(--space-m);border-radius:var(--radius-m);background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line);min-width:0}
+.pp-card>h2{margin:0;font:var(--weight-ui-medium) var(--size-s)/var(--line-s) var(--font-ui)}
+/* home */
+.pp-hero{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-xl);min-height:clamp(15rem,32vw,22rem);padding:clamp(1.25rem,3.5vw,2.5rem);border-radius:var(--radius-m);overflow:hidden}
+.pp-hero-top{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m)}
+.pp-hero-logo{display:block;height:clamp(1.5rem,3vw,2.25rem);width:auto;max-width:14rem;object-fit:contain;object-position:left center}
+.pp-hero-by{font-size:.72rem;opacity:.7;letter-spacing:.06em;text-transform:uppercase}
+.pp-hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-l);flex-wrap:wrap}
+.pp-hero-title{margin:0;max-width:16ch;font-size:clamp(2rem,5vw,3.75rem);line-height:1.02}
+.pp-hero-meet{display:flex;flex-direction:column;gap:2px;padding:var(--space-s) var(--space-m);border-radius:var(--radius-s);background:color-mix(in srgb,currentColor 10%,transparent);font:var(--size-xs)/1.35 var(--font-ui)}
+.pp-hero-meet .a-mono{font-size:.68rem;opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+.pp-hero-meet strong{font-size:var(--size-s);font-weight:var(--weight-ui-medium)}
+.pp-steps{list-style:none;margin:var(--space-m) 0 var(--space-l);padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-xxs)}
+.pp-steps li{display:flex;align-items:center;gap:var(--space-xs);padding:var(--space-xs) 0 0;box-shadow:inset 0 2px 0 var(--pb-line);color:var(--pb-sub);font-size:var(--size-xs);min-width:0}
+.pp-steps li>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-steps li[data-state=done]{box-shadow:inset 0 2px 0 var(--neutral-10);color:var(--pb-body)}
+.pp-steps li[data-state=now]{box-shadow:inset 0 2px 0 var(--neutral-10);color:var(--neutral-10);font-weight:var(--weight-ui-medium)}
+.pp-step-dot{flex:none;display:grid;place-items:center;width:1.25rem;height:1.25rem;border-radius:var(--radius-full);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line);font-size:var(--size-xxs);font-variant-numeric:tabular-nums}
+.pp-step-dot .lucide{width:12px;height:12px}
+.pp-steps li[data-state=done] .pp-step-dot,.pp-steps li[data-state=now] .pp-step-dot{background:var(--neutral-10);color:var(--neutral-1);box-shadow:none}
+.pp-homegrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--space-m);align-items:start}
+.pp-homecol{display:flex;flex-direction:column;gap:var(--space-m);min-width:0}
+.pp-waitlist,.pp-actlist,.pp-team,.pp-teamedit{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.pp-waitlist button,.pp-actlist button{width:100%;display:flex;align-items:center;gap:var(--space-s);padding:var(--space-xs);margin:0 calc(-1 * var(--space-xs));border:0;border-radius:var(--radius-s);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;box-sizing:content-box}
+.pp-waitlist button:hover,.pp-actlist button:hover{background:var(--pb-hover)}
+.pp-waitlist img{flex:none;width:3rem;height:3rem;object-fit:cover;border-radius:var(--radius-s);background:var(--pb-ground)}
+.pp-waitdot{flex:none;width:.5rem;height:.5rem;margin:0 .25rem;border-radius:var(--radius-full);background:var(--neutral-10)}
+.pp-waitlist button>span:not(.pp-av):not(.pp-waitdot),.pp-actlist button>span:not(.pp-av),.pp-team li>span:not(.pp-av){flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.pp-waitlist strong{font-weight:var(--weight-ui-medium);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-waitlist small,.pp-actlist small,.pp-team small{color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-waitlist .lucide{color:var(--pb-sub)}
+.pp-actlist li{position:relative}
+.pp-actlist li[data-new]::after{content:"";position:absolute;right:0;top:50%;width:.45rem;height:.45rem;margin-top:-.22rem;border-radius:var(--radius-full);background:var(--neutral-10)}
+.pp-actlist button>span>span{color:var(--pb-body);overflow-wrap:anywhere}
+.pp-actlist strong{color:var(--neutral-10);font-weight:var(--weight-ui-medium)}
+.pp-team li{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-xs) 0}
+.pp-team strong{font-weight:var(--weight-ui-medium)}
+.pp-meter{height:.4rem;border-radius:var(--radius-full);background:var(--pb-hover);overflow:hidden}
+.pp-meter i{display:block;height:100%;background:var(--neutral-10);border-radius:inherit}
+.pp-plancard .pp-link{align-self:flex-start}
+.pp-projstudio{margin:0 0 var(--space-m)}
+.pp-projstudio>summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-xs) var(--space-s);cursor:pointer;list-style:none}
+.pp-projstudio>summary::-webkit-details-marker{display:none}
+.pp-projstudio[open]>summary{margin-bottom:var(--space-s)}
+.pp-teamedit{gap:var(--space-xs)}
+.pp-teamedit li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:var(--space-xs);align-items:center}
+.pp-inviteform{display:flex;flex-direction:column;gap:var(--space-xs);padding-top:var(--space-xs);box-shadow:inset 0 var(--border-s) 0 var(--pb-line)}
+.pp-locked{align-items:center;text-align:center}
+.pp-locked>.lucide{width:24px;height:24px;color:var(--pb-sub)}
+/* request form */
+.pp-examples{display:flex;flex-direction:column;gap:var(--space-xs)}
+.pp-examples .pb-pill{cursor:pointer}
+.pp-examples .pb-pill:hover{background:var(--pb-hover)}
+.pp-likecard{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-xs);border-radius:var(--radius-m);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-likecard img{flex:none;width:4rem;height:4rem;object-fit:cover;border-radius:var(--radius-s);background:var(--pb-ground)}
+.pp-likecard>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pp-likecard strong{font-weight:var(--weight-ui-medium);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-usechip{display:inline-flex;align-items:center;gap:4px;height:1.75rem;padding:0 var(--space-xxs) 0 var(--space-s);border-radius:var(--radius-full);background:var(--neutral-10);color:var(--neutral-1);font:var(--weight-ui-medium) var(--size-xs)/1 var(--font-ui)}
+.pp-usechip:not(:has(button)){padding-right:var(--space-s)}
+.pp-usechip button{display:grid;place-items:center;width:1.25rem;height:1.25rem;padding:0;border:0;border-radius:var(--radius-full);background:none;color:inherit;cursor:pointer}
+.pp-usechip button:hover{background:color-mix(in srgb,currentColor 20%,transparent)}
+.pp-usechip .lucide{width:12px;height:12px}
+.pp-refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr));gap:var(--space-xs)}
+.pp-refs figure{position:relative;margin:0;aspect-ratio:1;border-radius:var(--radius-s);overflow:hidden;background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-refs img{width:100%;height:100%;object-fit:cover;display:block}
+.pp-refx{position:absolute;top:4px;right:4px;display:grid;place-items:center;width:1.5rem;height:1.5rem;padding:0;border:0;border-radius:var(--radius-full);background:rgba(0,0,0,.6);color:#fff;cursor:pointer}
+.pp-refx .lucide{width:12px;height:12px}
+.pp-refadd{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-xxs);aspect-ratio:1;padding:var(--space-xs);border:0;border-radius:var(--radius-s);background:none;box-shadow:inset 0 0 0 var(--border-s) var(--pb-line);color:var(--pb-sub);font:var(--weight-ui-medium) var(--size-xs)/1.2 var(--font-ui);cursor:pointer;outline-offset:2px}
+.pp-refadd:hover{color:var(--neutral-10);box-shadow:inset 0 0 0 var(--border-s) var(--neutral-6)}
+/* request status, as steps */
+.pp-reqsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:14rem}
+.pp-reqsteps li i{display:block;height:3px;border-radius:2px;background:var(--pb-line)}
+.pp-reqsteps li[data-state=done] i,.pp-reqsteps li[data-state=now] i{background:var(--neutral-10)}
+.pp-reqsteps.is-big{max-width:none;gap:var(--space-xs);margin:calc(-1 * var(--space-s)) 0 var(--space-l)}
+.pp-reqsteps.is-big li{display:flex;flex-direction:column;gap:var(--space-xs);font-size:var(--size-xs);color:var(--pb-sub)}
+.pp-reqsteps.is-big li[data-state=now]{color:var(--neutral-10);font-weight:var(--weight-ui-medium)}
+.pp-reqrow{grid-template-columns:3.5rem minmax(0,1fr)!important}
+.pp-rowthumb{width:3.5rem;height:3.5rem;border-radius:var(--radius-s);overflow:hidden;background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-rowthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.pp-rowthumb.is-empty{display:grid;place-items:center;color:var(--pb-sub)}
+.pp-readygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:var(--space-s)}
+.pp-readycard{display:flex;flex-direction:column;padding:0;border:0;border-radius:var(--radius-m);background:var(--pb-panel);box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10);color:inherit;font:inherit;text-align:left;cursor:pointer;overflow:hidden}
+.pp-readymedia{display:grid;place-items:center;aspect-ratio:16/10;background:var(--pb-ground);color:var(--pb-sub)}
+.pp-readymedia img{width:100%;height:100%;object-fit:cover}
+.pp-readybody{display:flex;flex-direction:column;gap:2px;padding:var(--space-s) var(--space-m) var(--space-m)}
+.pp-readybody strong{font-weight:var(--weight-ui-medium)}
+.pp-readybody>span{color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-readycta{display:inline-flex!important;align-items:center;gap:2px;margin-top:var(--space-xs);color:var(--neutral-10)!important;font-weight:var(--weight-ui-medium)}
+.pp-readycard:hover .pp-readycta{text-decoration:underline;text-underline-offset:.2em}
+/* review */
+.pp-compare{display:grid;grid-template-columns:repeat(var(--n,1),minmax(0,1fr));gap:var(--space-s)}
+.pp-compare[data-n="2"]{--n:2}.pp-compare[data-n="3"]{--n:3}
+.pp-cmpcard{padding:var(--space-s)}
+.pp-cmpcard .pp-opt-head{justify-content:flex-start}
+.pp-cmpcard .pp-opt-head>:last-child:not(:nth-child(2)),.pp-cmpcard .pp-opt-head>.themed-button{margin-left:auto}
+.pp-opt[data-approved]{box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10)}
+.pp-cmpmedia{display:flex;align-items:center;justify-content:center;min-height:12rem;padding:var(--space-s);border-radius:var(--radius-s);background:var(--pb-ground)}
+.pp-cmpmedia video{width:100%;max-height:70vh}
+.pp-pinwrap{position:relative;display:inline-block;max-width:100%;line-height:0;cursor:zoom-in}
+.pp-pinwrap img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;border-radius:var(--radius-xs);user-select:none;-webkit-user-select:none}
+.pp-pinwrap.is-pinning{cursor:crosshair}
+.pp-pinwrap.is-pinning::after{content:"";position:absolute;inset:0;border-radius:var(--radius-xs);box-shadow:0 0 0 2px var(--neutral-10);pointer-events:none}
+.pp-pin{position:absolute;display:grid;place-items:center;width:1.6rem;height:1.6rem;margin:-.8rem 0 0 -.8rem;border-radius:50% 50% 50% 0;background:var(--neutral-10);color:var(--neutral-1);box-shadow:0 0 0 2px var(--neutral-1),0 4px 10px rgba(0,0,0,.25);font:var(--weight-ui-medium) .7rem/1 var(--font-ui);line-height:1;pointer-events:auto}
+.pp-pin.is-draft{background:#E5484D;color:#fff}
+.pp-pin.is-done{opacity:.45}
+.pp-pin.is-static{position:static;margin:0;flex:none;box-shadow:none}
+.pp-pinlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-xs)}
+.pp-pinlist li{display:flex;align-items:flex-start;gap:var(--space-xs);font-size:var(--size-xs);color:var(--neutral-10)}
+.pp-pinlist li>span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;overflow-wrap:anywhere}
+.pp-pinlist small{color:var(--pb-sub)}
+.pp-pinlist li[data-done]>span:nth-child(2){color:var(--pb-sub);text-decoration:line-through}
+.pp-pinlist.is-draft textarea{flex:1;min-width:0}
+.pp-why{margin:0;display:flex;flex-direction:column;gap:2px;color:var(--neutral-10);font-size:var(--size-s);line-height:var(--line-s)}
+.pp-why span{color:var(--pb-sub);font-size:var(--size-xs);font-weight:var(--weight-ui-medium)}
+.pp-from{display:flex;gap:var(--space-s);align-items:flex-start}
+.pp-changebox{padding:var(--space-m);border-radius:var(--radius-m);box-shadow:inset 0 0 0 var(--border-l) var(--neutral-10)}
+.pp-changebox .pp-note{display:flex;align-items:center;gap:4px}
+.pp-changebox .pp-note .lucide{width:14px;height:14px}
+.pp-actbar{margin:calc(-1 * var(--space-m)) 0 var(--space-xl)}
+.pp-phoneonly{display:none!important}
+[data-color-mode=dark] .pp-hero{box-shadow:inset 0 0 0 var(--border-s) var(--pb-line)}
+.pp-actbar-in{display:flex;flex-wrap:wrap;gap:var(--space-xs)}
+.pp-railhist{padding:0 var(--space-xs)}
+.pp-histtext{color:var(--pb-body)!important;white-space:pre-wrap}
+.pp-lightbox{position:fixed;inset:0;z-index:10001;display:flex;flex-direction:column;background:rgba(10,10,10,.94);color:#f4f3f0;outline:none}
+.pp-lightbox-bar{display:flex;align-items:center;gap:var(--space-xs);padding:var(--space-s) var(--space-m)}
+.pp-lightbox-bar strong{font:var(--weight-ui-medium) var(--size-s)/1 var(--font-ui)}
+.pp-lightbox-stage{flex:1;min-height:0;display:grid;place-items:center;padding:0 var(--space-m) var(--space-l)}
+.pp-lightbox .pp-pinwrap{cursor:default}
+.pp-lightbox .pp-pinwrap img{max-width:min(92vw,1600px);max-height:calc(100svh - 7rem)}
+.pp-toast{position:fixed;left:50%;bottom:var(--space-l);transform:translateX(-50%);z-index:10002;padding:var(--space-xs) var(--space-m);border-radius:var(--radius-full);background:var(--neutral-1, #111);color:var(--neutral-10, #fff);font:var(--weight-ui-medium) var(--size-xs)/1.4 var(--font-ui);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.pp-toast[data-color-mode=dark]{background:#1b1b1b;color:#f4f3f0}
+.pp-toast[data-color-mode=light]{background:#f4f3f0;color:#1b1b1b}
+/* library */
+.pp-libtools{margin-bottom:var(--space-m);max-width:24rem}
+.pp-libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:var(--space-m)}
+.pp-libcard{display:flex;flex-direction:column;gap:var(--space-xs);min-width:0}
+.pp-libmedia{display:grid;place-items:center;aspect-ratio:4/3;padding:0;border:0;border-radius:var(--radius-m);overflow:hidden;background:var(--pb-ground);box-shadow:inset 0 0 0 var(--border-s) var(--pb-line);cursor:pointer}
+.pp-libmedia img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.pp-libmedia:hover img{transform:scale(1.02)}
+.pp-libbody{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pp-libbody strong{font-weight:var(--weight-ui-medium);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-libbody span{color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-libcard .pp-row{gap:0;margin-left:calc(-1 * var(--space-xs))}
+/* brand book, joined to the work */
+.pb-pb-sechead{flex-wrap:wrap}
+.pp-secacts{display:flex;gap:2px;margin-left:auto}
+.pp-copyable{cursor:copy;border-radius:var(--radius-s);outline-offset:2px}
+.pp-copyable:hover .pb-pb-chip,.pp-copyable:hover{filter:brightness(.97)}
+.pp-changes{display:flex;flex-direction:column;gap:var(--space-xs);margin-bottom:var(--space-l);padding:var(--space-m);border-radius:var(--radius-m);background:var(--pb-hover)}
+.pp-changes>div:first-child{display:flex;align-items:baseline;gap:var(--space-s)}
+.pp-changes strong{font-weight:var(--weight-ui-medium)}
+.pp-changes small{color:var(--pb-sub);font-size:var(--size-xs)}
+.pp-changes ul{margin:0;padding-left:var(--space-m);color:var(--pb-body)}
+.pp-changes .themed-button{align-self:flex-start}
+@media(max-width:60rem){
+  .pp-homegrid{grid-template-columns:1fr}
+  .pp-steps{grid-template-columns:repeat(5,minmax(4.5rem,1fr));overflow-x:auto}
+  .pp-compare,.pp-compare[data-n]{grid-template-columns:1fr}
+  .pp-actbar{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:var(--space-s) var(--space-m) calc(var(--space-s) + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--pb-panel) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 var(--border-s) 0 var(--pb-line)}
+  .pp-phoneonly{display:revert!important}
+  .themed-button.pp-phoneonly{display:inline-flex!important}
+  .pp-deskonly{display:none!important}
+  .pp-actbar-in>*{flex:1}
+  .pb-page:has(.pp-actbar){padding-bottom:6rem}
+  .pp-secacts{margin-left:0;width:100%}
+  .pp-teamedit li{grid-template-columns:1fr auto}
+  .pp-teamedit li input+input{grid-column:1}
+}
 </style>
 <div id="root"><div class="graphical-theme" data-graphical-theme="Base" data-color-mode="light"></div></div>
 <input type="file" id="pp-bookfile" accept=".json,application/json" hidden>
@@ -167,7 +341,14 @@ Object.assign(ICONS, {
   chevronRight: L('<path d="m9 18 6-6-6-6"></path>'),
   sparkles: L('<path d="M12 3l1.8 4.9L19 9.7l-5.2 1.8L12 16.4l-1.8-4.9L5 9.7l5.2-1.8z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path>'),
   wallet: L('<path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>'),
-  eye: L('<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle>')
+  eye: L('<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle>'),
+  home: L('<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>'),
+  library: L('<rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path>'),
+  pin: L('<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>'),
+  expand: L('<path d="M15 3h6v6"></path><path d="m21 3-7 7"></path><path d="m3 21 7-7"></path><path d="M9 21H3v-6"></path>'),
+  users: L('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>'),
+  calendar: L('<path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>'),
+  lock: L('<rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>')
 });
 const icon = (k) => { const t = document.createElement("template"); t.innerHTML = ICONS[k] || ""; return t.content.firstChild; };
 
@@ -238,14 +419,17 @@ const S = {
   studio: false, asClient: false, me: null, names: {},
   client: null, clientFrom: null, clientMeta: null, bookNode: null, bookNote: [], bookBusy: false,
   answers: { ...Q.answers }, briefFrom: "file", briefSave: "", briefAt: null,
-  requests: [], reqState: "loading", draft: { what: "", channels: [], due: "", photo: null, format: null }, sendBusy: false, sendErr: "",
-  detailNote: {}, changeOpen: false, changeText: "",
+  requests: [], reqState: "loading", draft: { what: "", channels: [], due: "", photo: null, format: null, refs: [], using: [], like: null }, sendBusy: false, sendErr: "",
+  detailNote: {}, changeOpen: false, changeText: "", pinDraft: [], lightbox: null,
   rv: 0, plan: null, asks: [], planNote: "",
+  project: null, invites: [], inviteNote: "", projNote: "", signedOut: false, libFilter: "all", libQuery: "",
 };
 let db = null, assets = null, downloads = null, userCap = null;
 const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 S.asClient = store.get("pp-as-client") === "1";
-try { const d = JSON.parse(store.get("pp-draft") || "null"); if (d && typeof d === "object") S.draft = { ...S.draft, ...d, photo: d.photo || null }; } catch {}
+try { const d = JSON.parse(store.get("pp-draft") || "null"); if (d && typeof d === "object") { S.draft = { ...S.draft, ...d, photo: null }; S.draft.refs = Array.isArray(d.refs) ? d.refs : d.photo ? [d.photo] : []; S.draft.using = Array.isArray(d.using) ? d.using : []; } } catch {}
+// What's new since the last visit, for the home page's activity
+S.lastSeen = +(store.get("pp-seen") || 0); store.set("pp-seen", String(Date.now()));
 try { const a = JSON.parse(store.get("pp-answers") || "null"); if (a && typeof a === "object") { S.answers = { ...S.answers, ...a.answers }; S.briefFrom = "local"; S.briefAt = a.at || null; } } catch {}
 
 const studio = () => S.studio && !S.asClient;
@@ -307,14 +491,14 @@ async function downloadAll(b) {
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["brief", "reveal", "book", "files", "new", "requests", "plan"];
+const VIEWS = ["home", "brief", "reveal", "book", "files", "new", "requests", "library", "plan"];
 function readRoute() {
   const hsh = location.hash.slice(1);
   if (hsh.startsWith("req-")) { S.view = "request"; S.reqId = hsh.slice(4); }
-  else { S.view = VIEWS.includes(hsh) ? hsh : "brief"; S.reqId = null; }
+  else { S.view = VIEWS.includes(hsh) ? hsh : "home"; S.reqId = null; }
 }
 function go(view, id) {
-  S.sheet = false; S.changeOpen = false; S.changeText = "";
+  S.sheet = false; S.changeOpen = false; S.changeText = ""; S.pinDraft = []; S.lightbox = null;
   const target = view === "request" ? "req-" + id : view;
   if (location.hash.slice(1) !== target) location.hash = target; else { readRoute(); render(); }
   document.getElementById("pb-main")?.scrollTo?.({ top: 0 });
@@ -324,7 +508,8 @@ addEventListener("hashchange", () => { readRoute(); render(); });
 readRoute();
 
 /* ---------- shell: the tool's nav, top bar and panels ---------- */
-const STATUS = { received: "Received", progress: "In progress", ready: "Ready for you", approved: "Approved" };
+const STATUS = { received: "Received", progress: "In design", ready: "Ready for you", approved: "Approved" };
+const STEPS = ["received", "progress", "ready", "approved"];
 const STATUS_KIND = { received: undefined, progress: "check", ready: "fix", approved: "page" };
 function badgeCount() {
   return studio() ? S.requests.filter((r) => r.status === "received").length : S.requests.filter((r) => r.status === "ready").length;
@@ -336,13 +521,13 @@ function nav() {
   }, icon(ic), h("span", { className: "pb-navlabel" }, label), badge ? h("span", { className: "pb-badge", "aria-label": `${badge} ${studio() ? "new" : "ready for you"}` }, String(badge)) : null));
   const n = badgeCount();
   const inner = h("div", { className: "pb-nav-inner" },
-    h("div", { className: "pb-navhead" }, h("button", { type: "button", className: "pb-navhome", onClick: () => go("book") }, h("span", { className: "pb-mark", "aria-hidden": "true" }, "P"), h("span", { className: "pb-navlabel" }, "Primary"))),
+    h("div", { className: "pb-navhead" }, h("button", { type: "button", className: "pb-navhome", onClick: () => go("home") }, h("span", { className: "pb-mark", "aria-hidden": "true" }, "P"), h("span", { className: "pb-navlabel" }, "Primary"))),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Project")),
-    h("ul", { className: "pb-navlist" }, item("brief", "Questionnaire", "Brief")),
+    h("ul", { className: "pb-navlist" }, item("home", "Home", "home", waiting().length && !studio() ? waiting().length : 0), item("brief", "Questionnaire", "Brief")),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Brand")),
     h("ul", { className: "pb-navlist" }, item("reveal", "Brand reveal", "sparkles"), item("book", "Brand book", "Guideline"), item("files", "Files", "Assets")),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Requests")),
-    h("ul", { className: "pb-navlist" }, item("new", "Request assets", "circlePlus"), item("requests", "Requests", "inbox", n)),
+    h("ul", { className: "pb-navlist" }, item("new", "Request assets", "circlePlus"), item("requests", "Requests", "inbox", n), item("library", "Library", "library")),
     h("p", { className: "pb-navgroup" }, h("span", { className: "pb-navlabel" }, "Account")),
     h("ul", { className: "pb-navlist" }, item("plan", "Plan", "wallet", studio() ? S.asks.filter((a) => !a.done).length : 0)),
     S.studio ? h("div", { className: "pb-navfoot" }, h("button", {
@@ -375,7 +560,7 @@ function topBar() {
   return h("header", { className: "pb-top" },
     h("div", { className: "pb-top-start" },
       btn({ label: "Menu", icon: "top:lucide-panel-left", variant: "ghost", iconOnly: true, cls: "pb-navopen", onClick: () => { S.sheet = true; render(); } }),
-      h("button", { type: "button", className: "ui-part ui-button pb-menutrigger pb-brandpick pp-brandpick", style: dark ? THEME.pickDark : THEME.pickLight, "aria-label": `${BRAND().name} brand book`, onClick: () => go("book") }, dots(), h("span", null, BRAND().name))),
+      h("button", { type: "button", className: "ui-part ui-button pb-menutrigger pb-brandpick pp-brandpick", style: dark ? THEME.pickDark : THEME.pickLight, "aria-label": `${BRAND().name} home`, onClick: () => go("home") }, dots(), h("span", null, BRAND().name))),
     h("div", { className: "pb-top-end" },
       h("div", { className: "pb-top-actions", role: "group", "aria-label": "Actions" }, topActions()),
       btn({ label: dark ? "Switch to light mode" : "Switch to dark mode", icon: dark ? "sun" : "top:lucide-moon", variant: "ghost", iconOnly: true, onClick: () => { document.documentElement.dataset.theme = dark ? "light" : "dark"; } })));
@@ -406,8 +591,8 @@ function render() {
   rendering = false;
 }
 document.addEventListener("focusout", () => setTimeout(() => { if (pendingRender && !document.activeElement?.closest?.("#pb-main textarea, #pb-main input")) render(); }, 0));
-const TOOL_VIEW = { brief: "brief", reveal: "publish", plan: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
-const VIEWS_RENDER = { brief: viewBrief, reveal: viewReveal, plan: viewPlan, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
+const TOOL_VIEW = { home: "brief", library: "assets", brief: "brief", reveal: "publish", plan: "brief", book: "publish", files: "assets", new: "brief", requests: "review", request: "review" };
+const VIEWS_RENDER = { home: viewHome, library: viewLibrary, brief: viewBrief, reveal: viewReveal, plan: viewPlan, book: viewBook, files: viewFiles, new: viewNew, requests: viewRequests, request: viewRequest };
 const pagehead = (eyebrow, title, text, cls) => h("header", { className: "pb-pagehead" + (cls ? " " + cls : "") }, eyebrow ? h("p", { className: "pb-eyebrow" }, eyebrow) : null, h("h1", null, title), text ? h("p", null, text) : null);
 // The main panel scrolls on desktop; on a phone the page itself does.
 const mainScroller = () => { const m = document.getElementById("pb-main"); return m && m.scrollHeight > m.clientHeight + 1 ? m : null; };
@@ -512,7 +697,7 @@ function setBook(c, from, meta) {
 function bookNode() {
   if (!S.client) return null;
   if (!S.bookNode) {
-    try { S.bookNode = pbPubBook({ c: S.client, brand: { id: S.client.brand.id } }); }
+    try { S.bookNode = augmentBook(pbPubBook({ c: S.client, brand: { id: S.client.brand.id } })); }
     catch (e) { S.bookNode = h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "This version couldn’t be shown"), h("p", null, "Something in the file didn’t read as expected. Publish it again from the Brand Tool and load the new file.")); }
   }
   return S.bookNode;
@@ -524,9 +709,11 @@ function bookSections() {
 function versionLine() {
   const c = S.client; if (!c) return "";
   if (S.clientFrom === "sample") return "A sample of the brand book";
-  return [c.version ? `Version ${c.version}` : "Published version", c.published ? `published ${fmtDate(c.published)}` : ""].filter(Boolean).join(", ");
+  const v = c.version || S.clientMeta?.version, at = c.published || S.clientMeta?.published || (S.clientMeta?.at && new Date(S.clientMeta.at).toISOString());
+  return [v ? `Version ${v}` : "Published version", at ? `published ${fmtDate(at)}` : ""].filter(Boolean).join(", ");
 }
 function viewBook() {
+  if (!revealOpen()) return lockedView("Brand book");
   const secs = bookSections();
   const bar = S.client && secs.length ? h("nav", { className: "pp-booknav", "aria-label": "Sections" },
     h("div", { className: "pp-booknav-in" }, secs.map((s) => h("button", { type: "button", "data-sec": s.id, onClick: () => jumpTo(s.id) }, s.title)))) : null;
@@ -537,8 +724,9 @@ function viewBook() {
       btn({ label: S.bookBusy ? "Saving the version…" : "Load a published version", icon: "top:lucide-upload", busy: S.bookBusy, onClick: () => pickBook() }),
       h("span", { className: "pp-note" }, "Or drop the .json from the Brand Tool’s Publish tab anywhere on this page.")) : null,
     notes.length ? h("ul", { className: "pp-status", role: "status" }, notes) : null,
+    hiddenNote(), S.client ? changesCard() : null,
     bar,
-    S.client ? bookNode() : h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading the brand book…" : "No brand book yet"), h("p", null, S.bookLoading ? "This takes a moment the first time." : "Primary publishes it from the Brand Tool when it’s ready.")));
+    S.client ? bookNode() : S.signedOut ? signInBlock("see your brand book") : h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading the brand book…" : "No brand book yet"), h("p", null, S.bookLoading ? "This takes a moment the first time." : "Primary publishes it from the Brand Tool when it’s ready.")));
   return [null, main, "Brand book", "book"];
 }
 // Highlight the section in view in the sticky bar, and keep its chip visible.
@@ -579,12 +767,14 @@ async function loadBookFile(file) {
     setBook(c, "file"); if (S.view !== "book") go("book"); return;
   }
   S.bookBusy = true; S.bookNote.push({ text: "Saving it so your client sees this version too…", tone: "" });
+  const prevSaved = S.clientFrom === "saved" ? S.client : null;
   setBook(c, "file"); if (S.view !== "book") go("book");
   try {
     const blob = new Blob([JSON.stringify(c)], { type: "application/json" });
     const up = await assets.upload(blob, { type: "application/json" });
     if (tok !== bookToken) return;
-    const meta = { assetId: up.id, version: c.version ?? null, published: c.published ?? null, brandId: c.brand.id, brandName: c.brand.name, file: file.name, by: S.me || null, at: Date.now() };
+    const changes = prevSaved && prevSaved.brand?.id === c.brand.id ? diffVersions(prevSaved, c) : [];
+    const meta = { assetId: up.id, version: c.version ?? null, published: c.published ?? null, brandId: c.brand.id, brandName: c.brand.name, file: file.name, by: S.me || null, at: Date.now(), changes, prevVersion: prevSaved?.version ?? null };
     await db.doc("portal/book").set(meta);
     S.clientMeta = meta; S.clientFrom = "saved";
     S.bookNote = [{ text: `Showing ${label}.`, tone: "good" }, { text: "Saved: everyone who opens this page now sees this version.", tone: "" }];
@@ -600,7 +790,7 @@ async function loadSaved(meta) {
     const r = await fetch("/_blob/" + meta.assetId); if (!r.ok) throw 0;
     const j = await r.json(); if (tok !== bookToken || check(j)) throw 0;
     S.bookLoading = false; setBook(unwrap(j), "saved", meta);
-  } catch { if (tok === bookToken) { S.bookLoading = false; if (!S.client) loadSample(); } }
+  } catch { if (tok === bookToken) { S.bookLoading = false; if (!S.client && S.studio) loadSample(); } }
 }
 async function loadSample() {
   const tok = bookToken; S.bookLoading = true;
@@ -726,6 +916,7 @@ function rvGo(i, slides) {
   if (document.querySelector(".pp-present")) presentDraw(); else render();
 }
 function viewReveal() {
+  if (!revealOpen()) return lockedView("Brand reveal");
   const c = S.client, slides = c ? revealSlides(c) : [];
   S.rv = Math.min(S.rv || 0, Math.max(0, slides.length - 1));
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Brand reveal" },
@@ -737,7 +928,8 @@ function viewReveal() {
   const stage = h("div", { className: "pp-stage" }, h("div", { className: "pp-stage-fit" }, slides.length ? rvNode(slides, S.rv) : null));
   const main = h(FRAG, null,
     pagehead(null, "Brand reveal", `${BRAND().name}, start to finish. Present it in the final sprint meeting, or come back to it any time.`),
-    !c ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading…" : "Not ready yet"), h("p", null, "The reveal shows here once Primary publishes the brand book.")) : h(FRAG, null,
+    hiddenNote(),
+    !c && S.signedOut ? signInBlock("see your brand reveal") : !c ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.bookLoading ? "Loading…" : "Not ready yet"), h("p", null, "The reveal shows here once Primary publishes the brand book.")) : h(FRAG, null,
       stage,
       h("div", { className: "pp-stage-bar" },
         btn({ label: "Previous slide", icon: "chevronLeft", variant: "ghost", iconOnly: true, disabled: S.rv === 0, onClick: () => rvGo(S.rv - 1, slides) }),
@@ -854,6 +1046,7 @@ async function setPlan(patch) {
 /* ---------- Files ---------- */
 const isImgData = (f) => typeof f.data === "string" && /^data:image\//.test(f.data);
 function viewFiles() {
+  if (!revealOpen()) return lockedView("Files");
   const c = S.client, ds = (c?.downloads || []);
   const groups = [...new Set(ds.map((d) => d.group || "Files"))];
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Files" },
@@ -886,94 +1079,132 @@ function allowanceNote() {
   if (left === 1) return h("ul", { className: "pp-status" }, h("li", null, p.status === "starter" ? "This is your last included request. " : "One request left this month. ", h("button", { type: "button", className: "pp-link", onClick: () => go("plan") }, "See what a plan includes")));
   return null;
 }
+// A few ways in, for clients who don't know how to brief a designer yet. Clicking one fills the form; they edit it.
+const EXAMPLES = [
+  ["Announce a new hire", "A LinkedIn post welcoming our new Head of Design, with their photo and a short quote from them.", ["LinkedIn"]],
+  ["Lead with a number", "A post that leads with one big number from our latest report, with a line on why it matters.", ["LinkedIn", "Instagram"]],
+  ["Event banner", "A banner for our event page: the name, date and place, and one line on what it’s for.", ["Website"]],
+  ["Investor update slide", "One slide for our investor update with this quarter’s three highlights.", ["Deck"]],
+  ["Newsletter header", "A header image for our monthly customer newsletter.", ["Email"]],
+];
+const MAX_REFS = 6;
+const refSrc = (r) => "/_blob/" + r.assetId;
 function viewNew() {
   const d = S.draft, formats = S.client?.formats || [];
+  d.refs ||= []; d.using ||= [];
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Start from a format" },
     h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Request assets"),
       h("ul", { className: "pb-raillist" }, railItem("Describe it yourself", undefined, !d.format, () => { d.format = null; saveDraft(); render(); }))),
     formats.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Or start from a format")),
       h("ul", { className: "pb-raillist" }, formats.map((f) => railItem(f.name, f.kind, d.format?.id === f.id, () => { d.format = { id: f.id, name: f.name, kind: f.kind, use: f.use }; saveDraft(); render(); })))) : null,
     h("p", { className: "pb-railnote pb-railfoot" }, "The studio sees a request as soon as you send it."));
-  const what = h("textarea", { id: "pp-what", className: "pb-q-input", rows: 4, maxlength: 4000, placeholder: d.format ? `What should the ${d.format.name.toLowerCase()} say or show?` : "For example: a LinkedIn post announcing our new office, using the globe" });
+  const what = h("textarea", { id: "pp-what", className: "pb-q-input", rows: 4, maxlength: 4000, placeholder: d.like ? "What should be different this time?" : d.format ? `What should the ${d.format.name.toLowerCase()} say or show?` : "For example: a LinkedIn post announcing our new office, using the globe" });
   what.value = d.what; what.addEventListener("input", () => { d.what = what.value; saveDraft(); upd(); });
   const due = h("input", { id: "pp-due", type: "date", className: "pp-input", min: new Date().toISOString().slice(0, 10) });
   due.value = d.due || ""; due.addEventListener("change", () => { d.due = due.value; saveDraft(); });
   const sendB = btn({ label: S.sendBusy ? "Sending…" : "Send request", icon: "send", variant: "primary", busy: S.sendBusy, onClick: sendRequest });
   const hint = h("p", { className: "pp-note", "data-tone": S.sendErr ? "bad" : undefined, role: "status" });
-  const upd = () => { const ok = d.what.trim().length > 0 && d.channels.length > 0; sendB.disabled = !ok || S.sendBusy; sendB.style.opacity = ok && !S.sendBusy ? "" : ".5"; hint.textContent = S.sendErr || (ok ? "" : !d.what.trim() ? "Say what you need, then pick where it goes." : "Pick at least one place it will go."); };
+  const upd = () => { const ok = (d.what.trim().length > 0 || !!d.like) && d.channels.length > 0; sendB.disabled = !ok || S.sendBusy; sendB.style.opacity = ok && !S.sendBusy ? "" : ".5"; hint.textContent = S.sendErr || (ok ? "" : !d.what.trim() && !d.like ? "Say what you need, then pick where it goes." : "Pick at least one place it will go."); };
   const chip = (c) => h("button", { type: "button", className: "pb-pill", "aria-pressed": d.channels.includes(c) ? "true" : "false", onClick: (e) => {
     d.channels = d.channels.includes(c) ? d.channels.filter((x) => x !== c) : [...d.channels, c]; saveDraft();
     e.currentTarget.setAttribute("aria-pressed", d.channels.includes(c) ? "true" : "false"); upd();
   } }, c);
-  const photo = d.photo
-    ? h("div", { className: "pp-row" }, h("img", { className: "pp-thumb", src: "/_blob/" + d.photo.assetId, alt: d.photo.name || "Attached photo" }),
-      btn({ label: "Remove photo", icon: "x", variant: "ghost", onClick: () => { d.photo = null; saveDraft(); render(); } }))
-    : h("div", { className: "pp-row" }, assets
-      ? btn({ label: S.photoBusy ? "Adding…" : "Add a photo", icon: "imagePlus", busy: S.photoBusy, onClick: () => { const i = document.getElementById("pp-photofile"); i.value = ""; i.click(); } })
-      : h("span", { className: "pp-note" }, "Adding a photo needs access to this page from the studio."),
-      S.photoErr ? h("span", { className: "pp-note", "data-tone": "bad" }, S.photoErr) : null);
+  const examples = !d.like ? h("div", { className: "pp-examples" }, h("span", { className: "pp-note" }, "Start from an example"),
+    h("div", { className: "pp-picks" }, EXAMPLES.map(([t, text, ch]) => h("button", { type: "button", className: "pb-pill", onClick: () => { d.what = text; d.channels = [...new Set([...d.channels, ...ch])]; saveDraft(); render(); setTimeout(() => { const el = document.getElementById("pp-what"); el?.focus(); el?.setSelectionRange(el.value.length, el.value.length); }, 0); } }, t)))) : null;
+  const likeCard = d.like ? h("div", { className: "pp-likecard" },
+    d.like.assetId ? h("img", { src: refSrc(d.like), alt: "" }) : null,
+    h("div", null, h("span", { className: "pp-note" }, "Another like this"), h("strong", null, d.like.title || "An approved piece")),
+    btn({ label: "Remove", icon: "x", variant: "ghost", iconOnly: true, onClick: () => { d.like = null; saveDraft(); render(); } })) : null;
+  const using = d.using.length ? h("div", { className: "pp-row" }, h("span", { className: "pp-note" }, "Using"), d.using.map((u, i) => h("span", { className: "pp-usechip" }, u.label,
+    h("button", { type: "button", "aria-label": `Remove ${u.label}`, onClick: () => { d.using.splice(i, 1); saveDraft(); render(); } }, icon("x"))))) : null;
+  const refs = h("div", { className: "pp-refs" },
+    d.refs.map((r, i) => h("figure", null, h("img", { src: refSrc(r), alt: r.name || "Reference" }),
+      h("button", { type: "button", className: "pp-refx", "aria-label": `Remove ${r.name || "image"}`, onClick: () => { d.refs.splice(i, 1); saveDraft(); render(); } }, icon("x")))),
+    d.refs.length < MAX_REFS ? (assets
+      ? h("button", { type: "button", className: "pp-refadd", disabled: S.photoBusy ? true : undefined, onClick: () => { const inp = document.getElementById("pp-photofile"); inp.value = ""; inp.click(); } }, S.photoBusy ? h("span", { className: "pb-spin" }) : icon("imagePlus"), h("span", null, S.photoBusy ? "Adding…" : d.refs.length ? "Add more" : "Add images"))
+      : h("span", { className: "pp-note" }, "Adding images needs Contributor access to this page. Ask Primary.")) : null);
   const main = h(FRAG, null,
-    pagehead(`${BRAND().name} · Requests`, "Request assets", "Tell the studio what you need. Options come back here for you to approve."),
-    !db ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Sign in to send requests"), h("p", null, "Requests are shared with the studio, so they need you signed in to Claude.")) :
+    pagehead(`${BRAND().name} · Requests`, "Request assets", `Tell the studio what you need. Options come back here for you to approve.${!studio() && planOf().status !== "none" ? " " + planLine() + "." : ""}`),
+    !db ? signInBlock("send requests") :
       h(FRAG, null, allowanceNote(),
       h("div", { className: "pb-form" },
         h("section", { className: "pb-form-section" }, h("h2", null, "What do you need?"),
+          examples, likeCard, using,
           d.format ? h("div", { className: "pp-row" }, h("span", { className: "pb-chip", "data-kind": "check" }, `${d.format.name} · ${d.format.kind}`),
             h("span", { className: "pp-note" }, d.format.use || ""), btn({ label: "Clear format", icon: "x", variant: "ghost", iconOnly: true, onClick: () => { d.format = null; saveDraft(); render(); } })) : null,
-          h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-what" }, h("span", { className: "pb-q-n" }, "1"), "Describe the asset"), what)),
+          h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-what" }, h("span", { className: "pb-q-n" }, "1"), d.like ? "Anything to change?" : "Describe the asset"), what)),
         h("section", { className: "pb-form-section" }, h("h2", null, "Where will it go?"),
           h("div", { className: "pb-q" }, h("p", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "2"), " Pick one or more."), h("div", { className: "pp-picks", role: "group", "aria-label": "Channels" }, CHANNELS.map(chip)))),
         h("section", { className: "pb-form-section" }, h("h2", null, "Anything else?"),
-          h("div", { className: "pp-field-row" },
-            h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-due" }, h("span", { className: "pb-q-n" }, "3"), "Needed by (optional)"), due),
-            h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "4"), " A photo to work from (optional)"), photo))),
+          h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-due" }, h("span", { className: "pb-q-n" }, "3"), "Needed by (optional)"), due),
+          h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, h("span", { className: "pb-q-n" }, "4"), " Photos, screenshots or examples to work from (optional)"), refs,
+            S.photoErr ? h("span", { className: "pp-note", "data-tone": "bad" }, S.photoErr) : null)),
         h("div", { className: "pb-kit-actions" }, sendB, hint))));
   upd();
   return [rail, main, "Request assets", true];
 }
+document.getElementById("pp-photofile").multiple = true;
 document.getElementById("pp-photofile").addEventListener("change", async (e) => {
-  const f = e.target.files?.[0]; if (!f || !assets) return;
+  const files = [...(e.target.files || [])].slice(0, MAX_REFS - (S.draft.refs || []).length); if (!files.length || !assets) return;
   S.photoBusy = true; S.photoErr = ""; render();
-  try { const up = await assets.upload(f); S.draft.photo = { assetId: up.id, name: f.name }; saveDraft(); }
-  catch (er) { S.photoErr = er?.code === "unsupported_type" ? "That file type can’t be attached. Try a JPG or PNG." : er?.code === "too_large" || er?.code === "file_too_large" ? "That photo is over 20 MB." : "The photo couldn’t be added. Try again."; }
+  for (const f of files) {
+    try { const up = await assets.upload(f); S.draft.refs.push({ assetId: up.id, name: f.name }); saveDraft(); }
+    catch (er) { S.photoErr = er?.code === "unsupported_type" ? `${f.name} can’t be attached. Try a JPG or PNG.` : er?.code === "too_large" || er?.code === "file_too_large" ? `${f.name} is over 20 MB.` : `${f.name} couldn’t be added. Try again.`; }
+  }
   S.photoBusy = false; render();
 });
 async function sendRequest() {
-  const d = S.draft; if (!db || !d.what.trim() || !d.channels.length || S.sendBusy) return;
+  const d = S.draft; if (!db || (!d.what.trim() && !d.like) || !d.channels.length || S.sendBusy) return;
   S.sendBusy = true; S.sendErr = ""; render();
   try {
     const ref = db.collection("requests").doc(); const at = Date.now();
     const oneOff = !studio() && planUse().left <= 0;
-    await ref.set({ what: d.what.trim(), channels: d.channels, due: d.due || null, photo: d.photo || null, format: d.format || null, status: "received", at, updatedAt: at, by: S.me || null, delivery: null, notes: [], ...(oneOff ? { oneOff: true } : {}) });
-    S.draft = { what: "", channels: [], due: "", photo: null, format: null }; saveDraft();
+    const what = d.what.trim() || "Another like this.";
+    await ref.set({ what, channels: d.channels, due: d.due || null, photo: null, refs: d.refs || [], using: d.using || [], like: d.like || null, format: d.format || null, status: "received", at, updatedAt: at, by: S.me || null, delivery: null, notes: [], pins: [], ...(oneOff ? { oneOff: true } : {}) });
+    S.draft = { what: "", channels: [], due: "", photo: null, format: null, refs: [], using: [], like: null }; saveDraft();
     S.detailNote[ref.id] = "Sent. The studio has your request.";
     S.sendBusy = false; go("request", ref.id);
   } catch (e) { S.sendBusy = false; S.sendErr = e?.code === "not_granted" || e?.code === "permission_denied" ? "Your access to this page doesn’t allow sending requests. Ask Primary to give you Contributor access." : "The request didn’t send. Try again."; render(); }
 }
+// Signed out: nothing shared can load, so say so plainly instead of showing someone else's data.
+const signInBlock = (what) => h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, `Sign in to ${what}`), h("p", null, "Your brand studio is shared with you through Claude. Sign in to Claude with the email Primary invited, then reload this page."));
 const statusChip = (s) => h("span", { className: "pb-chip", "data-kind": STATUS_KIND[s] }, STATUS[s] || s);
+// Where a request is, as four steps: the client always knows whose move it is.
+const stepBar = (status, big) => { const at = STEPS.indexOf(status); return h("ol", { className: "pp-reqsteps" + (big ? " is-big" : ""), "aria-label": `Status: ${STATUS[status] || status}` },
+  STEPS.map((k, i) => h("li", { "data-state": i < at ? "done" : i === at ? "now" : "next" }, h("i"), big ? h("span", null, STATUS[k]) : null))); };
+const pickOpt = (r) => { const os = r.delivery?.options || []; return os.find((o) => o.assetId === r.approvedOpt) || os.find((o) => o.recommended) || os[0] || null; };
+const isPic = (o) => o && !/^video\//.test(o.type || "") && !/pdf/.test(o.type || "") && !/\.pdf$/i.test(o.name || "");
 function viewRequests() {
   const all = S.requests, f = S.filter;
   const count = (s) => all.filter((r) => r.status === s).length;
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request filters" },
     h("div", { className: "pb-railblock" }, h("div", { className: "pb-railhead" }, h("h2", null, "Requests")),
-      h("ul", { className: "pb-raillist" }, [["all", "All", all.length], ["ready", "Ready for you", count("ready")], ["received", "Received", count("received")], ["progress", "In progress", count("progress")], ["approved", "Approved", count("approved")]]
+      h("ul", { className: "pb-raillist" }, [["all", "All", all.length], ["ready", "Ready for you", count("ready")], ["received", "Received", count("received")], ["progress", "In design", count("progress")], ["approved", "Approved", count("approved")]]
         .map(([k, l, n]) => railItem(l, n, f === k, () => { S.filter = k; render(); })))),
-    h("p", { className: "pb-railnote pb-railfoot", role: "status" }, S.reqState === "loading" ? "Loading…" : S.reqState === "slow" ? "Requests can’t be reached yet." : S.reqState === "off" ? "Sign in to see requests." : studio() ? "New requests show here as clients send them." : "Options show up here when the studio sends them."));
-  const list = all.filter((r) => f === "all" || r.status === f);
+    h("p", { className: "pb-railnote pb-railfoot", role: "status" }, S.reqState === "loading" ? "Loading…" : S.reqState === "slow" ? "Requests can’t be reached yet." : S.reqState === "off" ? "Sign in to see requests." : studio() ? "New requests show here as clients send them." : planLine() + "."));
+  const ready = !studio() && f === "all" ? all.filter((r) => r.status === "ready") : [];
+  const list = all.filter((r) => (f === "all" || r.status === f) && !ready.includes(r));
+  const row = (r) => { const o = pickOpt(r); return h("li", { className: "pb-flag pp-reqrow", "data-done": r.status === "approved" ? "true" : "false" },
+    o && isPic(o) ? h("span", { className: "pp-rowthumb", "aria-hidden": "true" }, h("img", { src: "/_blob/" + o.assetId, alt: "", loading: "lazy" })) : h("span", { className: "pp-rowthumb is-empty", "aria-hidden": "true" }, icon(r.status === "approved" ? "check" : "inbox")),
+    h("button", { type: "button", className: "pp-flagbtn pb-flag-body", onClick: () => go("request", r.id) },
+      h("div", { className: "pb-flag-head" }, h("h2", null, title(r)), h("span", { className: "pb-chips" }, statusChip(r.status), r.due ? h("span", { className: "pb-chip", "data-kind": "page" }, `Due ${fmtDay(r.due + "T12:00")}`) : null)),
+      stepBar(r.status),
+      h("dl", null, h("dt", null, "For"), h("dd", null, (r.channels || []).join(", ") || "—"),
+        h("dt", null, "Asked"), h("dd", null, `${who(r.by)}, ${fmtWhen(r.at)}`),
+        r.delivery?.options?.length ? [h("dt", null, "Options"), h("dd", null, plural(r.delivery.options.length, "option"))] : null))); };
   const main = h(FRAG, null,
     pagehead(`${BRAND().name} · Requests`, "Requests", studio() ? "What the client has asked for. Open one to send options back." : "Everything you’ve asked the studio for, newest first."),
-    S.reqState === "off" ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Sign in to see requests"), h("p", null, "Requests are shared with the studio, so they need you signed in to Claude.")) :
+    S.reqState === "off" ? signInBlock("see requests") :
     S.reqState === "error" ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, "Requests couldn’t load"), h("p", null, "Reload the page to try again.")) :
-    !list.length ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading requests…" : all.length ? "Nothing here" : "No requests yet"),
+    !list.length && !ready.length ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading requests…" : all.length ? "Nothing here" : "No requests yet"),
       all.length || S.reqState === "loading" ? null : h("p", null, "Ask for a post, a slide, a banner or anything else, and the studio sends options back here."),
       all.length || S.reqState === "loading" ? null : btn({ label: "Request assets", icon: "plus", variant: "primary", onClick: () => go("new") })) :
-    h("ul", { className: "pb-flags" }, list.map((r) => h("li", { className: "pb-flag", "data-done": r.status === "approved" ? "true" : "false" },
-      h("span", { className: "pb-flag-toggle pp-dot", "aria-pressed": r.status === "approved" ? "true" : "false", "aria-hidden": "true" }, r.status === "approved" ? icon("check") : null),
-      h("button", { type: "button", className: "pp-flagbtn pb-flag-body", onClick: () => go("request", r.id) },
-        h("div", { className: "pb-flag-head" }, h("h2", null, title(r)), h("span", { className: "pb-chips" }, statusChip(r.status), r.due ? h("span", { className: "pb-chip", "data-kind": "page" }, `Due ${fmtDay(r.due + "T12:00")}`) : null)),
-        h("dl", null, h("dt", null, "For"), h("dd", null, (r.channels || []).join(", ") || "—"),
-          h("dt", null, "Asked"), h("dd", null, `${who(r.by)}, ${fmtWhen(r.at)}`),
-          r.delivery?.options?.length ? [h("dt", null, "Options"), h("dd", null, plural(r.delivery.options.length, "option"))] : null))))));
+    h(FRAG, null,
+      ready.length ? h("div", { className: "pp-block" }, h("h2", null, "Ready for you"),
+        h("div", { className: "pp-readygrid" }, ready.map((r) => { const o = pickOpt(r); return h("button", { type: "button", className: "pp-readycard", onClick: () => go("request", r.id) },
+          h("span", { className: "pp-readymedia" }, o && isPic(o) ? h("img", { src: "/_blob/" + o.assetId, alt: "" }) : icon("inbox")),
+          h("span", { className: "pp-readybody" }, h("strong", null, title(r)), h("span", null, `${plural((r.delivery?.options || []).length, "option")} from ${who(r.delivery?.by)}, ${fmtWhen(r.delivery?.sentAt || r.updatedAt)}`), h("span", { className: "pp-readycta" }, "Review", icon("chevronRight")))); }))) : null,
+      list.length ? h("div", { className: "pp-block" }, ready.length ? h("h2", null, "Everything else") : null, h("ul", { className: "pb-flags" }, list.map(row))) : null));
   return [rail, main, "Requests", false];
 }
 const title = (r) => { const t = (r.what || "").split("\n")[0].trim(); return (r.format ? `${r.format.name}: ` : "") + (t.length > 90 ? t.slice(0, 88) + "…" : t || "Request"); };
@@ -991,9 +1222,71 @@ async function downloadOpt(o, b) {
   try { const r = await fetch("/_blob/" + o.assetId); if (!r.ok) throw 0; saveFile(o.name || "option", await r.blob(), b); }
   catch { flash(b, "Couldn’t fetch it"); }
 }
-async function copyText(text, b) {
-  try { await navigator.clipboard.writeText(text); flash(b, "Copied"); }
-  catch { const p = b.closest(".pp-opt")?.querySelector(".pp-caption"); if (p) { const r = document.createRange(); r.selectNodeContents(p); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } flash(b, "Selected, copy it"); }
+async function copyText(text, b, msg) {
+  try { await navigator.clipboard.writeText(text); if (b) flash(b, "Copied"); else toast(msg || "Copied"); }
+  catch { const p = b?.closest(".pp-opt")?.querySelector(".pp-caption"); if (p) { const r = document.createRange(); r.selectNodeContents(p); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } if (b) flash(b, "Selected, copy it"); }
+}
+function toast(text) {
+  document.querySelector(".pp-toast")?.remove();
+  const t = h("div", { className: "pp-toast graphical-theme", "data-color-mode": S.mode === "dark" ? "light" : "dark", role: "status" }, text);
+  document.body.append(t); setTimeout(() => t.remove(), 1800);
+}
+
+/* Comments pinned on an image: the client points at what should change. Positions are fractions of the image, so
+   they land in the same place at any size. Pins already sent stay on the image; the studio marks them resolved. */
+const pinsFor = (r, o) => (r.pins || []).filter((p) => p.opt === o.assetId);
+function pinnable(r, o, opts) {
+  const mine = S.pinDraft.filter((p) => p.opt === o.assetId), sent = pinsFor(r, o), base0 = (r.pins || []).length;
+  const img = h("img", { src: "/_blob/" + o.assetId, alt: o.caption ? o.caption.slice(0, 80) : o.name || "Option", draggable: "false" });
+  const wrap = h("div", { className: "pp-pinwrap" + (S.changeOpen ? " is-pinning" : "") }, img,
+    sent.map((p) => h("span", { className: "pp-pin" + (p.done ? " is-done" : ""), style: { left: p.x * 100 + "%", top: p.y * 100 + "%" }, title: p.text }, String((r.pins || []).indexOf(p) + 1))),
+    mine.map((p) => h("span", { className: "pp-pin is-draft", style: { left: p.x * 100 + "%", top: p.y * 100 + "%" } }, String(base0 + S.pinDraft.indexOf(p) + 1))));
+  wrap.addEventListener("click", (e) => {
+    if (!S.changeOpen) { S.lightbox = { reqId: r.id, i: opts.indexOf(o) }; openLightbox(); return; }
+    const b = img.getBoundingClientRect(); if (!b.width) return;
+    S.pinDraft.push({ opt: o.assetId, x: Math.max(0, Math.min(1, (e.clientX - b.left) / b.width)), y: Math.max(0, Math.min(1, (e.clientY - b.top) / b.height)), text: "" });
+    render(); setTimeout(() => document.getElementById("pp-pin-" + (S.pinDraft.length - 1))?.focus(), 0);
+  });
+  return wrap;
+}
+function openLightbox() {
+  document.querySelector(".pp-lightbox")?.remove();
+  const L0 = S.lightbox, r = L0 && S.requests.find((x) => x.id === L0.reqId); if (!r) return;
+  const opts = sortedOpts(r), o = opts[L0.i]; if (!o) return;
+  const close = () => { S.lightbox = null; document.querySelector(".pp-lightbox")?.remove(); };
+  const step = (d) => { S.lightbox.i = (L0.i + d + opts.length) % opts.length; openLightbox(); };
+  const box = h("div", { className: "pp-lightbox graphical-theme", "data-color-mode": "dark", style: THEME.dark, role: "dialog", "aria-label": optLabel(o, L0.i), tabIndex: -1, onClick: (e) => { if (e.target === box) close(); } },
+    h("div", { className: "pp-lightbox-bar" }, h("strong", null, optLabel(o, L0.i)), h("span", { className: "pp-grow" }),
+      opts.length > 1 ? btn({ label: "Previous option", icon: "chevronLeft", variant: "ghost", iconOnly: true, onClick: () => step(-1) }) : null,
+      opts.length > 1 ? h("span", { className: "pp-note" }, `${L0.i + 1} / ${opts.length}`) : null,
+      opts.length > 1 ? btn({ label: "Next option", icon: "chevronRight", variant: "ghost", iconOnly: true, onClick: () => step(1) }) : null,
+      btn({ label: "Download", icon: "download", variant: "ghost", iconOnly: true, onClick: (e) => downloadOpt(o, e.currentTarget) }),
+      btn({ label: "Close", icon: "x", variant: "ghost", iconOnly: true, onClick: close })),
+    h("div", { className: "pp-lightbox-stage" }, isPic(o) ? h("div", { className: "pp-pinwrap" }, h("img", { src: "/_blob/" + o.assetId, alt: o.name || "Option" }),
+      pinsFor(r, o).map((p) => h("span", { className: "pp-pin" + (p.done ? " is-done" : ""), style: { left: p.x * 100 + "%", top: p.y * 100 + "%" }, title: p.text }, String((r.pins || []).indexOf(p) + 1)))) : optMedia(o)));
+  document.body.append(box); box.focus();
+}
+addEventListener("keydown", (e) => {
+  if (!document.querySelector(".pp-lightbox")) return;
+  if (e.key === "Escape") { S.lightbox = null; document.querySelector(".pp-lightbox")?.remove(); }
+  else if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const r = S.requests.find((x) => x.id === S.lightbox?.reqId); const n = r ? sortedOpts(r).length : 0; if (n > 1) { S.lightbox.i = (S.lightbox.i + (e.key === "ArrowRight" ? 1 : -1) + n) % n; openLightbox(); } }
+});
+const sortedOpts = (r) => { const opts = r.delivery?.options || []; return [...opts.filter((o) => o.recommended), ...opts.filter((o) => !o.recommended)]; };
+const optLabel = (o, i) => o.recommended ? "Recommended" : i === 1 ? "Alternative" : `Option ${i + 1}`;
+async function approve(r, o) {
+  const now = Date.now();
+  if (await updateReq(r.id, { status: "approved", approvedAt: now, approvedBy: S.me || null, approvedOpt: o?.assetId || null, notes: [...(r.notes || []), { at: now, by: S.me || null, kind: "approve", text: o ? `Approved: ${optLabel(o, sortedOpts(r).indexOf(o))}` : "Approved" }] }))
+    S.detailNote[r.id] = "Approved. It’s in your library now.";
+}
+async function sendChanges(r) {
+  const drafts = S.pinDraft.filter((p) => p.text.trim()), t = S.changeText.trim();
+  if (!t && !drafts.length) return;
+  const now = Date.now(), round = (r.round || 1);
+  const pins = [...(r.pins || []), ...drafts.map((p) => ({ id: "p" + now.toString(36) + Math.random().toString(36).slice(2, 6), opt: p.opt, x: p.x, y: p.y, text: p.text.trim().slice(0, 600), by: S.me || null, at: now, round, done: false }))];
+  const summary = [t, drafts.length ? plural(drafts.length, "comment") + " on the images" : ""].filter(Boolean).join("\n");
+  if (await updateReq(r.id, { status: "progress", pins, notes: [...(r.notes || []), { at: now, by: S.me || null, kind: "change", text: summary }] })) {
+    S.changeOpen = false; S.changeText = ""; S.pinDraft = []; S.detailNote[r.id] = "Sent. The studio is on it.";
+  }
 }
 function viewRequest() {
   const r = S.requests.find((x) => x.id === S.reqId);
@@ -1002,67 +1295,95 @@ function viewRequest() {
     const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request" }, back);
     return [rail, h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading…" : "This request isn’t here"), S.reqState === "loading" ? null : h("p", null, "It may have been removed."), btn({ label: "All requests", icon: "back", onClick: () => go("requests") })), "Request", false];
   }
-  const opts = r.delivery?.options || [], sorted = [...opts.filter((o) => o.recommended), ...opts.filter((o) => !o.recommended)];
+  const sorted = sortedOpts(r);
   const hist = [{ at: r.at, by: r.by, text: "Sent the request" }, ...(r.notes || [])].sort((a, b) => a.at - b.at);
+  const histItems = () => hist.map((n) => h("li", null, h("strong", null, n.kind === "change" ? "Asked for a change" : n.kind === "sent" ? "Sent options" : n.kind === "approve" ? n.text || "Approved" : n.text), n.kind === "change" ? h("span", { className: "pp-histtext" }, n.text) : null, h("span", null, `${who(n.by)}, ${fmtWhen(n.at)}`)));
   const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Request" }, back,
-    h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Progress")),
-      h("ul", { className: "pb-raillist" }, ["received", "progress", "ready", "approved"].map((s) => railItem(STATUS[s], s === r.status ? "Now" : ["received", "progress", "ready", "approved"].indexOf(s) < ["received", "progress", "ready", "approved"].indexOf(r.status) ? "Done" : "", s === r.status, () => {})))),
+    h("div", { className: "pb-railblock pb-railblock--fill pp-deskonly" }, h("div", { className: "pb-railhead" }, h("h2", null, "History")),
+      h("ul", { className: "pp-history pp-railhist" }, hist.map((n) => h("li", null, h("strong", null, n.kind === "change" ? "Asked for a change" : n.kind === "sent" ? "Sent options" : n.kind === "approve" ? n.text || "Approved" : n.text), n.kind === "change" ? h("span", { className: "pp-histtext" }, n.text) : null, h("span", null, `${who(n.by)}, ${fmtWhen(n.at)}`))))),
     h("p", { className: "pb-railnote pb-railfoot" }, `Updated ${fmtWhen(r.updatedAt || r.at)}.`));
   const note = S.detailNote[r.id];
-  const clientActions = r.status === "ready" && opts.length && !studio() ? h("div", { className: "pp-block" },
-    h("div", { className: "pb-kit-actions" },
-      btn({ label: opts.length > 1 ? "Approve the recommendation" : "Approve", icon: "check", variant: "primary", onClick: async () => { if (await updateReq(r.id, { status: "approved", approvedAt: Date.now(), approvedBy: S.me || null, notes: [...(r.notes || []), { at: Date.now(), by: S.me || null, kind: "approve", text: "Approved" }] })) { S.detailNote[r.id] = "Approved. The studio can see it."; } } }),
-      btn({ label: "Ask for a change", icon: "message", onClick: () => { S.changeOpen = !S.changeOpen; render(); setTimeout(() => document.getElementById("pp-change")?.focus(), 0); } })),
-    S.changeOpen ? (() => {
-      const ta = h("textarea", { id: "pp-change", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "What should change?" }); ta.value = S.changeText;
-      const sb = btn({ label: "Send to the studio", icon: "send", variant: "primary", disabled: !S.changeText.trim(), onClick: async () => {
-        const t = S.changeText.trim(); if (!t) return;
-        if (await updateReq(r.id, { status: "progress", notes: [...(r.notes || []), { at: Date.now(), by: S.me || null, kind: "change", text: t }] })) { S.changeOpen = false; S.changeText = ""; S.detailNote[r.id] = "Sent. The studio is on it."; }
-      } });
-      ta.addEventListener("input", () => { S.changeText = ta.value; sb.disabled = !ta.value.trim(); sb.style.opacity = ta.value.trim() ? "" : ".5"; });
-      return h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-change" }, "What would you like changed?"), ta, h("div", { className: "pb-kit-actions" }, sb));
-    })() : null) : null;
-  const optionCard = (o, i, hero) => h("article", { className: "pp-opt" + (hero ? " pp-opt-hero" : ""), "data-rec": o.recommended ? "" : undefined },
-    h("div", { className: "pp-opt-head" }, h("strong", null, o.recommended ? "Recommended" : `Option ${i + 1}`), o.recommended ? h("span", { className: "pb-chip", "data-kind": "fix" }, "Studio’s pick") : null),
-    h("div", { className: "pp-opt-media" }, optMedia(o)),
-    o.caption ? h("p", { className: "pp-caption" }, o.caption) : null,
-    h("div", { className: "pp-row" },
-      btn({ label: "Download", icon: "download", onClick: (e) => downloadOpt(o, e.currentTarget) }),
-      o.caption ? btn({ label: "Copy caption", icon: "copy", variant: "ghost", onClick: (e) => copyText(o.caption, e.currentTarget) }) : null));
-  const delivered = r.delivery?.sentAt && opts.length;
+  const canAct = r.status === "ready" && sorted.length && !studio();
+  const optionCard = (o, i) => {
+    const pins = pinsFor(r, o);
+    return h("article", { className: "pp-opt pp-cmpcard", "data-rec": o.recommended ? "" : undefined, "data-approved": r.approvedOpt === o.assetId ? "" : undefined },
+      h("div", { className: "pp-opt-head" }, h("strong", null, optLabel(o, i)),
+        r.approvedOpt === o.assetId ? h("span", { className: "pb-chip", "data-kind": "page" }, "Approved") : o.recommended ? h("span", { className: "pb-chip", "data-kind": "fix" }, "Studio’s pick") : null,
+        isPic(o) ? btn({ label: "View larger", icon: "expand", variant: "ghost", iconOnly: true, onClick: () => { S.lightbox = { reqId: r.id, i }; openLightbox(); } }) : null),
+      h("div", { className: "pp-cmpmedia" }, isPic(o) ? pinnable(r, o, sorted) : optMedia(o)),
+      o.why ? h("p", { className: "pp-why" }, h("span", null, "Why this one"), o.why) : null,
+      o.caption ? h("p", { className: "pp-caption" }, o.caption) : null,
+      pins.length ? h("ol", { className: "pp-pinlist" }, pins.map((p) => h("li", { "data-done": p.done ? "" : undefined },
+        h("span", { className: "pp-pin is-static" + (p.done ? " is-done" : "") }, String((r.pins || []).indexOf(p) + 1)),
+        h("span", null, p.text, h("small", null, `${who(p.by)}, ${fmtWhen(p.at)}${p.done ? " · resolved" : ""}`)),
+        studio() ? btn({ label: p.done ? "Reopen" : "Resolve", icon: p.done ? "x" : "check", variant: "ghost", onClick: () => updateReq(r.id, { pins: (r.pins || []).map((x) => x === p ? { ...x, done: !p.done } : x) }) }) : null))) : null,
+      S.pinDraft.some((p) => p.opt === o.assetId) ? h("ol", { className: "pp-pinlist is-draft" }, S.pinDraft.map((p, k) => p.opt !== o.assetId ? null : (() => {
+        const ta = h("textarea", { id: "pp-pin-" + k, className: "pb-q-input", rows: 2, maxlength: 600, placeholder: "What should change here?", "aria-label": `Comment ${(r.pins || []).length + k + 1}` });
+        ta.value = p.text; ta.addEventListener("input", () => { p.text = ta.value; syncSend(); });
+        return h("li", null, h("span", { className: "pp-pin is-static is-draft" }, String((r.pins || []).length + k + 1)), ta,
+          btn({ label: "Remove comment", icon: "x", variant: "ghost", iconOnly: true, onClick: () => { S.pinDraft.splice(k, 1); render(); } }));
+      })())) : null,
+      h("div", { className: "pp-row" },
+        canAct && !S.changeOpen ? btn({ label: o.recommended ? "Approve this" : "Approve this instead", icon: "check", variant: o.recommended ? "primary" : "secondary", onClick: () => approve(r, o) }) : null,
+        btn({ label: "Download", icon: "download", variant: canAct ? "ghost" : "secondary", onClick: (e) => downloadOpt(o, e.currentTarget) }),
+        o.caption ? btn({ label: "Copy caption", icon: "copy", variant: "ghost", onClick: (e) => copyText(o.caption, e.currentTarget) }) : null));
+  };
+  let sendB = null;
+  const syncSend = () => { if (!sendB) return; const ok = !!S.changeText.trim() || S.pinDraft.some((p) => p.text.trim()); sendB.disabled = !ok; sendB.style.opacity = ok ? "" : ".5"; };
+  const changeBox = canAct && S.changeOpen ? (() => {
+    const ta = h("textarea", { id: "pp-change", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "What should change? You can also click on an image to point at a spot." }); ta.value = S.changeText;
+    ta.addEventListener("input", () => { S.changeText = ta.value; syncSend(); });
+    sendB = btn({ label: "Send to the studio", icon: "send", variant: "primary", onClick: () => sendChanges(r) });
+    return h("div", { className: "pp-block pp-changebox" }, h("div", { className: "pb-q" }, h("label", { htmlFor: "pp-change" }, "What would you like changed?"), ta),
+      h("p", { className: "pp-note" }, icon("pin"), " Click anywhere on an image to leave a comment on that spot."),
+      h("div", { className: "pb-kit-actions" }, sendB, btn({ label: "Cancel", variant: "ghost", onClick: () => { S.changeOpen = false; S.pinDraft = []; render(); } })));
+  })() : null;
+  // On a phone this bar sticks to the bottom of the screen, so approving is one tap from anywhere on the page.
+  const actbar = canAct && !S.changeOpen ? h("div", { className: "pp-actbar" },
+    h("div", { className: "pp-actbar-in" },
+      btn({ label: "Approve", aria: sorted.length > 1 ? "Approve the recommendation" : "Approve", icon: "check", variant: "primary", cls: "pp-phoneonly", onClick: () => approve(r, sorted[0]) }),
+      btn({ label: "Ask for a change", icon: "message", onClick: () => { S.changeOpen = true; render(); setTimeout(() => document.getElementById("pp-change")?.focus(), 0); } }))) : null;
+  const delivered = r.delivery?.sentAt && sorted.length;
+  const refs = [...(r.refs || []), ...(r.photo ? [r.photo] : [])];
   const main = h(FRAG, null,
-    pagehead(`Request · ${STATUS[r.status]}`, title(r), [(r.channels || []).join(", "), r.due ? `needed by ${fmtDate(r.due + "T12:00")}` : ""].filter(Boolean).join(" · ")),
+    pagehead(null, title(r), [(r.channels || []).join(", "), r.due ? `needed by ${fmtDate(r.due + "T12:00")}` : ""].filter(Boolean).join(" · ")),
+    stepBar(r.status, true),
     note ? h("ul", { className: "pp-status", role: "status" }, h("li", { "data-tone": /didn’t/.test(note) ? "bad" : "good" }, note)) : null,
     studio() ? studioPanel(r) : null,
     delivered || studio() ? null : h("div", { className: "pp-block" }, h("p", { className: "pp-msg" }, r.status === "approved" ? "Approved." : r.status === "progress" ? "The studio is working on this. Options show up here when they’re ready." : "The studio has your request. Options show up here when they’re ready.")),
-    delivered ? h("div", { className: "pp-block" }, h("h2", null, opts.length > 1 ? "Options from the studio" : "From the studio"),
-      r.delivery.message ? h("p", { className: "pp-msg" }, h("small", null, `${who(r.delivery.by)}, ${fmtWhen(r.delivery.sentAt)}`), r.delivery.message) : null,
-      h("div", { className: "pp-opts" }, sorted.map((o, i) => optionCard(o, sorted[0].recommended ? i : i, i === 0 && o.recommended)))) : null,
-    clientActions,
+    delivered ? h("div", { className: "pp-block" }, h("h2", null, sorted.length > 1 ? "Options from the studio" : "From the studio"),
+      r.delivery.message ? h("div", { className: "pp-msg pp-from" }, avatar(who(r.delivery.by) === "You" ? "You" : who(r.delivery.by)), h("div", null, h("small", null, `${who(r.delivery.by)}, ${fmtWhen(r.delivery.sentAt)}`), r.delivery.message)) : null,
+      h("div", { className: "pp-compare", "data-n": String(Math.min(sorted.length, 3)) }, sorted.map((o, i) => optionCard(o, i)))) : null,
+    actbar, changeBox,
     h("div", { className: "pp-block" }, h("h2", null, "What was asked"),
+      r.like ? h("div", { className: "pp-likecard" }, r.like.assetId ? h("img", { src: refSrc(r.like), alt: "" }) : null, h("div", null, h("span", { className: "pp-note" }, "Another like this"), h("strong", null, r.like.title || "An approved piece"))) : null,
+      r.using?.length ? h("div", { className: "pp-row" }, h("span", { className: "pp-note" }, "Using"), r.using.map((u) => h("span", { className: "pp-usechip" }, u.label))) : null,
       h("p", { className: "pp-caption" }, r.what),
-      r.photo ? h("img", { className: "pp-thumb", src: "/_blob/" + r.photo.assetId, alt: r.photo.name || "Photo sent with the request" }) : null),
-    h("div", { className: "pp-block" }, h("h2", null, "History"), h("ul", { className: "pp-history" }, hist.map((n) => h("li", null, h("strong", null, n.kind === "change" ? "Asked for a change" : n.kind === "sent" ? "Sent options" : n.kind === "approve" ? "Approved" : n.text), n.kind === "change" ? n.text : null, h("span", null, `${who(n.by)}, ${fmtWhen(n.at)}`))))));
-  return [rail, main, "Request", false];
+      refs.length ? h("div", { className: "pp-refs" }, refs.map((x) => h("figure", null, h("img", { src: refSrc(x), alt: x.name || "Reference" })))) : null),
+    h("div", { className: "pp-block pp-phoneonly" }, h("h2", null, "History"), h("ul", { className: "pp-history" }, histItems())));
+  return [rail, main, "Request", true];
 }
 function studioPanel(r) {
   const opts = r.delivery?.options || [];
   const set = (options, extra) => updateReq(r.id, { delivery: { ...(r.delivery || {}), options, ...(extra || {}) }, ...(r.status === "received" ? { status: "progress" } : {}) });
-  const seg = h("div", { className: "pb-seg", role: "group", "aria-label": "Status" }, ["received", "progress", "ready", "approved"].map((s) =>
+  const seg = h("div", { className: "pb-seg", role: "group", "aria-label": "Status" }, STEPS.map((s) =>
     h("button", { type: "button", className: "pb-pill", "aria-pressed": r.status === s ? "true" : "false", style: "background:none", onClick: () => r.status !== s && updateReq(r.id, { status: s }) }, STATUS[s])));
-  const msg = h("textarea", { id: "pp-studio-msg", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "A short note to the client: what you made and why you recommend it" });
+  const msg = h("textarea", { id: "pp-studio-msg", className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "A short note to the client: what you made and what to look at" });
   msg.value = r.delivery?.message || "";
   msg.addEventListener("change", () => set(opts, { message: msg.value.trim() }));
+  const open = (r.pins || []).filter((p) => !p.done).length;
   return h("div", { className: "pp-block pp-studio" },
     h("h2", null, "Studio"),
-    h("div", { className: "pp-row" }, seg),
+    h("div", { className: "pp-row" }, seg, open ? h("span", { className: "pb-chip", "data-kind": "fix" }, `${plural(open, "comment")} to resolve`) : null),
     h("div", { className: "pp-opts" }, opts.map((o, i) => {
-      const cap = h("textarea", { className: "pb-q-input", rows: 3, maxlength: 2000, placeholder: "Caption the client can copy (optional)", "aria-label": `Caption for option ${i + 1}` });
+      const why = h("textarea", { className: "pb-q-input", rows: 2, maxlength: 400, placeholder: o.recommended ? "Why you recommend this one (the client sees it)" : "What this alternative does differently", "aria-label": `Why, for option ${i + 1}` });
+      why.value = o.why || ""; why.addEventListener("change", () => set(opts.map((x, j) => j === i ? { ...x, why: why.value.trim() } : x)));
+      const cap = h("textarea", { className: "pb-q-input", rows: 2, maxlength: 2000, placeholder: "Caption the client can copy (optional)", "aria-label": `Caption for option ${i + 1}` });
       cap.value = o.caption || "";
       cap.addEventListener("change", () => set(opts.map((x, j) => j === i ? { ...x, caption: cap.value.trim() } : x)));
       return h("article", { className: "pp-opt", "data-rec": o.recommended ? "" : undefined },
         h("div", { className: "pp-opt-head" }, h("strong", null, o.name || `Option ${i + 1}`), o.recommended ? h("span", { className: "pb-chip", "data-kind": "fix" }, "Recommended") : null),
-        h("div", { className: "pp-opt-media" }, optMedia(o)), cap,
+        h("div", { className: "pp-opt-media" }, optMedia(o)), h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, o.recommended ? "Why this one (the client sees it)" : "What this one does differently"), why), h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, "Caption to copy"), cap),
         h("div", { className: "pp-row" },
           o.recommended ? null : btn({ label: "Recommend this", icon: "check", variant: "ghost", onClick: () => set(opts.map((x, j) => ({ ...x, recommended: j === i }))) }),
           btn({ label: "Remove", icon: "x", variant: "ghost", onClick: () => set(opts.filter((_, j) => j !== i)) })));
@@ -1074,9 +1395,9 @@ function studioPanel(r) {
     h("div", { className: "pb-kit-actions" },
       btn({ label: r.delivery?.sentAt ? "Send again" : "Send to client", icon: "send", variant: "primary", disabled: !opts.length, onClick: async () => {
         const now = Date.now();
-        if (await updateReq(r.id, { status: "ready", delivery: { ...(r.delivery || {}), options: opts, message: msg.value.trim(), sentAt: now, by: S.me || null }, notes: [...(r.notes || []), { at: now, by: S.me || null, kind: "sent", text: "Sent options" }] })) S.detailNote[r.id] = "Sent. The client sees the options now.";
+        if (await updateReq(r.id, { status: "ready", round: (r.round || 1) + (r.delivery?.sentAt ? 1 : 0), delivery: { ...(r.delivery || {}), options: opts, message: msg.value.trim(), sentAt: now, by: S.me || null }, notes: [...(r.notes || []), { at: now, by: S.me || null, kind: "sent", text: "Sent options" }] })) S.detailNote[r.id] = "Sent. The client sees the options now.";
       } }),
-      h("span", { className: "pp-note" }, opts.length ? "The client sees the recommended option first." : "Add at least one option first.")));
+      h("span", { className: "pp-note" }, opts.length ? "The client sees the recommended option first, with your note on why." : "Add at least one option first.")));
 }
 document.getElementById("pp-optfile").addEventListener("change", async (e) => {
   const files = [...(e.target.files || [])], id = S.optFor; if (!files.length || !assets || !id) return;
@@ -1095,21 +1416,254 @@ document.getElementById("pp-optfile").addEventListener("change", async (e) => {
   S.optBusy = false; render();
 });
 
+/* ---------- Library: everything approved, in one place ---------- */
+function libraryItems() {
+  return S.requests.filter((r) => r.status === "approved").map((r) => ({ r, o: pickOpt(r) })).filter((x) => x.o)
+    .sort((a, b) => (b.r.approvedAt || b.r.updatedAt || 0) - (a.r.approvedAt || a.r.updatedAt || 0));
+}
+function anotherLike(r, o) {
+  S.draft = { what: "", channels: [...(r.channels || [])], due: "", photo: null, format: r.format || null, refs: [], using: [], like: { reqId: r.id, assetId: o.assetId, title: title(r) } };
+  saveDraft(); go("new");
+}
+function viewLibrary() {
+  const items = libraryItems(), chans = [...new Set(items.flatMap((x) => x.r.channels || []))];
+  const q = S.libQuery.trim().toLowerCase();
+  const shown = items.filter(({ r, o }) => (S.libFilter === "all" || (r.channels || []).includes(S.libFilter)) && (!q || `${r.what} ${o.caption || ""} ${(r.channels || []).join(" ")}`.toLowerCase().includes(q)));
+  const rail = h("nav", { className: "pb-panel pb-rail", "aria-label": "Library" },
+    h("div", { className: "pb-railblock" }, h("h2", { className: "pb-railtitle" }, "Library"),
+      h("ul", { className: "pb-raillist" }, railItem("Everything", items.length, S.libFilter === "all", () => { S.libFilter = "all"; render(); }))),
+    chans.length ? h("div", { className: "pb-railblock pb-railblock--fill" }, h("div", { className: "pb-railhead" }, h("h2", null, "Where it goes")),
+      h("ul", { className: "pb-raillist" }, chans.map((c) => railItem(c, items.filter((x) => (x.r.channels || []).includes(c)).length, S.libFilter === c, () => { S.libFilter = c; render(); })))) : null,
+    h("p", { className: "pb-railnote pb-railfoot" }, "Everything you approve lands here, ready to download again."));
+  const search = h("input", { type: "search", className: "pp-input pp-search", placeholder: "Search your library", "aria-label": "Search your library", value: S.libQuery });
+  search.addEventListener("input", () => { S.libQuery = search.value; const pos = search.selectionStart; rendering = true; render(); rendering = false; const el = document.querySelector(".pp-search"); el?.focus(); el?.setSelectionRange(pos, pos); });
+  const card = ({ r, o }) => h("article", { className: "pp-libcard" },
+    h("button", { type: "button", className: "pp-libmedia", "aria-label": `Open ${title(r)}`, onClick: () => go("request", r.id) }, isPic(o) ? h("img", { src: "/_blob/" + o.assetId, alt: "", loading: "lazy" }) : optMedia(o)),
+    h("div", { className: "pp-libbody" }, h("strong", null, title(r)), h("span", null, [(r.channels || []).join(", "), r.approvedAt ? `approved ${fmtDay(r.approvedAt)}` : ""].filter(Boolean).join(" · "))),
+    h("div", { className: "pp-row" },
+      btn({ label: "Download", icon: "download", variant: "ghost", onClick: (e) => downloadOpt(o, e.currentTarget) }),
+      o.caption ? btn({ label: "Copy caption", icon: "copy", variant: "ghost", iconOnly: true, onClick: (e) => copyText(o.caption, e.currentTarget) }) : null,
+      db ? btn({ label: "Make another like this", icon: "plus", variant: "ghost", onClick: () => anotherLike(r, o) }) : null));
+  const main = h(FRAG, null,
+    pagehead(`${BRAND().name} · Library`, "Library", "Everything you’ve approved, ready to download again or use as the starting point for something new."),
+    S.reqState === "off" ? signInBlock("see your library") :
+    !items.length ? h("div", { className: "pb-empty pb-empty--inline" }, h("h2", null, S.reqState === "loading" ? "Loading…" : "Nothing approved yet"), S.reqState === "loading" ? null : h("p", null, "When you approve something the studio made, it lands here."), S.reqState === "loading" ? null : btn({ label: "Request assets", icon: "plus", variant: "primary", onClick: () => go("new") })) :
+    h(FRAG, null, items.length > 6 ? h("div", { className: "pp-libtools" }, search) : null,
+      shown.length ? h("div", { className: "pp-libgrid" }, shown.map(card)) : h("p", { className: "pp-note" }, "Nothing matches. Try another word.")));
+  return [rail, main, "Library", "book"];
+}
+
+/* ---------- Home: where the project is, what's waiting, who's on it ---------- */
+const STAGES = [["kickoff", "Kick-off"], ["questionnaire", "Questionnaire"], ["design", "Design"], ["reveal", "Brand reveal"], ["team", "Brand team"]];
+const STAGE_LINE = { kickoff: "Your brand sprint starts here.", questionnaire: "Tell us about the company.", design: "Your brand is in design.", reveal: "Your brand is ready.", team: "Your brand team is on it." };
+const projOf = () => ({ stage: null, meeting: null, team: [], revealOpen: true, ...(S.project || {}) });
+const revealOpen = () => studio() || projOf().revealOpen !== false;
+function stageNow() {
+  const p = projOf(); if (p.stage && STAGES.some(([k]) => k === p.stage)) return p.stage;
+  if (planOf().status === "active") return "team";
+  if (S.client && revealOpen()) return "reveal";
+  return filled() < Q.fields.length ? "questionnaire" : "design";
+}
+const initials = (n) => String(n || "?").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join("") || "?";
+const avatar = (n) => h("span", { className: "pp-av", "aria-hidden": "true" }, initials(n));
+const fmtMeet = (v) => { const d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + " at " + fmtTime(d); };
+function waiting() {
+  const out = [];
+  if (studio()) {
+    S.requests.filter((r) => r.status === "received").forEach((r) => out.push({ label: title(r), meta: "New request", go: () => go("request", r.id) }));
+    S.requests.filter((r) => r.status === "progress" && (r.pins || []).some((p) => !p.done)).forEach((r) => out.push({ label: title(r), meta: plural((r.pins || []).filter((p) => !p.done).length, "comment") + " to resolve", go: () => go("request", r.id) }));
+    S.invites.filter((i) => !i.done).forEach((i) => out.push({ label: `Add ${i.name || i.email} to this page`, meta: i.role === "request" ? "As a Contributor" : "As a Viewer", go: () => jumpTo("pp-people") }));
+    S.asks.filter((a) => !a.done).forEach((a) => out.push({ label: `${who(a.by)} asked about a plan`, meta: fmtWhen(a.at), go: () => go("plan") }));
+    return out;
+  }
+  S.requests.filter((r) => r.status === "ready").forEach((r) => out.push({ label: title(r), meta: "Ready to review", go: () => go("request", r.id), thumb: pickOpt(r) }));
+  if (stageNow() === "questionnaire" && filled() < Q.fields.length) out.push({ label: "Finish the questionnaire", meta: `${filled()} of ${Q.fields.length} answered`, go: () => go("brief") });
+  if (S.client && revealOpen() && S.clientFrom !== "sample" && store.get("pp-reveal-seen") !== "1") out.push({ label: "See your brand reveal", meta: "New", go: () => go("reveal") });
+  if (changesUnseen()) out.push({ label: `See what changed in version ${S.clientMeta?.version || S.client?.version || ""}`.trim(), meta: "Brand book", go: () => go("book") });
+  return out;
+}
+function activity() {
+  const ev = [];
+  for (const r of S.requests) {
+    ev.push({ at: r.at, by: r.by, text: `asked for “${title(r)}”`, open: () => go("request", r.id) });
+    for (const n of r.notes || []) if (n.kind) ev.push({ at: n.at, by: n.by, text: n.kind === "sent" ? `sent options for “${title(r)}”` : n.kind === "approve" ? `approved “${title(r)}”` : `asked for a change to “${title(r)}”`, open: () => go("request", r.id) });
+  }
+  if (S.clientMeta?.at) ev.push({ at: S.clientMeta.at, by: S.clientMeta.by, text: `published ${S.clientMeta.version ? `version ${S.clientMeta.version} of ` : ""}the brand book`, open: () => go("book") });
+  return ev.filter((e) => e.at).sort((a, b) => b.at - a.at).slice(0, 6);
+}
+async function setProject(patch) {
+  if (!db || !studio()) return;
+  try { await db.doc("portal/project").set({ ...projOf(), ...patch, updatedAt: Date.now(), by: S.me || null }); S.projNote = ""; }
+  catch { S.projNote = "That didn’t save. Try again."; render(); }
+}
+function viewHome() {
+  const c = S.client, p = projOf(), T = c ? rvTones(c) : { dark: { ground: "#1c1b19", ink: "#f4f3f0" } }, logo = c ? rvLogo(c, true) : null;
+  const st = stageNow(), si = STAGES.findIndex(([k]) => k === st), wait = waiting(), acts = activity(), team = (p.team || []).filter((m) => m && m.name);
+  const hero = h("section", { className: "a pp-hero", "data-brand": rvBrand().id, style: { background: T.dark.ground, color: T.dark.ink } },
+    h("div", { className: "pp-hero-top" }, rvImg(logo, "pp-hero-logo") || h("strong", { className: "a-sub" }, BRAND().name), h("span", { className: "a-mono pp-hero-by" }, "Brand studio · Primary")),
+    h("div", { className: "pp-hero-foot" },
+      h("h1", { className: "a-h pp-hero-title" }, STAGE_LINE[st]),
+      p.meeting?.at ? h("div", { className: "pp-hero-meet" }, h("span", { className: "a-mono" }, "Next meeting"), h("strong", null, p.meeting.title || "With Primary"), h("span", null, fmtMeet(p.meeting.at))) : null));
+  const steps = h("ol", { className: "pp-steps", "aria-label": "Where the project is" }, STAGES.map(([k, l], i) => h("li", { "data-state": i < si ? "done" : i === si ? "now" : "next" },
+    h("span", { className: "pp-step-dot" }, i < si ? icon("check") : String(i + 1)), h("span", null, l))));
+  const waitBlock = h("div", { className: "pp-card" }, h("h2", null, studio() ? "Needs the studio" : "Waiting on you"),
+    wait.length ? h("ul", { className: "pp-waitlist" }, wait.map((w) => h("li", null, h("button", { type: "button", onClick: w.go },
+      w.thumb && isPic(w.thumb) ? h("img", { src: "/_blob/" + w.thumb.assetId, alt: "" }) : h("span", { className: "pp-waitdot" }),
+      h("span", null, h("strong", null, w.label), h("small", null, w.meta)), icon("chevronRight"))))) :
+      h("p", { className: "pp-note" }, studio() ? "Nothing waiting. New requests and comments show here." : "You’re all caught up. When the studio sends something, it shows here."),
+    !studio() ? h("div", { className: "pp-row" }, btn({ label: "Request assets", icon: "plus", variant: "primary", onClick: () => go("new") }), S.client && revealOpen() ? btn({ label: "Open the brand book", icon: "Guideline", onClick: () => go("book") }) : null) : null);
+  const actBlock = h("div", { className: "pp-card" }, h("h2", null, "Recent activity"),
+    acts.length ? h("ul", { className: "pp-actlist" }, acts.map((e) => h("li", { "data-new": e.at > S.lastSeen && e.by !== S.me && S.lastSeen ? "" : undefined },
+      h("button", { type: "button", onClick: e.open }, avatar(who(e.by)), h("span", null, h("span", null, h("strong", null, who(e.by)), " ", e.text), h("small", null, fmtWhen(e.at))))))) :
+      h("p", { className: "pp-note" }, "Requests, deliveries and new versions of the brand book show here."));
+  const teamBlock = h("div", { className: "pp-card" }, h("h2", null, "Your team at Primary"),
+    team.length ? h("ul", { className: "pp-team" }, team.map((m) => h("li", null, avatar(m.name), h("span", null, h("strong", null, m.name), h("small", null, m.role || ""))))) :
+      h("p", { className: "pp-note" }, studio() ? "Add who’s working on this below, so the client knows who they’re talking to." : "The people working on your brand show here."));
+  const planBlock = planOf().status !== "none" ? h("div", { className: "pp-card pp-plancard" }, h("h2", null, "Requests"),
+    (() => { const { left, total } = planUse(); return h(FRAG, null, h("div", { className: "pp-meter", role: "img", "aria-label": `${left} of ${total} left` }, h("i", { style: { width: total ? Math.round((left / total) * 100) + "%" : "0%" } })), h("p", { className: "pp-note" }, planLine() + ".")); })(),
+    h("button", { type: "button", className: "pp-link", onClick: () => go("plan") }, "See your plan")) : null;
+  if (!db && S.signedOut) {
+    hero.querySelector(".pp-hero-title").textContent = "Your brand studio.";
+    return [null, h(FRAG, null, hero, h("div", { className: "pp-gap" }), signInBlock("open your brand studio")), "Home", "book"];
+  }
+  const main = h(FRAG, null,
+    hero, steps,
+    studio() ? projectStudio(p) : null,
+    h("div", { className: "pp-homegrid" },
+      h("div", { className: "pp-homecol" }, waitBlock, actBlock),
+      h("div", { className: "pp-homecol" }, teamBlock, peopleBlock(), planBlock)));
+  return [null, main, "Home", "book"];
+}
+function projectStudio(p) {
+  const field = (label, id, value, type, onSave, extra) => { const i = h("input", { id, className: "pp-input", type, maxlength: 80, ...(extra || {}) }); i.value = value ?? ""; i.addEventListener("change", () => onSave(i.value)); return h("div", { className: "pb-q" }, h("label", { htmlFor: id }, label), i); };
+  const team = [...(p.team || [])];
+  const toLocal = (v) => { const d = new Date(v); if (isNaN(d)) return ""; const z = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`; };
+  return h("details", { className: "pp-block pp-studio pp-projstudio", open: !S.project ? true : undefined },
+    h("summary", null, h("strong", null, "Studio: set up this page"), h("span", { className: "pp-note" }, "Stage, next meeting, the reveal and your team")),
+    h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, "Stage"),
+      h("div", { className: "pb-seg", role: "group", "aria-label": "Stage" }, [["", "Automatic"], ...STAGES].map(([k, l]) =>
+        h("button", { type: "button", className: "pb-pill", "aria-pressed": (p.stage || "") === k ? "true" : "false", style: "background:none", onClick: () => setProject({ stage: k || null }) }, l)))),
+    h("div", { className: "pp-field-row" },
+      field("Next meeting", "pp-meet-at", p.meeting?.at ? toLocal(p.meeting.at) : "", "datetime-local", (v) => setProject({ meeting: v ? { ...(p.meeting || {}), at: new Date(v).toISOString() } : null })),
+      field("What it is", "pp-meet-title", p.meeting?.title || "", "text", (v) => setProject({ meeting: { ...(p.meeting || {}), title: v.trim() } }), { placeholder: "Brand reveal" })),
+    h("div", { className: "pp-row" },
+      h("span", { className: "pp-note" }, p.revealOpen === false ? "The reveal, brand book and files are hidden from the client." : "The client can see the reveal, brand book and files."),
+      btn({ label: p.revealOpen === false ? "Open them to the client" : "Hide until the reveal", icon: p.revealOpen === false ? "sparkles" : "lock", variant: p.revealOpen === false ? "primary" : "secondary", onClick: () => setProject({ revealOpen: p.revealOpen === false }) })),
+    h("div", { className: "pb-q" }, h("span", { className: "pp-note" }, "Your team on this project"),
+      h("ul", { className: "pp-teamedit" }, team.map((m, i) => h("li", null,
+        (() => { const n = h("input", { className: "pp-input", placeholder: "Name", "aria-label": "Name", maxlength: 60 }); n.value = m.name || ""; n.addEventListener("change", () => { team[i] = { ...m, name: n.value.trim() }; setProject({ team }); }); return n; })(),
+        (() => { const r = h("input", { className: "pp-input", placeholder: "Role, e.g. Design lead", "aria-label": "Role", maxlength: 60 }); r.value = m.role || ""; r.addEventListener("change", () => { team[i] = { ...m, role: r.value.trim() }; setProject({ team }); }); return r; })(),
+        btn({ label: "Remove", icon: "x", variant: "ghost", iconOnly: true, onClick: () => setProject({ team: team.filter((_, j) => j !== i) }) })))),
+      h("div", null, btn({ label: "Add someone", icon: "plus", variant: "ghost", onClick: () => setProject({ team: [...team, { name: "", role: "" }] }) }))),
+    S.projNote ? h("p", { className: "pp-note", "data-tone": "bad" }, S.projNote) : null);
+}
+// The client's own people. Access itself is given from the page's Share menu, so the client asks and the studio adds them.
+function peopleBlock() {
+  const list = S.invites;
+  const form = !studio() && db ? (() => {
+    const n = h("input", { className: "pp-input", placeholder: "Name", "aria-label": "Their name", maxlength: 80 });
+    const e = h("input", { className: "pp-input", type: "email", placeholder: "Email", "aria-label": "Their email", maxlength: 120 });
+    let role = "request";
+    const seg = h("div", { className: "pb-seg", role: "group", "aria-label": "What they can do" }, [["request", "Request and approve"], ["view", "Look around"]].map(([k, l]) =>
+      h("button", { type: "button", className: "pb-pill", "aria-pressed": k === role ? "true" : "false", style: "background:none", onClick: (ev) => { role = k; seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === ev.currentTarget ? "true" : "false")); } }, l)));
+    const send = btn({ label: "Ask Primary to add them", icon: "send", onClick: async (ev) => {
+      const name = n.value.trim(), email = e.value.trim();
+      if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { flash(ev.currentTarget, "Add a name and email"); return; }
+      try { await db.collection("invites").doc().set({ name, email, role, at: Date.now(), by: S.me || null, done: false }); S.inviteNote = `Asked. Primary will add ${name}.`; render(); }
+      catch { flash(ev.currentTarget, "Didn’t send. Try again"); }
+    } });
+    return h("div", { className: "pp-inviteform" }, h("div", { className: "pp-field-row" }, n, e), seg, h("div", { className: "pp-row" }, send, S.inviteNote ? h("span", { className: "pp-note", role: "status" }, S.inviteNote) : null));
+  })() : null;
+  return h("div", { className: "pp-card", id: "pp-people" }, h("h2", null, studio() ? "The client’s team" : "Your team"),
+    list.length ? h("ul", { className: "pp-team" }, list.map((i) => h("li", null, avatar(i.name), h("span", null, h("strong", null, i.name), h("small", null, `${i.role === "request" ? "Can request and approve" : "Can look around"} · ${i.done ? "added" : "asked " + fmtDay(i.at)}${studio() ? " · " + i.email : ""}`)),
+      studio() && !i.done ? btn({ label: "Mark added", icon: "check", variant: "ghost", onClick: () => db.doc("invites/" + i.id).update({ done: true, doneAt: Date.now() }).catch(() => {}) }) : null))) :
+      h("p", { className: "pp-note" }, studio() ? "When the client asks to add someone, they show here." : "Bring in the people who’ll use the brand: someone to request and approve, or just to look around."),
+    studio() ? h("p", { className: "pp-note" }, "Add people from this page’s Share menu: Viewer to look around, Contributor to request and approve.") : form);
+}
+// Before the reveal: say when it opens instead of showing an empty page.
+function lockedView(label) {
+  const p = projOf();
+  return [null, h(FRAG, null, pagehead(null, label, ""),
+    h("div", { className: "pb-empty pb-empty--inline pp-locked" }, icon("lock"), h("h2", null, "Your brand is almost here"),
+      h("p", null, p.meeting?.at ? `It opens after ${p.meeting.title ? p.meeting.title.toLowerCase().replace(/^the /, "the ") : "the reveal"} on ${fmtMeet(p.meeting.at)}.` : "It opens after the reveal meeting with Primary."),
+      btn({ label: "Back to home", icon: "back", onClick: () => go("home") }))), label, "book"];
+}
+const hiddenNote = () => studio() && projOf().revealOpen === false ? h("ul", { className: "pp-status", role: "status" }, h("li", null, "Hidden from the client until you open the reveal. ", h("button", { type: "button", className: "pp-link", onClick: () => setProject({ revealOpen: true }) }, "Open it now"))) : null;
+
+/* ---------- The brand book, joined to the work ---------- */
+// Each section gets its files and a way to ask for something made with it; colour values copy on click.
+const SEC_FILES = { "Logo": (d) => /logo/i.test(d.id + d.group + d.name), "Typography": (d) => d.kind === "font", "Imagery": (d) => /imagery|photo/i.test(d.id + " " + d.group) && !/texture/i.test(d.id), "Graphic system": (d) => /texture|pattern|graphic/i.test(d.id + " " + d.name), "Icons": (d) => /icon/i.test(d.id + d.group + d.name) };
+function augmentBook(node) {
+  if (!node || node.dataset.aug) return node; node.dataset.aug = "1";
+  const c = S.client;
+  node.querySelectorAll(".pb-pb-sec").forEach((sec) => {
+    const head = sec.querySelector(".pb-pb-sechead"), t = head?.querySelector("h2")?.textContent || "";
+    if (!head || /^(Downloads|Ready formats)/.test(t)) return;
+    const acts = h("div", { className: "pp-secacts" });
+    const test = SEC_FILES[t], sets = test ? (c.downloads || []).filter((d) => d.included && usable(d).length && test(d)) : [];
+    if (sets.length) acts.append(btn({ label: sets.length === 1 ? `Download` : `Download ${sets.length} sets`, icon: "download", variant: "ghost", onClick: async (e) => { for (const d of sets) await downloadSet(d, e.currentTarget); } }));
+    if (t === "Your brand in use" && (c.inUse || []).some((u) => u.image)) acts.append(btn({ label: "Download", icon: "download", variant: "ghost", onClick: (e) => downloadInUse(e.currentTarget) }));
+    if (!/^Voice$/.test(t)) acts.append(btn({ label: "Request with this", icon: "plus", variant: "ghost", onClick: () => { const d = S.draft; d.using = [...(d.using || []).filter((u) => u.label !== t), { label: t }]; saveDraft(); go("new"); } }));
+    head.append(acts);
+  });
+  node.querySelectorAll(".pb-pb-swatch, .pb-pb-tone, .pb-pb-grad").forEach((sw) => {
+    const hex = (sw.textContent.match(/#[0-9a-f]{6}\b/i) || [])[0]; if (!hex) return;
+    sw.classList.add("pp-copyable"); sw.title = `Copy ${hex.toUpperCase()}`; sw.tabIndex = 0; sw.setAttribute("role", "button");
+    const go_ = () => copyText(hex.toUpperCase(), null, `Copied ${hex.toUpperCase()}`);
+    sw.addEventListener("click", go_); sw.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go_(); } });
+  });
+  node.querySelectorAll("img").forEach((im) => { im.decoding = "async"; if (!im.loading) im.loading = "lazy"; });
+  return node;
+}
+async function downloadInUse(b) {
+  const us = (S.client?.inUse || []).filter((u) => u.image); if (!us.length) return;
+  if (us.length === 1 || !window.JSZip) { for (const u of us) await saveFile(`${BRAND().id}-${slug(u.name)}.jpg`, dataBlob(u.image), b); return; }
+  const zip = new JSZip(); for (const u of us) zip.file(`${slug(u.name)}.jpg`, dataBlob(u.image));
+  saveFile(`${BRAND().id}-brand-in-use.zip`, await zip.generateAsync({ type: "blob" }), b);
+}
+// What changed between the version on screen and the one being saved, in words a client reads.
+function diffVersions(a, b) {
+  if (!a || !b) return [];
+  const out = [], J = (x) => JSON.stringify(x ?? null);
+  const hexes = (c) => new Set(JSON.stringify(c?.colour || {}).match(/#[0-9a-f]{6}/gi)?.map((x) => x.toUpperCase()) || []);
+  const ha = hexes(a), hb = hexes(b), add = [...hb].filter((x) => !ha.has(x)), rem = [...ha].filter((x) => !hb.has(x));
+  if (add.length) out.push(`New colour${add.length > 1 ? "s" : ""}: ${add.slice(0, 4).join(", ")}`);
+  if (rem.length) out.push(`Colour${rem.length > 1 ? "s" : ""} retired: ${rem.slice(0, 4).join(", ")}`);
+  if (!add.length && !rem.length && J(a.colour) !== J(b.colour)) out.push("Colour guidance updated");
+  const fam = (c) => Object.values(c?.type?.families || {}).map((f) => f?.name).filter(Boolean).join(", ");
+  if (fam(a) !== fam(b)) out.push(`Type: now ${fam(b) || "updated"}`); else if (J(a.type) !== J(b.type)) out.push("Type styles updated");
+  const names = (c) => new Set((c?.downloads || []).filter((d) => d.included).map((d) => d.name));
+  const na = names(a), nb = names(b), newSets = [...nb].filter((x) => !na.has(x));
+  if (newSets.length) out.push(`New files: ${newSets.slice(0, 4).join(", ")}`);
+  for (const [k, label] of [["logo", "Logo rules"], ["voice", "Voice"], ["imagery", "Imagery guidance"], ["graphics", "Graphic system"], ["icons", "Icons"], ["tones", "Colour pairings"]]) if (J(a[k]) !== J(b[k])) out.push(`${label} updated`);
+  if (J((a.inUse || []).map((u) => u.params)) !== J((b.inUse || []).map((u) => u.params))) out.push("Your brand in use updated");
+  const fa = (a.formats || []).length, fb = (b.formats || []).length; if (fb > fa) out.push(`${fb - fa} new ready format${fb - fa > 1 ? "s" : ""}`);
+  return out.slice(0, 8);
+}
+const changesKey = () => "pp-changes-seen-" + (S.clientMeta?.assetId || "");
+const changesUnseen = () => !studio() && S.clientMeta?.changes?.length && store.get(changesKey()) !== "1";
+function changesCard() {
+  const m = S.clientMeta; if (!m?.changes?.length) return null;
+  return h("div", { className: "pp-changes" }, h("div", null, h("strong", null, `What changed in version ${m.version || ""}`.trim()), h("small", null, m.prevVersion ? `Since version ${m.prevVersion}` : "")),
+    h("ul", null, m.changes.map((t) => h("li", null, t))),
+    !studio() && store.get(changesKey()) !== "1" ? btn({ label: "Got it", icon: "check", variant: "ghost", onClick: () => { store.set(changesKey(), "1"); render(); } }) : null);
+}
+
 /* ---------- start ---------- */
 render();
 (async () => {
   const [u, d, a] = await Promise.all([claude.use("user").catch(() => null), claude.use("db").catch(() => null), claude.use("assets").catch(() => null)]);
   userCap = u; db = d; assets = a;
   if (u) { try { S.studio = !!(await u.canEdit()); S.me = await u.id(); } catch {} }
-  if (!db) { S.reqState = "off"; loadSample(); render(); return; }
+  if (!db) { S.reqState = "off"; S.signedOut = true; render(); return; }
   /* published brand book: the version the studio saved for everyone, else the sample */
   let bookSeen = false;
-  const bookTimer = setTimeout(() => { if (!bookSeen && !S.client) loadSample(); }, 10000);
+  const bookTimer = setTimeout(() => { if (!bookSeen && !S.client && S.studio) loadSample(); }, 10000);
   db.doc("portal/book").onSnapshot((snap) => {
     if (snap.fromCache && !snap.exists) return;
     bookSeen = true; clearTimeout(bookTimer);
-    if (snap.exists) loadSaved(snap.data()); else if (!S.client) loadSample();
-  }, () => { clearTimeout(bookTimer); if (!S.client) loadSample(); });
+    if (snap.exists) loadSaved(snap.data()); else if (!S.client && S.studio) loadSample();
+  }, () => { clearTimeout(bookTimer); if (!S.client && S.studio) loadSample(); });
   /* questionnaire answers shared with the studio */
   db.doc("brief/answers").onSnapshot((snap) => {
     if (!snap.exists || snap.hasPendingWrites) return;
@@ -1124,6 +1678,9 @@ render();
   /* the plan the studio set, and asks about one */
   db.doc("portal/plan").onSnapshot((snap) => { S.plan = snap.exists ? snap.data() : null; render(); }, () => {});
   db.collection("planasks").orderBy("at", "desc").onSnapshot((snap) => { S.asks = snap.docs.map((x) => ({ id: x.id, ...x.data() })); render(); }, () => {});
+  /* the project page the studio sets up, and the client's own people */
+  db.doc("portal/project").onSnapshot((snap) => { S.project = snap.exists ? snap.data() : null; render(); }, () => {});
+  db.collection("invites").orderBy("at", "desc").onSnapshot((snap) => { S.invites = snap.docs.map((x) => ({ id: x.id, ...x.data() })); render(); }, () => {});
   db.collection("requests").orderBy("at", "desc").onSnapshot((snap) => {
     S.requests = snap.docs.map((x) => ({ id: x.id, ...x.data() }));
     if (!snap.fromCache) { clearTimeout(reqTimer); S.reqState = "ok"; } else if (S.reqState === "loading") S.reqState = "ok";
@@ -1133,7 +1690,7 @@ render();
 })();
 async function resolveNames() {
   if (!userCap?.profiles) return;
-  const ids = [...new Set([...S.requests.flatMap((r) => [r.by, r.delivery?.by, ...(r.notes || []).map((n) => n.by)]), ...S.asks.map((a) => a.by)].filter((x) => x && x !== S.me && !(x in S.names)))];
+  const ids = [...new Set([...S.requests.flatMap((r) => [r.by, r.delivery?.by, ...(r.notes || []).map((n) => n.by), ...(r.pins || []).map((p) => p.by)]), ...S.asks.map((a) => a.by), S.clientMeta?.by].filter((x) => x && x !== S.me && !(x in S.names)))];
   if (!ids.length) return;
   try { const ps = await userCap.profiles(ids); for (const id of ids) S.names[id] = ps?.[id]?.name || ""; render(); } catch {}
 }
